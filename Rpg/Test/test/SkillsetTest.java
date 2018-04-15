@@ -3,6 +3,7 @@ package test;
 import entity.basic.attributeset.Attributes;
 import entity.basic.attributeset.Attributeset;
 
+@SuppressWarnings("javadoc")
 public class SkillsetTest {
 
 	public static void main(String[] args) {
