@@ -9,19 +9,13 @@ import javafx.beans.property.IntegerProperty;
 /**
  * The class represents the Attribute values of an actor.</br>
  *
- * Examples:</br>
- * <b>strength</b></br>
- * 	Defines how hard a actor can hit/how much he can carry</br>
- * <b>perception</b></br>
- * 	Defines how well a actor can hear/see.</br>
- * <b>agility</b></br>
- * 	Defines the speed of an actor and its ability to evade.</br>
- * <b>endurance</b></br>
- * 	Defines the health and general endurance of an actor.</br>
- * <b>intelligence</b></br>
- * 	Defines the booksmarts of a Actor.</br>
- * <b>wisdom</b></br>
- * 	Defines the streetsmarts of a Actor.</br>
+ * Values:</br>
+ * {@link Attributes#STRENGTH}</br>
+ * {@link Attributes#PERCEPTION}</br>
+ * {@link Attributes#AGILITY}</br>
+ * {@link Attributes#ENDURANCE}</br>
+ * {@link Attributes#INTELLIGENCE}</br>
+ * {@link Attributes#WISDOM}
  * @author Dave
  *
  */
@@ -80,46 +74,59 @@ public class Attributeset implements I_Attributeset, Iterable<Attribute> {
 
 	@Override
 	public IntegerProperty strengthProperty() {
-		return this.attMap.get(Attributes.STRENGTH).valeProperty();
+		return this.attMap.get(Attributes.STRENGTH).valueProperty();
 	}
 	@Override
 	public IntegerProperty perceptionProperty() {
-		return this.attMap.get(Attributes.PERCEPTION).valeProperty();
+		return this.attMap.get(Attributes.PERCEPTION).valueProperty();
 	}
 	@Override
 	public IntegerProperty agilityProperty() {
-		return this.attMap.get(Attributes.AGILITY).valeProperty();
+		return this.attMap.get(Attributes.AGILITY).valueProperty();
 	}
 	@Override
 	public IntegerProperty enduranceProperty() {
-		return this.attMap.get(Attributes.ENDURANCE).valeProperty();
+		return this.attMap.get(Attributes.ENDURANCE).valueProperty();
 	}
 	@Override
 	public IntegerProperty intelligenceProperty() {
-		return this.attMap.get(Attributes.INTELLIGENCE).valeProperty();
+		return this.attMap.get(Attributes.INTELLIGENCE).valueProperty();
 	}
 	@Override
 	public IntegerProperty wisdomProperty() {
-		return this.attMap.get(Attributes.WISDOM).valeProperty();
+		return this.attMap.get(Attributes.WISDOM).valueProperty();
 	}
 
 	//Iterable Methods + Iterator
-	// TODO
 
+	@SuppressWarnings("javadoc")
+	private class Atributerator implements Iterator<Attribute>{
+		private Attributes[] all = Attributes.values();
+		private int current = 0;
+		@Override
+		public boolean hasNext() {
+			return current < all.length;
+		}
+		@Override
+		public Attribute next() {
+			return attMap.get(all[current++]);
+		}
+	}
 
 	@Override
 	public Iterator<Attribute> iterator() {
-		return null;
+		return new Atributerator();
 	}
 
 	//Object Methods
-	// TODO
+
 	@Override
 	public String toString() {
+		// TODO
 		String ret = "";
 		for(Attribute e : this)
-			ret = ret.concat(e.toString());
-		return ret;
+			ret = ret.concat(e.toString()).concat(" ");
+		return ret.trim();
 	}
 	@Override
 	public int hashCode() {
@@ -148,7 +155,5 @@ public class Attributeset implements I_Attributeset, Iterable<Attribute> {
 				this.getEndurance() == other.getEndurance() &&
 				this.getIntelligence() == other.getIntelligence() &&
 				this.getWisdom() == other.getWisdom();
-
 	}
-
 }

@@ -7,17 +7,50 @@ package entity.basic.attributeset;
  */
 public enum Attributes
 {
-	/**used for strength*/
+	/**
+	 * used for strength <br>
+	 * carryweight <br>
+     * close combat damage
+	 */
 	STRENGTH("Strength"),
-	/**used for Perception*/
+
+	/**
+	 * used for Perception<br>
+	 * aiming bow<br>
+     * crit chance<br>
+     * trap finding<br>
+     * Savingthrows
+	 */
 	PERCEPTION("Perception"),
-	/**used for Agility*/
+
+	/**
+	 * used for Agility<br>
+	 * walk/ work speed<br>
+	 * aiming close combat<br>
+	 * Savingthrows
+	 */
 	AGILITY("Agility"),
-	/**used for Endurance*/
+
+	/**
+	 * used for Endurance<br>
+	 * Health<br>
+	 * Savingthrows
+	 */
 	ENDURANCE("Endurance"),
-	/**used for Intelligence*/
+
+	/**
+	 * used for Intelligence<br>
+	 * Knowledge<br>
+	 * Teaching<br>
+	 * Magic Mana
+	 */
 	INTELLIGENCE("Intelligence"),
-	/**used for Wisdom*/
+
+	/**
+	 * used for Wisdom<br>
+	 * streetsmarts<br>
+	 * cleric mana
+	 */
 	WISDOM("Wisdom");
 
 	/**holds the name of the Attribute*/

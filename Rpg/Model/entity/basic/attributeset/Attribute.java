@@ -30,7 +30,7 @@ public class Attribute
 	 * Used to expose the IntegerProperty
 	 * @return the valueProperty
 	 */
-	public IntegerProperty valeProperty() { return this.value; }
+	public IntegerProperty valueProperty() { return this.value; }
 
 	/**
 	 * Used to access the name of the attribute
@@ -49,16 +49,14 @@ public class Attribute
 		return this.value.get() == other.value.get() &&
 				this.name.equals(other.name);
 	}
-
 	@Override
 	public int hashCode() {
 		int value = this.value.hashCode();
 		int name = this.name.hashCode();
 		return value + name*name;
 	}
-
 	@Override
 	public String toString() {
-		return String.format("%s: %s", this.name, this.value.get());
+		return String.format("%s: %s", this.name.getId(), this.value.get());
 	}
 }

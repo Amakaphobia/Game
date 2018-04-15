@@ -42,31 +42,7 @@ Base
        
     LivingWorld
         Attributes
-            static ids
-            Values(use int properties)
-                Strength
-                    carry
-                    cc dmg
-                Perception
-                    aiming bow
-                    critchance
-                    trap finding
-                    Savingthrows
-                Agility
-                    walk/ work speed
-                    aiming cc
-                    Savingthrows
-                Endurance
-                    Health
-                    Savingthrows
-                Intelligence
-                    Knowledge
-                    Teaching
-                    Magic Mana
-                Wisdom
-                    streetsmarts
-                    cleric mana
-                List of effected skills
+        	List of effected skills
         AktionEvent
             Source
             Target
@@ -142,7 +118,8 @@ CityPlaning Modus
         Buildings
     Map
     Resources   
-    Buildings can process harvested stuff and produce intermediate / finished stuff(equipment, BuildingMaterial, food)       
+    Buildings can process harvested stuff and produce intermediate / finished 
+    	stuff(equipment, BuildingMaterial, food)       
 
 Fight Modus
     Pokemon like fight group against group
