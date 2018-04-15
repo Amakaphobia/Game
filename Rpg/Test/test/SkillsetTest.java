@@ -1,5 +1,6 @@
 package test;
 
+import entity.basic.attributeset.Attributes;
 import entity.basic.attributeset.Attributeset;
 
 public class SkillsetTest {
@@ -12,6 +13,10 @@ public class SkillsetTest {
 		s.setAgility(5);
 		System.out.println(s);
 
+		Attributes e = Attributes.AGILITY;
+		Attributes f = Attributes.AGILITY;
+
+		System.out.println(e.equals(f));
 	}
 
 }

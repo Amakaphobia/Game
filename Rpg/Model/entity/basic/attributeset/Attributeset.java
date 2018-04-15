@@ -1,9 +1,10 @@
 package entity.basic.attributeset;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * The class represents the Attribute values of an actor.</br>
@@ -24,20 +25,10 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @author Dave
  *
  */
-public class Attributeset implements I_Attributeset, Iterable<IntegerProperty> {
+public class Attributeset implements I_Attributeset, Iterable<Attribute> {
 
-	/**holds the strength value*/
-	private final IntegerProperty strength;
-	/**holds the perception value*/
-	private final IntegerProperty perception;
-	/**holds the agility value*/
-	private final IntegerProperty agility;
-	/**holds the endurance value*/
-	private final IntegerProperty endurance;
-	/**holds the intelligence value*/
-	private final IntegerProperty intelligence;
-	/**holds the wisdom value*/
-	private final IntegerProperty wisdom;
+	/**this map holds the {@link Attribute}s of this set. It is accessed by providing the correct {@link Attributes}*/
+	private Map<Attributes, Attribute> attMap;
 
 	/**
 	 * Constructor with specified values for each attribute
@@ -50,12 +41,25 @@ public class Attributeset implements I_Attributeset, Iterable<IntegerProperty> {
 	 */
 	public Attributeset(int strength, int perception, int agility, int endurance, int inteligence, int wisdom) {
 		super();
-		this.strength = new SimpleIntegerProperty(strength);
-		this.perception = new SimpleIntegerProperty(perception);
-		this.agility = new SimpleIntegerProperty(agility);
-		this.endurance = new SimpleIntegerProperty(endurance);
-		this.intelligence = new SimpleIntegerProperty(inteligence);
-		this.wisdom = new SimpleIntegerProperty(wisdom);
+		this.attMap = new HashMap<>();
+		this.attMap.put(
+			Attributes.STRENGTH,
+			new Attribute(Attributes.STRENGTH, strength));
+		this.attMap.put(
+			Attributes.PERCEPTION,
+			new Attribute(Attributes.PERCEPTION, perception));
+		this.attMap.put(
+			Attributes.AGILITY,
+			new Attribute(Attributes.AGILITY, agility));
+		this.attMap.put(
+			Attributes.ENDURANCE,
+			new Attribute(Attributes.ENDURANCE, endurance));
+		this.attMap.put(
+			Attributes.INTELLIGENCE,
+			new Attribute(Attributes.INTELLIGENCE, inteligence));
+		this.attMap.put(
+			Attributes.WISDOM,
+			new Attribute(Attributes.WISDOM, wisdom));
 	}
 
 	/**
@@ -75,63 +79,37 @@ public class Attributeset implements I_Attributeset, Iterable<IntegerProperty> {
 	//I_SkillsetMethods
 
 	@Override
-	public IntegerProperty strengthProperty() { return this.strength; }
+	public IntegerProperty strengthProperty() {
+		return this.attMap.get(Attributes.STRENGTH).valeProperty();
+	}
 	@Override
-	public IntegerProperty perceptionProperty() { return this.perception; }
+	public IntegerProperty perceptionProperty() {
+		return this.attMap.get(Attributes.PERCEPTION).valeProperty();
+	}
 	@Override
-	public IntegerProperty agilityProperty() { return this.agility; }
+	public IntegerProperty agilityProperty() {
+		return this.attMap.get(Attributes.AGILITY).valeProperty();
+	}
 	@Override
-	public IntegerProperty enduranceProperty() { return this.endurance; }
+	public IntegerProperty enduranceProperty() {
+		return this.attMap.get(Attributes.ENDURANCE).valeProperty();
+	}
 	@Override
-	public IntegerProperty intelligenceProperty() { return this.intelligence; }
+	public IntegerProperty intelligenceProperty() {
+		return this.attMap.get(Attributes.INTELLIGENCE).valeProperty();
+	}
 	@Override
-	public IntegerProperty wisdomProperty() { return this.wisdom; }
-
-	//Iterable Methods + Iterator
-
-	// TODO
-	@SuppressWarnings("javadoc")
-	private class Skillterator implements Iterator<IntegerProperty>{
-		private int current = 0;
-		private final int max = 6;
-		@Override
-		public boolean hasNext() {
-			return current < max;
-		}
-
-		// TODO
-		@Override
-		public IntegerProperty next() {
-			IntegerProperty ret = null;
-			switch(this.current) {
-			case 0:
-				ret = strength;
-				break;
-			case 1:
-				ret = perception;
-				break;
-			case 2:
-				ret = agility;
-				break;
-			case 3:
-				ret = endurance;
-				break;
-			case 4:
-				ret = intelligence;
-				break;
-			case 5:
-				ret = wisdom;
-			}
-			this.current++;
-
-			return ret;
-		}
-
+	public IntegerProperty wisdomProperty() {
+		return this.attMap.get(Attributes.WISDOM).valeProperty();
 	}
 
+	//Iterable Methods + Iterator
+	// TODO
+
+
 	@Override
-	public Iterator<IntegerProperty> iterator() {
-		return new Skillterator();
+	public Iterator<Attribute> iterator() {
+		return null;
 	}
 
 	//Object Methods
@@ -139,17 +117,16 @@ public class Attributeset implements I_Attributeset, Iterable<IntegerProperty> {
 	@Override
 	public String toString() {
 		String ret = "";
-		for(IntegerProperty e : this)
+		for(Attribute e : this)
 			ret = ret.concat(e.toString());
 		return ret;
 	}
-
 	@Override
 	public int hashCode() {
 		int erg = 0;
 		int count = 1;
 		int mult;
-		for(IntegerProperty e : this) {
+		for(Attribute e : this) {
 			mult = 1;
 			for(int i = 0; i < count; i++)
 				mult *= e.hashCode();
@@ -158,7 +135,6 @@ public class Attributeset implements I_Attributeset, Iterable<IntegerProperty> {
 		}
 		return erg;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if(obj == this) return true;
