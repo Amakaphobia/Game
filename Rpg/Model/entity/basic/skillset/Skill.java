@@ -1,5 +1,7 @@
 package entity.basic.skillset;
 
+import java.io.Serializable;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -9,7 +11,10 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @author Dave
  *
  */
-public class Skill {
+public class Skill implements Serializable{
+	/**serial*/
+	private static final long serialVersionUID = 1418267970463202521L;
+
 	/**holds the name of the Skill*/
 	private final Skills name;
 	/**holds the value of the Skill*/

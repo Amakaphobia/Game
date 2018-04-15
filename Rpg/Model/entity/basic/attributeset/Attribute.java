@@ -1,5 +1,7 @@
 package entity.basic.attributeset;
 
+import java.io.Serializable;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -9,8 +11,10 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @author Dave
  *
  */
-public class Attribute
+public class Attribute implements Serializable
 {
+	/**serial*/
+	private static final long serialVersionUID = -7052775875998858697L;
 	/**holds the value of the Attribute*/
 	private final IntegerProperty value;
 	/**holds the name of the Attribute*/

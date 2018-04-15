@@ -1,6 +1,5 @@
 Interfaces
     RenderableInMap
-    Eventtarget
 Functional
     eventhandler(incomingevent(source, target, command))
     isTargetable (event) implement if the class should be able to handle events
@@ -8,12 +7,15 @@ Functional
 Base
     Entity (targetable)
         ID
-        image
-       
+        image       
     Savingthrow(skill id, threshold)
         predicat
     DiceMachine
     DiceCode
+    Logger
+    	syso logger
+    	personal history logger (?)
+    	datafile logger?
     IG TimeHandler
     Dialog Handler
     incomingevent

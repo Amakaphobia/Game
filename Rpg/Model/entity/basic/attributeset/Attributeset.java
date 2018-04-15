@@ -1,5 +1,6 @@
 package entity.basic.attributeset;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,7 +20,10 @@ import javafx.beans.property.IntegerProperty;
  * @author Dave
  *
  */
-public class Attributeset implements I_Attributeset, Iterable<Attribute> {
+public class Attributeset implements I_Attributeset, Iterable<Attribute>, Serializable {
+
+	/**serial*/
+	private static final long serialVersionUID = 3583786418526275761L;
 
 	/**this map holds the {@link Attribute}s of this set. It is accessed by providing the correct {@link Attributes}*/
 	private Map<Attributes, Attribute> attMap;

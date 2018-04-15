@@ -1,11 +1,13 @@
 package entity.basic.attributeset;
 
+import java.io.Serializable;
+
 /**
  * Used to define the possible attributes.
  * @author Dave
  *
  */
-public enum Attributes
+public enum Attributes implements Serializable
 {
 	/**
 	 * used for strength <br>

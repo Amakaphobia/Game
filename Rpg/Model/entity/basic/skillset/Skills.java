@@ -1,6 +1,8 @@
 package entity.basic.skillset;
 
-public enum Skills {
+import java.io.Serializable;
+
+public enum Skills implements Serializable{
 	A();
 
 	public String getId() { return ""; }

@@ -7,7 +7,7 @@ import javafx.beans.property.IntegerProperty;
  * @author Dave
  *
  */
-public interface I_Attributeset {
+public interface I_Attributeset{
 /*
  * O------------------------------------------------------------------------------------------------------------------O
  * |																												  |
