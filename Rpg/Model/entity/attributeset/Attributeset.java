@@ -59,7 +59,8 @@ public class Attributeset implements I_Attributeset, Iterable<IntegerProperty> {
 	}
 
 	/**
-	 * Constructor with one value that gets used by all attributes. See {@link #Skillset(int, int, int, int, int, int)}
+	 * Constructor with one value that gets used by all attributes.
+	 * See {@link #Attributeset(int, int, int, int, int, int)}
 	 * @param all the value for your attributes
 	 */
 	public Attributeset(int all) {
