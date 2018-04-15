@@ -1,0 +1,156 @@
+Interfaces
+    RenderableInMap
+    Eventtarget
+Functional
+    eventhandler(incomingevent(source, target, command))
+    isTargetable (event) implement if the class should be able to handle events
+    Fightable (apply method)
+Base
+    Entity (targetable)
+        ID
+        image
+       
+    Savingthrow(skill id, threshold)
+        predicat
+    DiceMachine
+    DiceCode
+    IG TimeHandler
+    Dialog Handler
+    incomingevent
+    how to move through streets?
+    Resource
+        for stuff
+            Wood
+            Gold
+            Iron
+        Luxus?
+    Commands<Target>
+        burning buildings
+        attacking Enemies
+        Wizarding stuff
+        degrading tools
+        goToWork
+        goHome
+        goSleep
+        goEat.....
+    States(dots/hots)
+        tick()
+        TTL
+        Command
+        -> Physicalstatus
+        -> Mentalstatus
+       
+    LivingWorld
+        Attributes
+            static ids
+            Values(use int properties)
+                Strength
+                    carry
+                    cc dmg
+                Perception
+                    aiming bow
+                    critchance
+                    trap finding
+                    Savingthrows
+                Agility
+                    walk/ work speed
+                    aiming cc
+                    Savingthrows
+                Endurance
+                    Health
+                    Savingthrows
+                Intelligence
+                    Knowledge
+                    Teaching
+                    Magic Mana
+                Wisdom
+                    streetsmarts
+                    cleric mana
+                List of effected skills
+        AktionEvent
+            Source
+            Target
+            affectorslist<E-Skils, function<int,int>>
+            value(before)
+            value(after affect)
+        Skill
+            static Factory method
+                erwartet enum(E-Skills)
+            Name
+            Beschreibung
+            Map of Attribute Ids that have an effect, function <int, int>
+        Skilllist
+            map<skill, lvl>
+                           
+        Person
+            -applyAttack
+            -applyMagic
+            -targetable(attacktype)
+            +apply(commandevent)
+            class(default civilist)
+            attributes
+            skilllist
+            needs? food water warmth fun ?
+            eventhandler //onWorkCompleted power-- stuff++
+        -> MagicPerson
+        -> NPCFightingPerson
+        Location
+            coords
+            bounds
+            name
+        -> Property
+        -> Building
+        -> Cave
+        -> Battlefield
+        Item
+            Weapon
+                cc
+                ranged
+            Clothing
+            eventhandler //degradation
+        Buildings
+            Location
+            Property
+            Owner
+            Builder //Ownerchange?
+            eventhandler //ownerDeath?
+            bounds
+        Job
+            location
+            work
+   
+CityPlaning Modus
+    Villagers (Named Persons)
+        Inventar
+            worn
+            carried
+        Info
+            name
+            age
+            TTL
+        tasks
+            target
+            action
+            resource
+        location (Parent class w/ stuff like name/ coords / bounds...)
+            home
+        job
+        schedule
+    -> Heroes
+    Properties
+        Owners
+        Buildings
+    Map
+    Resources   
+    Buildings can process harvested stuff and produce intermediate / finished stuff(equipment, BuildingMaterial, food)       
+
+Fight Modus
+    Pokemon like fight group against group
+    round based action selection
+    actor order based on fighters attributes/skills
+    tick states
+    action execution after selection
+    on win get stuff on loose guys die
+    train fight equip
+   
+Dialog Modus
