@@ -1,4 +1,4 @@
-package entity.basic.attributeset;
+package entity.basic.attributeSet;
 
 import java.io.Serializable;
 

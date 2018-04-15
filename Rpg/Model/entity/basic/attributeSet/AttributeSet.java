@@ -1,4 +1,4 @@
-package entity.basic.attributeset;
+package entity.basic.attributeSet;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import javafx.beans.property.IntegerProperty;
  * @author Dave
  *
  */
-public class Attributeset implements I_Attributeset, Iterable<Attribute>, Serializable {
+public class AttributeSet implements I_AttributeSet, Iterable<Attribute>, Serializable {
 
 	/**serial*/
 	private static final long serialVersionUID = 3583786418526275761L;
@@ -37,7 +37,7 @@ public class Attributeset implements I_Attributeset, Iterable<Attribute>, Serial
 	 * @param inteligence intelligence value
 	 * @param wisdom wisdom value
 	 */
-	public Attributeset(int strength, int perception, int agility, int endurance, int inteligence, int wisdom) {
+	public AttributeSet(int strength, int perception, int agility, int endurance, int inteligence, int wisdom) {
 		super();
 		this.attMap = new HashMap<>();
 		this.attMap.put(
@@ -62,15 +62,15 @@ public class Attributeset implements I_Attributeset, Iterable<Attribute>, Serial
 
 	/**
 	 * Constructor with one value that gets used by all attributes.
-	 * See {@link #Attributeset(int, int, int, int, int, int)}
+	 * See {@link #AttributeSet(int, int, int, int, int, int)}
 	 * @param all the value for your attributes
 	 */
-	public Attributeset(int all) {
+	public AttributeSet(int all) {
 		this(all, all, all, all, all, all);
 	}
 
 	/** constructor with 0 for all values*/
-	public Attributeset() {
+	public AttributeSet() {
 		this(0,0,0,0,0,0);
 	}
 
@@ -150,9 +150,9 @@ public class Attributeset implements I_Attributeset, Iterable<Attribute>, Serial
 	public boolean equals(Object obj) {
 		if(obj == this) return true;
 		if(obj == null) return false;
-		if(!(obj instanceof Attributeset)) return false;
+		if(!(obj instanceof AttributeSet)) return false;
 
-		Attributeset other = (Attributeset) obj;
+		AttributeSet other = (AttributeSet) obj;
 		return this.getStrength() == other.getStrength() &&
 				this.getPerception() == other.getPerception() &&
 				this.getAgility() == other.getAgility() &&

@@ -1,4 +1,4 @@
-package entity.basic.attributeset;
+package entity.basic.attributeSet;
 
 import javafx.beans.property.IntegerProperty;
 
@@ -7,7 +7,7 @@ import javafx.beans.property.IntegerProperty;
  * @author Dave
  *
  */
-public interface I_Attributeset{
+public interface I_AttributeSet{
 /*
  * O------------------------------------------------------------------------------------------------------------------O
  * |																												  |

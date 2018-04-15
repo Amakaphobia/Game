@@ -1,13 +1,13 @@
 package test;
 
-import entity.basic.attributeset.Attributes;
-import entity.basic.attributeset.Attributeset;
+import entity.basic.attributeSet.AttributeSet;
+import entity.basic.attributeSet.Attributes;
 
 @SuppressWarnings("javadoc")
 public class SkillsetTest {
 
 	public static void main(String[] args) {
-		Attributeset s = new Attributeset();
+		AttributeSet s = new AttributeSet();
 		System.out.println(s);
 		s.setStrength(1);
 		System.out.println(s);

@@ -1,4 +1,4 @@
-package entity.basic.skillset;
+package entity.basic.skillSet;
 
 import java.io.Serializable;
 
