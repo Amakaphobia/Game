@@ -1,6 +1,6 @@
 package test;
 
-import entity.attributeset.Attributeset;
+import entity.basic.attributeset.Attributeset;
 
 public class SkillsetTest {
 
