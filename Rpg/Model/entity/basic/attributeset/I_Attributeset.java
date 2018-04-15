@@ -1,4 +1,4 @@
-package entity.attributeset;
+package entity.basic.attributeset;
 
 import javafx.beans.property.IntegerProperty;
 
