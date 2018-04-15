@@ -18,6 +18,7 @@ public class SkillsetTest {
 		Attributes f = Attributes.AGILITY;
 
 		System.out.println(e.equals(f));
+		System.out.println(e == f);
 	}
 
 }
