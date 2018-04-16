@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import entity.basic.attributeSet.Attributes;
+
 /**
  * This class is used to represent a Skill. It holds a Name (Swimming, Performing, Smithing) and the associated value.
  * see: {@link Skills}
@@ -57,6 +59,11 @@ public class Skill implements Serializable{
 	 * @param value the new level for this skill.
 	 */
 	public void setValue(int value) { this.value.set(value); }
+	/**
+	 * This method is used to identify the {@link Attributes} that effects this Skill
+	 * @return the Attribute identifier
+	 */
+	public Attributes getMainAttribute() { return this.name.getMainAttribute(); }
 
 	@Override
 	public boolean equals(Object obj) {

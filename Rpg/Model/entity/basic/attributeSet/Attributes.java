@@ -75,7 +75,20 @@ public enum Attributes implements Serializable
 	private Attributes(String id) {
 		this.id = id;
 	}
-	
+
+	/**
+	 * This method returns all Skills that are effected by this Attribute
+	 * @return a {@link List} containing all effected {@link Skills}.
+	 */
+	public List<Skills> getEffectedSkills(){
+		return getEffectedSkills(this);
+	}
+
+	/**
+	 * This method returns all Skills that are effected by the given Attribute
+	 * @param attribute the attribute you want to get the {@link Skills} to.
+	 * @return a {@link List} containing all effected {@link Skills}.
+	 */
 	public static List<Skills> getEffectedSkills(Attributes attribute){
 		return Arrays.asList(Skills.values())
 					.stream()

@@ -10,21 +10,22 @@ import dicemachine.DiceMachine;
 import logging.ConsoleLogger;
 import logging.I_Logger;
 
+@SuppressWarnings("javadoc")
 public class DiceTest {
 
 	public static void main(String[] args) {
 		DiceMachine dc = new DiceMachine();
-		
+
 		I_Logger ll = new ConsoleLogger();
 		ll.setComplete(true);
-		
+
 		IntStream.range(0, 1000)
 			.mapToObj(e -> (Integer)Integer.parseInt(""+dc.getRoll("2d6 +1")))
 			.collect(Collectors.groupingBy(Function.identity()))
 			.values().stream()
-			.map(e -> new Pair<Integer, Integer>(e.size(), e.get(0)))
-			.sorted(Comparator.comparingInt(p -> ((Pair<Integer, Integer>)p).getValue()))
-			.forEach(l -> 
+			.map(e -> new Pair<>(e.size(), e.get(0)))
+			.sorted(Comparator.comparingInt(p -> p.getValue()))
+			.forEach(l ->
 				ll.complete(
 					()-> l.toString()
 				)
