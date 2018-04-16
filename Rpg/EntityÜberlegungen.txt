@@ -3,10 +3,9 @@ Blues
 Items
 
 
-EntityBase
-	isLiving?
-	hat namen, id, bild, info.... 
+EntityBase sollte done sein 
 	ist renderbar,
+		da entity renderbar is sollte sie auch für die bewegung auf der karte zuständig sein
 	kann infofenster füttern
 	
 Person : EntityBase (unfightable npc entry point?)

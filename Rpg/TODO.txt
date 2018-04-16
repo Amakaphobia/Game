@@ -3,11 +3,10 @@ Interfaces
 Functional
     eventhandler(incomingevent(source, target, command))
     isTargetable (event) implement if the class should be able to handle events
-    Fightable (apply method)
+	eventtarget interface
 Base
-    Entity (targetable)
-        ID
-        image       
+    Entity 
+    	(targetable) not in Entity Base       
     Savingthrow(skill id, threshold)
         predicat
     Logger

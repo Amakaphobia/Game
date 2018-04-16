@@ -41,8 +41,10 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 		this.bildPath = bildPath;
 	}
 	
-	protected final String generateId() {
-		return ""; // TODO
+	// TODO ??
+	private static int nextID = 0;
+	private final String generateId() {
+		return String.valueOf(nextID++);
 	}	
 	
 	public Parent getRender() {
@@ -62,4 +64,35 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	
 	@Override
 	public abstract Parent getInfoView();
+	
+	// Object Methods:
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		if(obj == null) return false;
+		if(!(obj instanceof EntityBase)) return false;
+		
+		EntityBase other = (EntityBase) obj;
+		return this.getId().equals(other.getId());
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getId().hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("EntityBase: %s %s", this.getId(), this.getName());
+	}
 }
+
+
+
+
+
+
+
+
+

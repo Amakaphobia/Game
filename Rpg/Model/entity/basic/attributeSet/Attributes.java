@@ -1,6 +1,11 @@
 package entity.basic.attributeSet;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import entity.basic.skillSet.Skills;
 
 /**
  * Used to define the possible attributes.
@@ -69,5 +74,12 @@ public enum Attributes implements Serializable
 	 */
 	private Attributes(String id) {
 		this.id = id;
+	}
+	
+	public static List<Skills> getEffectedSkills(Attributes attribute){
+		return Arrays.asList(Skills.values())
+					.stream()
+					.filter(s -> s.getMainAttribute().equals(attribute))
+					.collect(Collectors.toList());
 	}
 }
