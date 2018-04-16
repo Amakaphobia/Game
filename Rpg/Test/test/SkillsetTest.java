@@ -2,6 +2,8 @@ package test;
 
 import entity.basic.attributeSet.AttributeSet;
 import entity.basic.attributeSet.Attributes;
+import entity.basic.skillSet.SkillSet;
+import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")
 public class SkillsetTest {
@@ -19,6 +21,19 @@ public class SkillsetTest {
 
 		System.out.println(e.equals(f));
 		System.out.println(e == f);
+		
+		
+		SkillSet ss = new SkillSet();
+		ss.addSkill(Skills.SWIMMING);
+		ss.trainSkill(Skills.SWIMMING, 3);
+		ss.addSkill(Skills.ACROBATIC, 2);
+		
+		System.out.println(ss);
+		
+		ss.removeSkill(Skills.SWIMMING);
+		ss.trainSkill(Skills.ACROBATIC, -1);
+		
+		System.out.println(ss);
 	}
 
 }

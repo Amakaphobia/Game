@@ -29,19 +29,25 @@ public class Skill implements Serializable{
 		this.name = name;
 		this.value = new SimpleIntegerProperty(value);
 	}
+	
+	public Skills getName() { return this.name; }
 
 	/**
 	 * Used to access the name of the skill
 	 * @return the name as a string
 	 */
-	public String getName() { return this.name.getId(); }
+	public String getNameId() { return this.name.getId(); }
 
 	/**
 	 * Used to expose the IntegerProperty
 	 * @return the valueProperty
 	 */
 	public IntegerProperty valueProperty() { return this.value; }
+	
+	public int getValue() { return this.value.get(); }
 
+	public void setValue(int value) { this.value.set(value); }
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(obj == this) return true;
@@ -61,5 +67,9 @@ public class Skill implements Serializable{
 		int value = this.value.hashCode();
 		int name = this.name.hashCode();
 		return value + name*name;
+	}
+	
+	public static Skill empty() {
+		return new Skill(Skills.EMPTY, 0);
 	}
 }
