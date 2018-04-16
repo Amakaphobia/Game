@@ -5,6 +5,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import boxes.Pair;
 import dicemachine.DiceMachine;
 import logging.ConsoleLogger;
 import logging.I_Logger;
@@ -17,13 +18,12 @@ public class DiceTest {
 		I_Logger ll = new ConsoleLogger();
 		ll.setComplete(true);
 		
-		IntStream.range(0, 100)
-			.mapToObj(e -> (Integer)Integer.parseInt(""+dc.getRoll("1d5 + 2")))
-			.sorted(Comparator.comparingInt(e -> e))
+		IntStream.range(0, 1000)
+			.mapToObj(e -> (Integer)Integer.parseInt(""+dc.getRoll("2d6 +1")))
 			.collect(Collectors.groupingBy(Function.identity()))
-//			.values().stream()
-//			.mapToInt(l -> l.size())
-			.entrySet()
+			.values().stream()
+			.map(e -> new Pair<Integer, Integer>(e.size(), e.get(0)))
+			.sorted(Comparator.comparingInt(p -> ((Pair<Integer, Integer>)p).getValue()))
 			.forEach(l -> 
 				ll.complete(
 					()-> l.toString()
