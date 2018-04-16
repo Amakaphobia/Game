@@ -1,0 +1,26 @@
+Gegner
+Blues
+Items
+
+
+EntityBase
+	isLiving?
+	hat namen, id, bild, info.... 
+	ist renderbar,
+	kann infofenster füttern
+	
+Person : EntityBase (unfightable npc entry point?)
+	hat attribute
+	hat skills
+	hat eventhandling
+	
+ClassyPerson : Person (ab hier fightable?)
+	hat HP und mana
+	hat klasse 
+		-> hier nötig weil HP und Mana von Klasse abhängen
+		
+Itembase : EntityBase
+	group handling
+Weapon... : Itembase
+
+	
