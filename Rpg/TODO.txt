@@ -56,6 +56,7 @@ Base
             -targetable(attacktype)
             +apply(commandevent)
             class(default civilist)
+            	multiclassing?
             attributes
             skilllist
             needs? food water warmth fun ?

@@ -2,7 +2,7 @@ package entity.basic.entity;
 
 import java.io.Serializable;
 
-import entity.render.I_InfoAble;
+import common.render.I_InfoAble;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Parent;

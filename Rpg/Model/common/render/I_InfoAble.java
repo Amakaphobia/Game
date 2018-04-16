@@ -1,4 +1,4 @@
-package entity.render;
+package common.render;
 
 import javafx.scene.Parent;
 
