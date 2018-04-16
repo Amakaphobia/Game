@@ -6,7 +6,8 @@ Items
 EntityBase 
 	ticking 
 	ist renderbar,
-		da entity renderbar is sollte sie auch für die bewegung auf der karte zuständig sein
+		da entity renderbar is sollte sie auch für die bewegung auf der karte 
+		zuständig sein or is it? hängt item von entity ab?
 	kann infofenster füttern
 	
 Person : EntityBase (unfightable npc entry point?)
