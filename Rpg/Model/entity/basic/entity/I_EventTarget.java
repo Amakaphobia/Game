@@ -1,4 +1,4 @@
-package entity;
+package entity.basic.entity;
 
 import event.I_Event;
 
@@ -16,5 +16,5 @@ public interface I_EventTarget
 	 * This Method is used to handle {@link I_Event} that target <code>this</code>.
 	 * @param event the event that should be executed.
 	 */
-	public abstract void handleEvent(I_Event<?> event);
+	public abstract void handleEvent(I_Event<? extends I_EventTarget> event);
 }
