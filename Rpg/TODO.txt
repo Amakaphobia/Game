@@ -10,10 +10,7 @@ Base
         image       
     Savingthrow(skill id, threshold)
         predicat
-    DiceMachine
-    DiceCode
     Logger
-    	syso logger
     	personal history logger (?)
     	datafile logger?
     IG TimeHandler
@@ -52,14 +49,7 @@ Base
             value(before)
             value(after affect)
         Skill
-            static Factory method
-                erwartet enum(E-Skills)
-            Name
-            Beschreibung
-            Map of Attribute Ids that have an effect, function <int, int>
-        Skilllist
-            map<skill, lvl>
-                           
+            Beschreibung                           
         Person
             -applyAttack
             -applyMagic
