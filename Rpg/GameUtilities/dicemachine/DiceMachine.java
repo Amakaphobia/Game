@@ -15,19 +15,19 @@ public class DiceMachine implements I_DiceMachine{
 	public int getRoll(String diceCode) {
 		IntBinaryOperator combiner = null;;
 		String[] codeParts = new String[2];
-		
+		String diceCodeTrimmed = diceCode.trim();
 		try {
-			return Integer.parseInt(diceCode);			
+			return Integer.parseInt(diceCodeTrimmed);			
 		}catch(NumberFormatException e) {}
 		
-		if(diceCode.contains("-")) {
+		if(diceCodeTrimmed.contains("-")) {
 			combiner = (a, b) -> a - b;
-			codeParts = this.split(diceCode, "-");
-		} else if(diceCode.contains("+")) {
+			codeParts = this.split(diceCodeTrimmed, "-");
+		} else if(diceCodeTrimmed.contains("+")) {
 			combiner = (a, b) -> a + b;
-			codeParts = this.split(diceCode, "+");
-		} else if(diceCode.contains("d")) {
-			codeParts = this.split(diceCode, "d");
+			codeParts = this.split(diceCodeTrimmed, "+");
+		} else if(diceCodeTrimmed.contains("d")) {
+			codeParts = this.split(diceCodeTrimmed, "d");
 			final int wuerfelZahl = this.getRoll(codeParts[0]);
 			final int wuerfelSeite = this.getRoll(codeParts[1]);
 			
