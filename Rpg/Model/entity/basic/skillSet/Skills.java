@@ -13,26 +13,27 @@ public enum Skills implements Serializable{
 	/**
 	 * An empty Skill Dummy
 	 */
-	EMPTY("", null),
+	EMPTY("", null, false),
 
 	/**
 	 * Acrobatic is used to represent things like abseiling, jumping, general Acrobatic stuff
 	 */
-	ACROBATIC("Acrobatic", Attributes.AGILITY),
+	ACROBATIC("Acrobatic", Attributes.AGILITY, false),
 
 	/**
 	 * This is used to move in water.
 	 */
-	SWIMMING("Swimming", Attributes.STRENGTH);
+	SWIMMING("Swimming", Attributes.STRENGTH, true);
 
 	/**
 	 * Constructor
 	 * @param id the Name of the Skill properly capitalized
 	 * @param mainAttribute the main {@link Attributes} for this skill
 	 */
-	private Skills(String id, Attributes mainAttribute) {
+	private Skills(String id, Attributes mainAttribute, boolean untrained) {
 		this.id = id;
 		this.mainAttribute = mainAttribute;
+		this.untrained = untrained;
 	}
 
 	/**holds the Skills name*/
@@ -40,6 +41,7 @@ public enum Skills implements Serializable{
 	/**the {@link Attributes} that effects this skill*/
 	private Attributes mainAttribute;
 
+	private boolean untrained;
 	/**
 	 * return the Skills name
 	 * @return a String containing the name
@@ -51,4 +53,6 @@ public enum Skills implements Serializable{
 	 * @return the {@link Attributes} that effects this skill
 	 */
 	public Attributes getMainAttribute() { return this.mainAttribute; }
+	
+	public boolean isUntrained() { return this.untrained; }
 }
