@@ -1,7 +1,7 @@
 package common.map;
 
 import boxes.Pair;
-import entity.basic.entity.MoveableEntityBase;
+import entity.basic.entityBase.MoveableEntityBase;
 import javafx.beans.property.IntegerProperty;
 
 public interface I_GameMap {
