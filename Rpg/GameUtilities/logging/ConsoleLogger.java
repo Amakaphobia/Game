@@ -2,17 +2,28 @@ package logging;
 
 import java.util.function.Supplier;
 
+/**
+ * Simple {@link I_Logger} implementation. It logs events to console.
+ * @author Dave
+ *
+ */
 public class ConsoleLogger implements I_Logger {
-	
+
+	/**used to describe complete logging state*/
 	private static boolean doComplete = false;
+	/**used to describe heightened logging state*/
 	private static boolean doDebug = false;
+	/**used to describe lowered logging state*/
 	private static boolean doLess = false;
 
-	
-	private void log(String s) {
-		System.out.println(s);
+	/**
+	 * internal method used to actually log the string
+	 * @param toLog the String you want to log
+	 */
+	private void log(String toLog) {
+		System.out.println(toLog);
 	}
-	
+
 	@Override
 	public void complete(Supplier<String> msgGenerator) {
 		if(!doComplete) return;
@@ -45,7 +56,7 @@ public class ConsoleLogger implements I_Logger {
 
 	@Override
 	public void setLess(boolean value) {
-		doLess = value;		
+		doLess = value;
 	}
 
 }
