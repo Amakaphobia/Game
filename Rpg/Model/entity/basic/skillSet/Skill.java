@@ -21,7 +21,7 @@ public class Skill implements Serializable{
 	private final Skills name;
 	/**holds the value of the Skill*/
 	private final IntegerProperty value;
-	
+
 	/**
 	 * Constructor
 	 * @param name the name of the Skill
@@ -31,9 +31,13 @@ public class Skill implements Serializable{
 		this.name = name;
 		this.value = new SimpleIntegerProperty(value);
 	}
-	
+
+	/**
+	 * used to access the untrained value of this skills {@link Skills}.
+	 * @return true if this skill can be attempted untrained.
+	 */
 	public boolean isUntrained() { return this.name.isUntrained(); }
-	
+
 	/**
 	 * this method is used to expose the {@link Skill#name} to the outside.
 	 * @return the {@link Skills} id.
