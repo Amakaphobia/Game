@@ -1,14 +1,12 @@
 package common.skillcheck;
 
-import java.util.function.Supplier;
-
 import dicemachine.I_DiceMachine;
 import dicemachine.DiceMachine;
 import entity.basic.entityBase.SkilledEntityBase;
 import entity.basic.skillSet.Skills;
 
 public class SkillCheck implements I_Check {
-	
+	// TODO baseclass implementierung before docu
 	private I_DiceMachine DiceMachine;
 	
 	private SkilledEntityBase Actor;

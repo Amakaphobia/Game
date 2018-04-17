@@ -14,6 +14,8 @@ Base
     	     introduce containerclass for that container + health + spellbook .....
     Savingthrow
         predicat (Difference Skill-/Att-check and saving throw?)
+    Checks
+    	CheckBaseclass for stuff that attribute and skill checks have in common.
     Logger
     	personal history logger (?)
     	datafile logger?

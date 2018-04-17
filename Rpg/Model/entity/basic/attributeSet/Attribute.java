@@ -19,7 +19,7 @@ public class Attribute implements Serializable
 	private final IntegerProperty value;
 	/**holds the name of the Attribute*/
 	private final Attributes name;
-
+	/**holds the derived modifier<br>the derived modifier is defined as the attributevalue subtracted by 10 and halfed (rounded down)*/
 	private final IntegerProperty derivedModifier;
 	/**
 	 * Constructor
@@ -39,13 +39,26 @@ public class Attribute implements Serializable
 	 * @return the valueProperty
 	 */
 	public IntegerProperty valueProperty() { return this.value; }
-
+	/**
+	 * return the level of this attribute as a Integer
+	 * @return the level of this attribute
+	 */
 	public int getValue() { return this.value.get(); }
-	
+	/**
+	 * used to set the level of this attribute
+	 * @param value the value you want the attribute to be set to
+	 */
 	public void setValue(int value) { this.value.set(value); }
 	
+	/**
+	 * used to access the {@link Attribute#derivedModifier} property of this attribute
+	 * @return the Property object that contains the derived modifier
+	 */
 	public IntegerProperty derivedModifierProperty() { return this.derivedModifier; }
-	
+	/**
+	 * used to access the value of the {@link Attribute#derivedModifier}.
+	 * @return the derived modifier as an integer
+	 */
 	public int getDerivedModifier() { return (int)Math.floor(this.derivedModifier.get()); }
 	
 	/**
