@@ -6,9 +6,14 @@ Functional
 	eventtarget interface
 Base
     Entity 
-    	(targetable) not in Entity Base       
-    Savingthrow(skill id, threshold)
-        predicat
+    	(targetable) not in Entity Base  
+    SkilledEntityBase
+    	delegate functioncalls from SEB to containerclasses
+    		less clutter!
+    	introduce containerclass for skillset + attribute set
+    	     introduce containerclass for that container + health + spellbook .....
+    Savingthrow
+        predicat (Difference Skill-/Att-check and saving throw?)
     Logger
     	personal history logger (?)
     	datafile logger?
@@ -39,8 +44,6 @@ Base
         -> Mentalstatus
        
     LivingWorld
-        Attributes
-        	List of effected skills
         AktionEvent
             Source
             Target
@@ -48,6 +51,7 @@ Base
             value(before)
             value(after affect)
         Skill
+        	move skill list into hashmap
             Beschreibung                           
         Person
             -applyAttack

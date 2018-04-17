@@ -16,8 +16,6 @@ import event.I_Event;
 import javafx.scene.Parent;
 
 public abstract class SkilledEntityBase extends MoveableEntityBase implements I_EventTarget{
-
-
 	/**serial*/
 	private static final long serialVersionUID = -6626140214455088421L;
 	
@@ -75,6 +73,10 @@ public abstract class SkilledEntityBase extends MoveableEntityBase implements I_
 		this.AttributeSet = AttributeSet;
 	}
 
+	public void updateMaxHealth(String hitDieCode) {
+		// TODO
+	}
+	
 	@Override
 	public void handleEvent(I_Event<? super I_EventTarget> event) {
 		event.execute(this);	

@@ -14,14 +14,13 @@ MoveableEntityBase : EntityBase
 		zuständig sein or is it?
 		
 SkilledEntityBase : MoveableEntityBase (unfightable npc entry point?)
-	size? age?
-	hat attribute
-	hat skills
-		kann skillchecks
+	size? 
+	age?
 	kann saving throws
-	hat eventhandling
 	hat class 
-		default?	
+		default?
+		als observable für entity 
+			on level up notify	
 
 FightableEntityBase : SkilledEntityBase
 	kann attackrolls
