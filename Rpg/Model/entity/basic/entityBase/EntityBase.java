@@ -73,10 +73,21 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	 */
 	public String getDescription() { return this.description.get(); }
 	
+	public void setDescription(String text) { this.description.set(text); }
+	
 	/**holds the path to the image*/
 	protected String bildPath;
 	/**the Image used for information*/
 	protected Image bild = null;
+	
+	
+	public EntityBase(String name, String bildPath, String description) {
+		super();
+		this.id = new SimpleStringProperty(this.generateId());
+		this.name = new SimpleStringProperty(name);
+		this.description = new SimpleStringProperty(description);
+		this.bildPath = bildPath;
+	}
 	
 	/**
 	 * Constructor
@@ -84,11 +95,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	 * @param bildPath the path to the info image
 	 */
 	public EntityBase(String name, String bildPath) {
-		super();
-		this.id = new SimpleStringProperty(this.generateId());
-		this.name = new SimpleStringProperty(name);
-		this.description = new SimpleStringProperty("");
-		this.bildPath = bildPath;
+		this(name, bildPath, "");
 	}
 	
 	// TODO mach besser

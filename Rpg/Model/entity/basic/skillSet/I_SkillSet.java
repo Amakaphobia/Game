@@ -60,8 +60,9 @@ public interface I_SkillSet extends Iterable<Skill>{
 		int oldLevel = this.getSkillLevel(id);
 		int testLevel = oldLevel + levelGain;
 		
-		final int newLevel = testLevel > 0 ? testLevel : 0;
-		
-		this.getSkill(id).ifPresent(skill -> skill.setValue(newLevel));		
+		if(testLevel > 0)
+			this.getSkill(id).ifPresent(skill -> skill.setValue(testLevel));
+		else
+			this.removeSkill(id);
 	}
 }

@@ -8,6 +8,8 @@ import javafx.beans.property.IntegerProperty;
  *
  */
 public interface I_AttributeSet{
+	
+	public abstract Attribute getAttribute(Attributes id);
 /*
  * O------------------------------------------------------------------------------------------------------------------O
  * |																												  |

@@ -20,6 +20,7 @@ public class Attribute implements Serializable
 	/**holds the name of the Attribute*/
 	private final Attributes name;
 
+	private final IntegerProperty derivedModifier;
 	/**
 	 * Constructor
 	 * @param name the name of the Attribute
@@ -27,6 +28,9 @@ public class Attribute implements Serializable
 	 */
 	public Attribute(Attributes name, int value) {
 		this.value = new SimpleIntegerProperty(value);
+		this.derivedModifier = new SimpleIntegerProperty();
+		
+		this.derivedModifier.bind(this.value.subtract(10).divide(2));
 		this.name = name;
 	}
 
@@ -36,6 +40,14 @@ public class Attribute implements Serializable
 	 */
 	public IntegerProperty valueProperty() { return this.value; }
 
+	public int getValue() { return this.value.get(); }
+	
+	public void setValue(int value) { this.value.set(value); }
+	
+	public IntegerProperty derivedModifierProperty() { return this.derivedModifier; }
+	
+	public int getDerivedModifier() { return (int)Math.floor(this.derivedModifier.get()); }
+	
 	/**
 	 * Used to access the name of the attribute
 	 * @return the name as a string

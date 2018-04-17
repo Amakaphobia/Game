@@ -5,21 +5,27 @@ Items
 
 EntityBase 
 	ticking 
+	hängt item von entity ab?
+	kann infofenster füttern
+
+MoveableEntityBase : EntityBase	
 	ist renderbar,
 		da entity renderbar is sollte sie auch für die bewegung auf der karte 
-		zuständig sein or is it? hängt item von entity ab?
-	kann infofenster füttern
-	
-Person : EntityBase (unfightable npc entry point?)
+		zuständig sein or is it?
+		
+SkilledEntityBase : MoveableEntityBase (unfightable npc entry point?)
+	size? age?
 	hat attribute
 	hat skills
+		kann skillchecks
+	kann saving throws
 	hat eventhandling
+	hat class 
+		default?	
+
+FightableEntityBase : SkilledEntityBase
+	kann attackrolls
 	
-ClassyPerson : Person (ab hier fightable?)
-	hat HP und mana
-	hat klasse 
-		-> hier nötig weil HP und Mana von Klasse abhängen
-		
 Itembase : EntityBase
 	group handling
 Weapon... : Itembase

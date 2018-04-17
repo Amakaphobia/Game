@@ -74,7 +74,12 @@ public class AttributeSet implements I_AttributeSet, Iterable<Attribute>, Serial
 		this(0,0,0,0,0,0);
 	}
 
-	//I_SkillsetMethods
+	//I_AttributesetMethods
+	
+	@Override
+	public Attribute getAttribute(Attributes id) {
+		return this.attMap.get(id);
+	}
 
 	@Override
 	public IntegerProperty strengthProperty() {

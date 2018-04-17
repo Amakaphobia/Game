@@ -16,5 +16,5 @@ public interface I_EventTarget
 	 * This Method is used to handle {@link I_Event} that target <code>this</code>.
 	 * @param event the event that should be executed.
 	 */
-	public abstract void handleEvent(I_Event<? extends I_EventTarget> event);
+	public abstract void handleEvent(I_Event<? super I_EventTarget> event);
 }

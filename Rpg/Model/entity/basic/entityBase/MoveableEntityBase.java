@@ -2,6 +2,8 @@ package entity.basic.entityBase;
 
 import boxes.Pair;
 import common.map.I_GameMap;
+import dicemachine.I_DiceMachine;
+import dicemachine.DiceMachine;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Parent;
@@ -10,6 +12,9 @@ public abstract class MoveableEntityBase extends EntityBase {
 
 	/**serial*/
 	private static final long serialVersionUID = 2400225046351524396L;
+	
+	// Dicemachine
+	protected I_DiceMachine DiceMachine = new DiceMachine();
 	
 	// Location
 	
