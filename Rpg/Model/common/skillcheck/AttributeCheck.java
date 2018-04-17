@@ -5,6 +5,12 @@ import dicemachine.I_DiceMachine;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.entityBase.SkilledEntityBase;
 
+/**
+ * This Class is a implementation of the {@link I_Check} Interface.
+ * It is used for Attribute Checks.
+ * @author Dave
+ *
+ */
 public class AttributeCheck implements I_Check{
 	/**the {@link I_DiceMachine} used to generate the check result*/
 	private I_DiceMachine DiceMachine;
@@ -16,7 +22,7 @@ public class AttributeCheck implements I_Check{
 	private int threshold;
 	/**the bonus or malus added to the check*/
 	private int bonus;
-	
+
 	/**
 	 * Constructor
 	 * @param Actor the actor that performs the check
@@ -35,22 +41,22 @@ public class AttributeCheck implements I_Check{
 
 	@Override
 	public I_CheckResult docheck() {
-		
-		final int derivedBonus = 
-			this.bonus + 
+
+		final int derivedBonus =
+			this.bonus +
 			this.Actor.getAttribute(AttributeId).getDerivedModifier();
-		
+
 		//TODO dicecode factory?
-		
+
 		StringBuilder strb = new StringBuilder("1d20");
-		
+
 		if(bonus >= 0)
 			strb.append("+");
-		
-		 strb.append(derivedBonus); 
-		
+
+		 strb.append(derivedBonus);
+
 		int erg = this.DiceMachine.getRoll(strb.toString()) - threshold;
-		
+
 		return new CheckResult(erg);
 	}
 

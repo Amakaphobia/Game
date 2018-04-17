@@ -6,8 +6,18 @@ import java.util.List;
 
 import entity.basic.skillSet.Skills;
 
-public class ClazzSkillListGenerator 
+/**
+ * Mock DB class to find Skill-Lists for Class Skills
+ * @author Dave
+ *
+ */
+public class ClazzSkillListGenerator
 {
+	/**
+	 * This method returns the Class Skills for given {@link Clazzs} id
+	 * @param id the {@link Clazzs} id
+	 * @return {@link List} containing all Class-{@link Skills}.
+	 */
 	public static List<Skills> getClassSkillsFor(Clazzs id){
 		switch(id) {
 			case WARRIOR:
@@ -18,11 +28,19 @@ public class ClazzSkillListGenerator
 				return new ArrayList<>();
 		}
 	}
-	
+
+	/**
+	 * internal method for Class Skills of the Warrior-Class
+	 * @return {@link List} containing all Class-{@link Skills}.
+	 */
 	private static List<Skills> getWarriorSkills(){
 		return Arrays.asList(Skills.ACROBATIC);
 	}
-	
+
+	/**
+	 * internal method for Class Skills of the Mage-Class
+	 * @return {@link List} containing all Class-{@link Skills}.
+	 */
 	private static List<Skills> getMageSkills(){
 		return Arrays.asList(Skills.SWIMMING);
 	}

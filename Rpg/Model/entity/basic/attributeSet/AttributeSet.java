@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javafx.beans.property.IntegerProperty;
-
 /**
  * The class represents the Attribute values of an actor.</br>
  *
@@ -40,24 +38,21 @@ public class AttributeSet implements I_AttributeSet, Iterable<Attribute>, Serial
 	public AttributeSet(int strength, int perception, int agility, int endurance, int inteligence, int wisdom) {
 		super();
 		this.attMap = new HashMap<>();
-		this.attMap.put(
-			Attributes.STRENGTH,
-			new Attribute(Attributes.STRENGTH, strength));
-		this.attMap.put(
-			Attributes.PERCEPTION,
-			new Attribute(Attributes.PERCEPTION, perception));
-		this.attMap.put(
-			Attributes.AGILITY,
-			new Attribute(Attributes.AGILITY, agility));
-		this.attMap.put(
-			Attributes.ENDURANCE,
-			new Attribute(Attributes.ENDURANCE, endurance));
-		this.attMap.put(
-			Attributes.INTELLIGENCE,
-			new Attribute(Attributes.INTELLIGENCE, inteligence));
-		this.attMap.put(
-			Attributes.WISDOM,
-			new Attribute(Attributes.WISDOM, wisdom));
+		this.putAttribute(Attributes.STRENGTH, strength);
+		this.putAttribute(Attributes.PERCEPTION, perception);
+		this.putAttribute(Attributes.AGILITY, agility);
+		this.putAttribute(Attributes.ENDURANCE, endurance);
+		this.putAttribute(Attributes.INTELLIGENCE, inteligence);
+		this.putAttribute(Attributes.WISDOM, wisdom);
+	}
+
+	/**
+	 * Internal Method used to put elements in the Attribute map {@link AttributeSet#attMap}
+	 * @param id the {@link Attributes} you want to put
+	 * @param value the level of this {@link Attributes}
+	 */
+	private void putAttribute(Attributes id, int value) {
+		this.attMap.put(id, new Attribute(id, value));
 	}
 
 	/**
@@ -75,35 +70,10 @@ public class AttributeSet implements I_AttributeSet, Iterable<Attribute>, Serial
 	}
 
 	//I_AttributesetMethods
-	
+
 	@Override
 	public Attribute getAttribute(Attributes id) {
 		return this.attMap.get(id);
-	}
-
-	@Override
-	public IntegerProperty strengthProperty() {
-		return this.attMap.get(Attributes.STRENGTH).valueProperty();
-	}
-	@Override
-	public IntegerProperty perceptionProperty() {
-		return this.attMap.get(Attributes.PERCEPTION).valueProperty();
-	}
-	@Override
-	public IntegerProperty agilityProperty() {
-		return this.attMap.get(Attributes.AGILITY).valueProperty();
-	}
-	@Override
-	public IntegerProperty enduranceProperty() {
-		return this.attMap.get(Attributes.ENDURANCE).valueProperty();
-	}
-	@Override
-	public IntegerProperty intelligenceProperty() {
-		return this.attMap.get(Attributes.INTELLIGENCE).valueProperty();
-	}
-	@Override
-	public IntegerProperty wisdomProperty() {
-		return this.attMap.get(Attributes.WISDOM).valueProperty();
 	}
 
 	//Iterable Methods + Iterator

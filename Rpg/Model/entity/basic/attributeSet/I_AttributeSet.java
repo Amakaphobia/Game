@@ -3,13 +3,12 @@ package entity.basic.attributeSet;
 import javafx.beans.property.IntegerProperty;
 
 /**
- * This Interface is implemented by attributesets of entities.
+ * This Interface is implemented by AttributeSets of entities.
  * @author Dave
  *
  */
 public interface I_AttributeSet{
-	
-	public abstract Attribute getAttribute(Attributes id);
+
 /*
  * O------------------------------------------------------------------------------------------------------------------O
  * |																												  |
@@ -18,35 +17,54 @@ public interface I_AttributeSet{
  * O------------------------------------------------------------------------------------------------------------------O
  */
 	/**
+	 * This Method exposes the Observable Property for the given {@link Attributes} value
+	 * @param id  {@link Attributes} value
+	 * @return the searched {@link Attribute}.
+	 */
+	public abstract Attribute getAttribute(Attributes id);
+
+	/**
 	 * This Method exposes the Observable Property for the strength value
 	 * @return IntegerProperty for the strength value.
 	 */
-	public abstract IntegerProperty strengthProperty();
+	public default IntegerProperty strengthProperty() {
+		return this.getAttribute(Attributes.STRENGTH).valueProperty();
+	}
 	/**
 	 * This Method exposes the Observable Property for the perception value
 	 * @return IntegerProperty for the perception value.
 	 */
-	public abstract IntegerProperty perceptionProperty();
+	public default IntegerProperty perceptionProperty() {
+		return this.getAttribute(Attributes.PERCEPTION).valueProperty();
+	}
 	/**
 	 * This Method exposes the Observable Property for the agility value
 	 * @return IntegerProperty for the agility value.
 	 */
-	public abstract IntegerProperty agilityProperty();
+	public default IntegerProperty agilityProperty() {
+		return this.getAttribute(Attributes.AGILITY).valueProperty();
+	}
 	/**
 	 * This Method exposes the Observable Property for the endurance value
 	 * @return IntegerProperty for the endurance value.
 	 */
-	public abstract IntegerProperty enduranceProperty();
+	public default IntegerProperty enduranceProperty() {
+		return this.getAttribute(Attributes.ENDURANCE).valueProperty();
+	}
 	/**
 	 * This Method exposes the Observable Property for the intelligence value
 	 * @return IntegerProperty for the intelligence value.
 	 */
-	public abstract IntegerProperty intelligenceProperty();
+	public default IntegerProperty intelligenceProperty() {
+		return this.getAttribute(Attributes.INTELLIGENCE).valueProperty();
+	}
 	/**
 	 * This Method exposes the Observable Property for the wisdom value
 	 * @return IntegerProperty for the wisdom value.
 	 */
-	public abstract IntegerProperty wisdomProperty();
+	public default IntegerProperty wisdomProperty() {
+		return this.getAttribute(Attributes.WISDOM).valueProperty();
+	}
 
 /*
  * O------------------------------------------------------------------------------------------------------------------O
