@@ -1,6 +1,4 @@
-package entity.basic.actorBase;
-
-import event.I_Event;
+package event;
 
 /**
  * This interface will be implemented by every class that can be a target of a {@link I_Event}.

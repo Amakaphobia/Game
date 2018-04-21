@@ -17,6 +17,7 @@ import entity.basic.skillSet.I_SkillSet;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.Skills;
 import event.I_Event;
+import event.I_EventTarget;
 
 /**
  * This is the BaseImplementation for all Actors that have skills and attributes.

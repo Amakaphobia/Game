@@ -1,7 +1,5 @@
 package event;
 
-import entity.basic.actorBase.I_EventTarget;
-
 /**
  * This Interface is implemented by events (attacks, spells, natural catastrophes,...).
  * It is a functional Interface, and its only Consumer is the execute method. The Execute Method holds
