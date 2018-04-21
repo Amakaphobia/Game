@@ -1,0 +1,58 @@
+package model.entity.basic;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
+
+import entity.basic.attributeSet.Attribute;
+import entity.basic.attributeSet.AttributeSet;
+import entity.basic.attributeSet.Attributes;
+
+@SuppressWarnings("javadoc")
+class AttributeSetTest {
+
+	AttributeSet allZero = new AttributeSet();
+	AttributeSet allFive = new AttributeSet(5);
+	AttributeSet mixed = new AttributeSet(
+			10, //Strength
+			12, //Dex
+			9,  //const
+			10, //int
+			16, //wis
+			20);//char
+
+
+	@Test
+	void testHashCode() {
+		assertEquals(allZero.hashCode(), new AttributeSet().hashCode());
+		assertEquals(allFive.hashCode(), new AttributeSet(5).hashCode());
+		assertNotEquals(allZero.hashCode(), allFive.hashCode());
+		assertEquals(mixed.hashCode(), mixed.hashCode());
+	}
+
+	@Test
+	void testGetAttribute() {
+		assertEquals(new Attribute(Attributes.STRENGTH, 10), mixed.getAttribute(Attributes.STRENGTH));
+		assertEquals(new Attribute(Attributes.DEXTERITY, 0), allZero.getAttribute(Attributes.DEXTERITY));
+	}
+
+	@Test
+	void testToString() {
+		assertEquals(
+			"Strength: 0 Dexterity: 0 Constitution: 0 Intelligence: 0 Wisdom: 0 Charisma: 0",
+			allZero.toString());
+		assertEquals(
+			"Strength: 10 Dexterity: 12 Constitution: 9 Intelligence: 10 Wisdom: 16 Charisma: 20",
+			mixed.toString());
+	}
+
+	@Test
+	void testEqualsObject() {
+		assertEquals(allZero, new AttributeSet());
+		assertEquals(allFive, allFive);
+		assertNotEquals(allZero, allFive);
+		assertEquals(mixed, mixed);
+	}
+
+}
