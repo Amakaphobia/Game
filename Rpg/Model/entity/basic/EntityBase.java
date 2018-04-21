@@ -140,7 +140,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 		if(!(obj instanceof EntityBase)) return false;
 
 		EntityBase other = (EntityBase) obj;
-		return this.getId().equals(other.getId());
+		return this.id.equals(other.id);
 	}
 	@Override
 	public int hashCode() {
