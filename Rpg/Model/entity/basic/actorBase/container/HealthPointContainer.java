@@ -15,10 +15,9 @@ import boxes.Pair;
 import dicemachine.DiceMachine;
 import dicemachine.I_DiceMachine;
 import entity.basic.actorBase.ClassedActorBase;
-import entity.basic.actorBase.I_HasHp;
 
 /**
- * This Class holds the logic and value of an Actors healthpoints.
+ * This Class holds the logic and value of an Actors healthPoints.
  * @see ClassedActorBase
  * @author Dave
  *
@@ -53,18 +52,57 @@ public class HealthPointContainer implements Serializable{
 
 	/**This property holds the current health a character currently has*/
 	private final IntegerProperty currentHealth;
+	/**
+	 * This Method is used to expose the currentHealth property
+	 * @return IntegerProperty currentHealth
+	 */
 	public IntegerProperty currentHealthProperty() { return this.currentHealth; }
+	/**
+	 * this Method is used to access the value of the currentHealth property
+	 * @return integer containing the currentHEalth of the parent
+	 */
 	public int getCurrentHealth() { return this.currentHealth.get(); }
-	public void takeDamage(int dmg) {
-		int newHealth = this.getCurrentHealth() - dmg;
+
+
+	/**
+	 * This Property holds the current Health in relation to the max health<br>
+	 * <code>
+	 * currentHealthPercent = currentHealth / MaxHealth * 100
+	 * </code>
+	 */
+	private final DoubleProperty currentHealthPercent;
+	/**
+	 * this Method is used to expose the currentHealthPercent Property.
+	 * @return the DoubleProperty currentHealth
+	 */
+	public DoubleProperty currentHealthPercentProperty() { return this.currentHealthPercent; }
+	/**
+	 * this Method is used to access the value of the currentHealthPercent property
+	 * @return double between 0 and 100
+	 */
+	public double getCurrentHealthPercent() { return this.currentHealthPercent.get(); }
+
+	/**
+	 * this method is used to after damage computation to subtract the computed damage from the current health
+	 * @param damage the total amount of damage taken
+	 */
+	public void takeDamage(int damage) {
+		int newHealth = this.getCurrentHealth() - damage;
 		this.currentHealth.set(newHealth);
 	}
 
-	private final DoubleProperty currentHealthPercent;
-	public DoubleProperty currentHealthPercentProperty() { return this.currentHealthPercent; }
-	public double getCurrentHealthPercent() { return this.currentHealthPercent.get(); }
+	/**
+	 * this method is used to after heal computation to add the computed heal to the current health
+	 * @param heal the total amount of heal received
+	 */
+	public void takeHeal(int heal) {
+		int newHealth = this.getCurrentHealth() + heal;
+		this.currentHealth.set(newHealth);
+	}
 
-
+	/** Constructor
+	 * @param Parent the Actor that is the owner of this HealthContainer
+	 */
 	public HealthPointContainer(I_HasHp Parent) {
 		super();
 
@@ -121,12 +159,20 @@ public class HealthPointContainer implements Serializable{
 		this.HpList.addListener(listener);
 	}
 
+	/**
+	 * This Method is used to add a new HitDie to this HealthContainer
+	 * @param diceCode the dicecode of the new hitdie
+	 */
 	public void addHitDie(String diceCode) {
 		I_DiceMachine Dm = new DiceMachine();
 		int erg = Dm.getRoll(diceCode);
 		this.HpList.add(new Pair<>(diceCode, erg));
 	}
 
+	/**
+	 * This Method is used to add a new hitdie and force the maximum result
+	 * @param diceCode the dicecode of the new hitdie
+	 */
 	public void addHitDieMax(String diceCode) {
 		StringTokenizer strk = new StringTokenizer(diceCode, "d");
 		I_DiceMachine Dm = new DiceMachine();
@@ -136,8 +182,8 @@ public class HealthPointContainer implements Serializable{
 			multiplikator = Dm.getRoll(strk.nextToken());
 
 		int singleErg = 0;
-		while(strk.hasMoreTokens())
-			singleErg += Dm.getRoll(strk.nextToken());
+		if(strk.hasMoreTokens())
+			singleErg = Dm.getRoll(strk.nextToken());
 
 		int erg = multiplikator * singleErg;
 

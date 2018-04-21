@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * this Interface will be implemented by all Skillsetimplementations.
+ * this Interface will be implemented by all Skillset implementations.
  * It handles the accessing adding, removing and leveling of skills.
  * @author hdaiv_000
  *
  */
 public interface I_SkillSet extends Serializable, Iterable<Skill>{
 	/**
-	 * This method is used to get a Optional ontaining a searched Skill
+	 * This method is used to get a Optional containing a searched Skill
 	 * @param id a {@link Skills} enum that defines what skill is searched
-	 * @return a optiona containing the found skill or emptyy if the skill isnt part of this set.
+	 * @return a optional containing the found skill or empty if the skill is not part of this set.
 	 */
 	public abstract Optional<Skill> getSkill(Skills id);
 	/**
@@ -23,7 +23,7 @@ public interface I_SkillSet extends Serializable, Iterable<Skill>{
 	 */
 	public abstract void addSkill(Skills id, int level);
 	/**
-	 * This method is remove a known SKill from the list completly
+	 * This method is remove a known SKill from the list completely
 	 * @param id the {@link Skills} enum that defines the skill you want to remove
 	 */
 	public abstract void removeSkill(Skills id);
@@ -44,9 +44,9 @@ public interface I_SkillSet extends Serializable, Iterable<Skill>{
 	}
 
 	/**
-	 * This method is used to get a integer containing the actual lvl of the given {@link Skills}
+	 * This method is used to get a integer containing the actual level of the given {@link Skills}
 	 * @param id the Skill you are looking for
-	 * @return the level oof the skill as an Integer. 0 if it is not known.
+	 * @return the level of the skill as an Integer. 0 if it is not known.
 	 */
 	public default int getSkillLevel(Skills id) {
 		return this.getSkill(id).orElse(Skill.empty()).getValue();
