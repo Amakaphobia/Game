@@ -1,4 +1,4 @@
-package entity.basic.actorBase.container;
+package entity.actorBase.container;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import common.check.AttributeCheck;
 import common.check.I_Check;
 import common.check.I_CheckResult;
 import common.check.SkillCheck;
-import entity.basic.actorBase.SkilledActorBase;
+import entity.actorBase.SkilledActorBase;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.AttributeSet;
 import entity.basic.attributeSet.Attributes;

@@ -1,4 +1,4 @@
-package entity.basic.actorBase.container;
+package entity.actorBase.container;
 
 import java.io.Serializable;
 import java.util.StringTokenizer;
@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import boxes.Pair;
 import dicemachine.DiceMachine;
 import dicemachine.I_DiceMachine;
-import entity.basic.actorBase.ClassedActorBase;
+import entity.actorBase.ClassedActorBase;
 
 /**
  * This Class holds the logic and value of an Actors healthPoints.

@@ -1,10 +1,10 @@
-package entity.basic.actorBase;
+package entity.actorBase;
 
 import javafx.scene.Parent;
 
 import common.map.I_GameMap;
-import entity.basic.actorBase.container.HealthPointContainer;
-import entity.basic.actorBase.container.I_HasHp;
+import entity.actorBase.container.HealthPointContainer;
+import entity.actorBase.container.I_HasHp;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.skillSet.I_SkillSet;

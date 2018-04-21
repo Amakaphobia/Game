@@ -3,7 +3,7 @@ package common.map;
 import javafx.beans.property.IntegerProperty;
 
 import boxes.Pair;
-import entity.basic.actorBase.MoveableActorBase;
+import entity.actorBase.MoveableActorBase;
 
 /**
  * This interface is implemented by all gamemap classes. it handles positioning of entities and moving them.

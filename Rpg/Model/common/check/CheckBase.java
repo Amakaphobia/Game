@@ -2,7 +2,7 @@ package common.check;
 
 import dicemachine.DiceMachine;
 import dicemachine.I_DiceMachine;
-import entity.basic.actorBase.SkilledActorBase;
+import entity.actorBase.SkilledActorBase;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.skillSet.Skills;
 

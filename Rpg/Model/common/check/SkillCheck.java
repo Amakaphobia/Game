@@ -1,6 +1,6 @@
 package common.check;
 
-import entity.basic.actorBase.SkilledActorBase;
+import entity.actorBase.SkilledActorBase;
 import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")

@@ -6,7 +6,7 @@ import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import entity.basic.actorBase.ClassedActorBase;
+import entity.actorBase.ClassedActorBase;
 import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")

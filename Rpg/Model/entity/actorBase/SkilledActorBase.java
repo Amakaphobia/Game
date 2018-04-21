@@ -1,4 +1,4 @@
-package entity.basic.actorBase;
+package entity.actorBase;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import common.check.AttributeCheck;
 import common.check.I_CheckResult;
 import common.check.SkillCheck;
 import common.map.I_GameMap;
+import entity.actorBase.container.SkillAttDele;
 import entity.basic.EntityBase;
-import entity.basic.actorBase.container.SkillAttDele;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;

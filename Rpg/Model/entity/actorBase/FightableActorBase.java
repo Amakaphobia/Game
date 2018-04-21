@@ -1,4 +1,4 @@
-package entity.basic.actorBase;
+package entity.actorBase;
 
 import javafx.scene.Parent;
 

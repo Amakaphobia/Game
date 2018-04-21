@@ -1,6 +1,6 @@
-package entity.basic.actorBase.container;
+package entity.actorBase.container;
 
-import entity.basic.actorBase.ClassedActorBase;
+import entity.actorBase.ClassedActorBase;
 
 /**
  * This Interface is implemented by all entities that have hp. It is used to declare eventmethod that are called when
