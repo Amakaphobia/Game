@@ -6,15 +6,10 @@ import javafx.scene.Parent;
 
 import boxes.Pair;
 import common.map.I_GameMap;
-import dicemachine.DiceMachine;
-import dicemachine.I_DiceMachine;
 import entity.basic.EntityBase;
 
+@SuppressWarnings("javadoc")
 public abstract class MoveableActorBase extends EntityBase {
-
-
-	// Dicemachine
-	protected I_DiceMachine DiceMachine = new DiceMachine();
 
 	// Map
 	protected I_GameMap Map;
