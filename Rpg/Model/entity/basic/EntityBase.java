@@ -20,7 +20,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	// TODO ticking?
 
 
-	/**set this to true if the object ticks*/
+	/**set this to true if the object is alive*/
 	protected boolean living = false;
 	/**
 	 * used to access {@link EntityBase#living}
