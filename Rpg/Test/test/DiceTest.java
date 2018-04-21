@@ -19,8 +19,8 @@ public class DiceTest {
 		I_Logger ll = new ConsoleLogger();
 		ll.setComplete(true);
 
-		IntStream.range(0, 1000)
-			.mapToObj(e -> (Integer)Integer.parseInt(""+dc.getRoll("2d6 +1")))
+		IntStream.range(0, 1000000)
+			.mapToObj(e -> (Integer)dc.getRoll("1d6"))
 			.collect(Collectors.groupingBy(Function.identity()))
 			.values().stream()
 			.map(e -> new Pair<>(e.size(), e.get(0)))
