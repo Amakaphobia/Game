@@ -18,7 +18,7 @@ public enum Skills implements Serializable{
 	/**
 	 * Acrobatic is used to represent things like abseiling, jumping, general Acrobatic stuff
 	 */
-	ACROBATIC("Acrobatic", Attributes.AGILITY, false),
+	ACROBATIC("Acrobatic", Attributes.DEXTERITY, false),
 
 	/**
 	 * This is used to move in water.

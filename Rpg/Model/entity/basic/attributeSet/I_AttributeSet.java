@@ -47,20 +47,15 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 */
 	public default int getStrength() { return this.getAttribute(Attributes.STRENGTH).getValue();}
 	/**
-	 * Getter Method for the perception value
-	 * @return a the integer inside the perception property
-	 */
-	public default int getPerception() { return this.getAttribute(Attributes.PERCEPTION).getValue(); }
-	/**
 	 * Getter Method for the agility value
 	 * @return a the integer inside the agility property
 	 */
-	public default int getAgility() { return this.getAttribute(Attributes.AGILITY).getValue(); }
+	public default int getDexterity() { return this.getAttribute(Attributes.DEXTERITY).getValue(); }
 	/**
 	 * Getter Method for the endurance value
 	 * @return a the integer inside the endurance property
 	 */
-	public default int getEndurance() { return this.getAttribute(Attributes.ENDURANCE).getValue(); }
+	public default int getEndurance() { return this.getAttribute(Attributes.CONSTITUTION).getValue(); }
 	/**
 	 * Getter Method for the intelligence value
 	 * @return a the integer inside the intelligence property
@@ -71,6 +66,13 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 * @return a the integer inside the wisdom property
 	 */
 	public default int getWisdom() { return this.getAttribute(Attributes.WISDOM).getValue(); }
+	/**
+	 * Getter Method for the charisma value
+	 * @return a the integer inside the charisma property
+	 */
+	public default int getCharisma() { return this.getAttribute(Attributes.CHARISMA).getValue(); }
+
+
 
 /*
  * O------------------------------------------------------------------------------------------------------------------O
@@ -86,19 +88,14 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	public default void setStrength(int strength) { this.getAttribute(Attributes.STRENGTH).setValue(strength); }
 	/**
 	 * setter Method for the perception value
-	 * @param perception the value
+	 * @param dexterity the value
 	 */
-	public default void setPerception(int perception) { this.getAttribute(Attributes.PERCEPTION).setValue(perception); }
-	/**
-	 * setter Method for the agility value
-	 * @param agility the value
-	 */
-	public default void setAgility(int agility) { this.getAttribute(Attributes.AGILITY).setValue(agility); }
+	public default void setDexterity(int dexterity) { this.getAttribute(Attributes.DEXTERITY).setValue(dexterity); }
 	/**
 	 * setter Method for the endurance value
 	 * @param endurance the value
 	 */
-	public default void setEndurance(int endurance) { this.getAttribute(Attributes.ENDURANCE).setValue(endurance); }
+	public default void setEndurance(int endurance) { this.getAttribute(Attributes.CONSTITUTION).setValue(endurance); }
 	/**
 	 * setter Method for the intelligence value
 	 * @param intelligence the value
@@ -109,6 +106,11 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 * @param wisdom the value
 	 */
 	public default void setWisdom(int wisdom) { this.getAttribute(Attributes.WISDOM).setValue(wisdom); }
+	/**
+	 * setter Method for the charisma value
+	 * @param charisma the value
+	 */
+	public default void setCharisma(int charisma) { this.getAttribute(Attributes.CHARISMA).setValue(charisma); }
 }
 
 

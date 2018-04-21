@@ -131,7 +131,7 @@ public class SkillAttDele implements Serializable {
 
 	//AttributeMethods
 	/**
-	 * @see I_AttributeSet#getAgility()
+	 * @see I_AttributeSet#getAttribute(Attributes)
 	 * @param AttributeId  {@link Attributes} value
 	 * @return the searched {@link Attribute}.
 	 */

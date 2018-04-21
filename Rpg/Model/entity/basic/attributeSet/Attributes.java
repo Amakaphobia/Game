@@ -22,28 +22,20 @@ public enum Attributes implements Serializable
 	STRENGTH("Strength"),
 
 	/**
-	 * used for Perception<br>
-	 * aiming bow<br>
-     * crit chance<br>
-     * trap finding<br>
-     * Savingthrows
-	 */
-	PERCEPTION("Perception"),
-
-	/**
 	 * used for Agility<br>
 	 * walk/ work speed<br>
 	 * aiming close combat<br>
 	 * Savingthrows
 	 */
-	AGILITY("Agility"),
+	DEXTERITY("Dexterity"),
+
 
 	/**
 	 * used for Endurance<br>
 	 * Health<br>
 	 * Savingthrows
 	 */
-	ENDURANCE("Endurance"),
+	CONSTITUTION("Constitution"),
 
 	/**
 	 * used for Intelligence<br>
@@ -58,7 +50,16 @@ public enum Attributes implements Serializable
 	 * streetsmarts<br>
 	 * cleric mana
 	 */
-	WISDOM("Wisdom");
+	WISDOM("Wisdom"),
+
+	/**
+	 * Charisma measures a character's personality, personal magnetism, ability to lead, and appearance.
+	 * It is the most important ability for paladins, sorcerers, and bards. It is also important for clerics,
+	 * since it affects their ability to channel energy. For undead creatures, Charisma is a measure of their unnatural
+	 * "lifeforce." Every creature has a Charisma score. A character with a Charisma score of 0 is not able to exert
+	 * himself in any way and is unconscious.
+	 */
+	CHARISMA("Charisma");
 
 	/**holds the name of the Attribute*/
 	private String id;

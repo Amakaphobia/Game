@@ -31,7 +31,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 
 	protected void onClassLevelUpHitDie(ClazzBase Clazz) {
 		StringBuilder strb = new StringBuilder(Clazz.getHitDieCode());
-		strb.append(this.getDerivedAttributeModifierAsString(Attributes.ENDURANCE));
+		strb.append(this.getDerivedAttributeModifierAsString(Attributes.CONSTITUTION));
 		if(Clazz.getLevel() == 1)
 			this.Hp.addHitDieMax(strb.toString());
 		else

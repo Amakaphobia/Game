@@ -9,11 +9,11 @@ import java.util.Map;
  *
  * Values:</br>
  * {@link Attributes#STRENGTH}</br>
- * {@link Attributes#PERCEPTION}</br>
- * {@link Attributes#AGILITY}</br>
- * {@link Attributes#ENDURANCE}</br>
+ * {@link Attributes#DEXTERITY}</br>
+ * {@link Attributes#CONSTITUTION}</br>
  * {@link Attributes#INTELLIGENCE}</br>
- * {@link Attributes#WISDOM}
+ * {@link Attributes#WISDOM}<br>
+ * {@link Attributes#CHARISMA}
  * @author Dave
  *
  */
@@ -27,21 +27,21 @@ public class AttributeSet implements I_AttributeSet {
 	/**
 	 * Constructor with specified values for each attribute
 	 * @param strength strength value
-	 * @param perception perception value
-	 * @param agility agility value
-	 * @param endurance endurance value
+	 * @param dexterity dexterity value
+	 * @param constitution constitution value
 	 * @param inteligence intelligence value
 	 * @param wisdom wisdom value
+	 * @param charisma charisma value
 	 */
-	public AttributeSet(int strength, int perception, int agility, int endurance, int inteligence, int wisdom) {
+	public AttributeSet(int strength, int dexterity, int constitution, int inteligence, int wisdom, int charisma) {
 		super();
 		this.attMap = new HashMap<>();
 		this.putAttribute(Attributes.STRENGTH, strength);
-		this.putAttribute(Attributes.PERCEPTION, perception);
-		this.putAttribute(Attributes.AGILITY, agility);
-		this.putAttribute(Attributes.ENDURANCE, endurance);
+		this.putAttribute(Attributes.DEXTERITY, dexterity);
+		this.putAttribute(Attributes.CONSTITUTION, constitution);
 		this.putAttribute(Attributes.INTELLIGENCE, inteligence);
 		this.putAttribute(Attributes.WISDOM, wisdom);
+		this.putAttribute(Attributes.CHARISMA, charisma);
 	}
 
 	/**
@@ -127,10 +127,10 @@ public class AttributeSet implements I_AttributeSet {
 
 		AttributeSet other = (AttributeSet) obj;
 		return this.getStrength() == other.getStrength() &&
-				this.getPerception() == other.getPerception() &&
-				this.getAgility() == other.getAgility() &&
+				this.getDexterity() == other.getDexterity() &&
 				this.getEndurance() == other.getEndurance() &&
 				this.getIntelligence() == other.getIntelligence() &&
-				this.getWisdom() == other.getWisdom();
+				this.getWisdom() == other.getWisdom() &&
+				this.getCharisma() == other.getCharisma();
 	}
 }

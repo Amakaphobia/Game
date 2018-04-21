@@ -98,7 +98,7 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 
 	//Attribute
 	/**
-	 * @see I_AttributeSet#getAgility()
+	 * @see I_AttributeSet#getAttribute(Attributes)
 	 * @param AttributeId  {@link Attributes} value
 	 * @return the searched {@link Attribute}.
 	 */
