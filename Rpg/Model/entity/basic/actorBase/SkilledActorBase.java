@@ -128,13 +128,7 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 	 * @return the derivedModifier string
 	 */
 	public String getDerivedAttributeModifierAsString(Attributes AttributeId) {
-		StringBuilder strb = new StringBuilder();
-		int modifier = this.getDerivedAttributeModifier(AttributeId);
-		strb.append(modifier >= 0 ? "+ " : "- ");
-		if(modifier < 0)
-			modifier *= -1;
-		strb.append(modifier);
-		return strb.toString();
+		return this.SkillAndAtt.getDerivedAttributeModifierAsString(AttributeId);
 	}
 	/**
 	 * this method is used to add to/subtract from a given attribute a given change

@@ -23,6 +23,15 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 */
 	public abstract Attribute getAttribute(Attributes id);
 
+	/**
+	 * This method gets the derived modifier of a given attribute as a string in form of "+/- modifer"
+	 * @param AttributeId the {@link Attributes} searched for
+	 * @return the derivedModifier string
+	 */
+	public default String getDerivedAttributeModifierAsString(Attributes AttributeId) {
+		return this.getAttribute(AttributeId).getDerivedAttributeModifierAsString();
+	}
+
 
 
 /*

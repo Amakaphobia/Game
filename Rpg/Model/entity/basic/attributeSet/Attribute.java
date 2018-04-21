@@ -60,6 +60,20 @@ public class Attribute implements Serializable
 	public int getDerivedModifier() { return (int)Math.floor(this.derivedModifier.get()); }
 
 	/**
+	 * This method gets the derived modifier of a given attribute as a string in form of "+/- modifer"
+	 * @return the derivedModifier string
+	 */
+	public String getDerivedAttributeModifierAsString() {
+		StringBuilder strb = new StringBuilder();
+		int modifier = this.getDerivedModifier();
+		strb.append(modifier >= 0 ? "+ " : "- ");
+		if(modifier < 0)
+			modifier *= -1;
+		strb.append(modifier);
+		return strb.toString();
+	}
+
+	/**
 	 * Used to access the name of the attribute
 	 * @return the name as a string
 	 */
