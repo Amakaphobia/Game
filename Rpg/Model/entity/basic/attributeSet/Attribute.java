@@ -92,7 +92,7 @@ public class Attribute implements Serializable
 	}
 	@Override
 	public int hashCode() {
-		int value = this.value.hashCode();
+		int value = Integer.hashCode(this.value.get());
 		int name = this.name.hashCode();
 		return value + name*name;
 	}
