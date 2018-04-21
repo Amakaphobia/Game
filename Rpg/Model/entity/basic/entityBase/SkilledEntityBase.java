@@ -9,21 +9,17 @@ import common.map.I_GameMap;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
-import entity.basic.entityBase.container.HealthPointContainer;
 import entity.basic.entityBase.container.SkillAttDele;
 import entity.basic.skillSet.I_SkillSet;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.Skills;
-import entity.clazz.ClazzBase;
 import event.I_Event;
 
 @SuppressWarnings("javadoc")
 public abstract class SkilledEntityBase extends MoveableEntityBase implements I_EventTarget{
 
-	/**this container holds the entity's skills and attributes*/
+	/**this container holds the entities skills and attributes*/
 	protected final SkillAttDele SkillAndAtt = new SkillAttDele();
-
-	protected final HealthPointContainer Hp = new HealthPointContainer();
 
 
 	// Constructor
@@ -36,10 +32,6 @@ public abstract class SkilledEntityBase extends MoveableEntityBase implements I_
 		super(name, bildPath, Map);
 		this.SkillAndAtt.setSkillSet(SkillSet);
 		this.SkillAndAtt.setAttributeSet(AttributeSet);
-	}
-
-	public void onClassLevelUp(ClazzBase clazz) {
-
 	}
 
 	@Override
