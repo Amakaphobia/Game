@@ -1,4 +1,4 @@
-package common.skillcheck;
+package common.check;
 
 /**
  * this interface is implemented by all Checkresults. 

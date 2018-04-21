@@ -1,4 +1,4 @@
-package common.skillcheck;
+package common.check;
 
 /**
  * this class gets returned by Skill attribute checks and so on
@@ -8,7 +8,7 @@ package common.skillcheck;
 public class CheckResult implements I_CheckResult {
 	/**the difference between the result and the threshold*/
 	private int resultDiff;
-	
+
 	/**
 	 * Constructor
 	 * @param resultDiff the difference between throw result and threshold
@@ -22,5 +22,14 @@ public class CheckResult implements I_CheckResult {
 
 	@Override
 	public boolean isPassed() { return this.resultDiff >= 0; }
+
+	/**
+	 * This static Method is used to help generating a new LostCheckresult. It calls the {@link #CheckResult(int)}
+	 * constructor with the minimum value an int can have.
+	 * @return a new {@link CheckResult}
+	 */
+	public static CheckResult lost() {
+		return new CheckResult(Integer.MIN_VALUE);
+	}
 
 }

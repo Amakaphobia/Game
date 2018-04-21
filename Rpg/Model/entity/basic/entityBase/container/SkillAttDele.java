@@ -59,7 +59,7 @@ public class SkillAttDele {
 			final int bonus) {
 		I_Check check = new SkillCheck(Actor, SkillId, threshold, bonus);
 
-		return check.docheck();
+		return check.doCheck();
 	}
 
 	//AttributeMethods
@@ -85,7 +85,7 @@ public class SkillAttDele {
 			final int bonus) {
 		I_Check check = new AttributeCheck(Actor, AttributeId, threshold, bonus);
 
-		return check.docheck();
+		return check.doCheck();
 	}
 
 	//ObjMethods

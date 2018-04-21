@@ -1,52 +1,37 @@
-package common.skillcheck;
+package common.check;
 
-import dicemachine.DiceMachine;
-import dicemachine.I_DiceMachine;
 import entity.basic.entityBase.SkilledEntityBase;
 import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")
-public class SkillCheck implements I_Check {
-	// TODO baseclass implementierung before docu
-	private I_DiceMachine DiceMachine;
+public class SkillCheck extends CheckBase {
 
-	private SkilledEntityBase Actor;
 	private Skills SkillId;
-	private int threshold;
-	private int bonus;
+	private int skillLevel;
 
 	public SkillCheck(SkilledEntityBase Actor, Skills SkillId, int threshold, int bonus) {
-		super();
-		this.Actor = Actor;
+		super(Actor, threshold, bonus);
 		this.SkillId = SkillId;
-		this.threshold = threshold;
-		this.bonus = bonus;
-		this.DiceMachine = new DiceMachine();
+
+		this.skillLevel =  this.Actor.getSkillLevel(SkillId);
 	}
 
 	@Override
-	public I_CheckResult docheck() {
-		final int skillLevel = this.Actor.getSkillLevel(SkillId);
+	public I_CheckResult doCheck() {
+
 		if(skillLevel == 0 && !SkillId.isUntrained())
-			return new CheckResult(Integer.MIN_VALUE);
+			return CheckResult.lost();
 
-		final int derivedBonus =
-			this.bonus +
-			skillLevel +
-			this.Actor.getAttribute(SkillId.getMainAttribute()).getDerivedModifier();
+		return super.doCheck();
+	}
 
-		//TODO dicecode factory?
+	@Override
+	protected int computeBonus() {
+		// TODO Auto-generated method stub
+		return this.bonus +
+				skillLevel +
+				this.Actor.getAttribute(SkillId.getMainAttribute()).getDerivedModifier();
 
-		StringBuilder strb = new StringBuilder("1d20");
-
-		if(bonus >= 0)
-			strb.append("+");
-
-		 strb.append(derivedBonus);
-
-		int erg = this.DiceMachine.getRoll(strb.toString()) - threshold;
-
-		return new CheckResult(erg);
 	}
 
 }
