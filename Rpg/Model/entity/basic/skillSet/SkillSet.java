@@ -14,7 +14,7 @@ import java.util.Optional;
 public class SkillSet implements I_SkillSet{
 
 	/**the list that holds the all skills in this Set*/
-	private List<Skill> skilllist;
+	private List<Skill> skillList;
 
 	/**empty constructor, sets up with an empty skill list*/
 	public SkillSet() {
@@ -27,12 +27,18 @@ public class SkillSet implements I_SkillSet{
 	 */
 	public SkillSet(List<Skill> liste) {
 		super();
-		this.skilllist = liste;
+		this.skillList = liste;
 	}
+
+	/**
+	 * This Method is used count the different skills an Actor has
+	 * @return the size of the List {@link #skillList}.
+	 */
+	public int size() { return this.skillList.size(); }
 
 	@Override
 	public Optional<Skill> getSkill(Skills id) {
-		return this.skilllist.stream()
+		return this.skillList.stream()
 				.filter(skill -> id.equals(skill.getName()))
 				.findFirst();
 	}
@@ -44,23 +50,23 @@ public class SkillSet implements I_SkillSet{
 		if(skill.isPresent())
 			return;
 
-		this.skilllist.add(new Skill(id, level));
+		this.skillList.add(new Skill(id, level));
 	}
 
 	@Override
 	public void removeSkill(Skills id) {
 		this.getSkill(id)
-			.ifPresent(s -> this.skilllist.remove(s));
+			.ifPresent(s -> this.skillList.remove(s));
 	}
 
 	@Override
 	public Iterator<Skill> iterator() {
-		return this.skilllist.iterator();
+		return this.skillList.iterator();
 	}
 
 	@Override
 	public String toString() {
-		return this.skilllist.toString();
+		return this.skillList.toString();
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class SkillSet implements I_SkillSet{
 		if(!(obj instanceof SkillSet)) return false;
 
 		SkillSet other = (SkillSet) obj;
-		return this.skilllist.equals(other.skilllist);
+		return this.skillList.equals(other.skillList);
 	}
 
 	@Override
@@ -79,7 +85,7 @@ public class SkillSet implements I_SkillSet{
 		int count = 1;
 		int mult, hash;
 
-		for(Skill e : this.skilllist) {
+		for(Skill e : this.skillList) {
 			mult = 1;
 			hash = e.hashCode();
 			for(int i = 0; i < count; i++)
