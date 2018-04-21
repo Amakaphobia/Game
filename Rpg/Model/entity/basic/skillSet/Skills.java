@@ -61,4 +61,5 @@ public enum Skills implements Serializable{
 	 */
 	public Attributes getMainAttribute() { return this.mainAttribute; }
 
+
 }
