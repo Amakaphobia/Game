@@ -2,8 +2,6 @@ package entity.basic.attributeSet;
 
 import java.io.Serializable;
 
-import javafx.beans.property.IntegerProperty;
-
 /**
  * This Interface is implemented by AttributeSets of entities.
  * @author Dave
@@ -25,48 +23,7 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 */
 	public abstract Attribute getAttribute(Attributes id);
 
-	/**
-	 * This Method exposes the Observable Property for the strength value
-	 * @return IntegerProperty for the strength value.
-	 */
-	public default IntegerProperty strengthProperty() {
-		return this.getAttribute(Attributes.STRENGTH).valueProperty();
-	}
-	/**
-	 * This Method exposes the Observable Property for the perception value
-	 * @return IntegerProperty for the perception value.
-	 */
-	public default IntegerProperty perceptionProperty() {
-		return this.getAttribute(Attributes.PERCEPTION).valueProperty();
-	}
-	/**
-	 * This Method exposes the Observable Property for the agility value
-	 * @return IntegerProperty for the agility value.
-	 */
-	public default IntegerProperty agilityProperty() {
-		return this.getAttribute(Attributes.AGILITY).valueProperty();
-	}
-	/**
-	 * This Method exposes the Observable Property for the endurance value
-	 * @return IntegerProperty for the endurance value.
-	 */
-	public default IntegerProperty enduranceProperty() {
-		return this.getAttribute(Attributes.ENDURANCE).valueProperty();
-	}
-	/**
-	 * This Method exposes the Observable Property for the intelligence value
-	 * @return IntegerProperty for the intelligence value.
-	 */
-	public default IntegerProperty intelligenceProperty() {
-		return this.getAttribute(Attributes.INTELLIGENCE).valueProperty();
-	}
-	/**
-	 * This Method exposes the Observable Property for the wisdom value
-	 * @return IntegerProperty for the wisdom value.
-	 */
-	public default IntegerProperty wisdomProperty() {
-		return this.getAttribute(Attributes.WISDOM).valueProperty();
-	}
+
 
 /*
  * O------------------------------------------------------------------------------------------------------------------O
@@ -79,32 +36,32 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 * Getter Method for the strength value
 	 * @return a the integer inside the strength property
 	 */
-	public default int getStrength() { return this.strengthProperty().get(); }
+	public default int getStrength() { return this.getAttribute(Attributes.STRENGTH).getValue();}
 	/**
 	 * Getter Method for the perception value
 	 * @return a the integer inside the perception property
 	 */
-	public default int getPerception() { return this.perceptionProperty().get(); }
+	public default int getPerception() { return this.getAttribute(Attributes.PERCEPTION).getValue(); }
 	/**
 	 * Getter Method for the agility value
 	 * @return a the integer inside the agility property
 	 */
-	public default int getAgility() { return this.agilityProperty().get(); }
+	public default int getAgility() { return this.getAttribute(Attributes.AGILITY).getValue(); }
 	/**
 	 * Getter Method for the endurance value
 	 * @return a the integer inside the endurance property
 	 */
-	public default int getEndurance() { return this.enduranceProperty().get(); }
+	public default int getEndurance() { return this.getAttribute(Attributes.ENDURANCE).getValue(); }
 	/**
 	 * Getter Method for the intelligence value
 	 * @return a the integer inside the intelligence property
 	 */
-	public default int getIntelligence() { return this.intelligenceProperty().get(); }
+	public default int getIntelligence() { return this.getAttribute(Attributes.INTELLIGENCE).getValue(); }
 	/**
 	 * Getter Method for the wisdom value
 	 * @return a the integer inside the wisdom property
 	 */
-	public default int getWisdom() { return this.wisdomProperty().get(); }
+	public default int getWisdom() { return this.getAttribute(Attributes.WISDOM).getValue(); }
 
 /*
  * O------------------------------------------------------------------------------------------------------------------O
@@ -117,32 +74,32 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 * setter Method for the strength value
 	 * @param strength the value
 	 */
-	public default void setStrength(int strength) { this.strengthProperty().set(strength); }
+	public default void setStrength(int strength) { this.getAttribute(Attributes.STRENGTH).setValue(strength); }
 	/**
 	 * setter Method for the perception value
 	 * @param perception the value
 	 */
-	public default void setPerception(int perception) { this.perceptionProperty().set(perception); }
+	public default void setPerception(int perception) { this.getAttribute(Attributes.PERCEPTION).setValue(perception); }
 	/**
 	 * setter Method for the agility value
 	 * @param agility the value
 	 */
-	public default void setAgility(int agility) { this.agilityProperty().set(agility); }
+	public default void setAgility(int agility) { this.getAttribute(Attributes.AGILITY).setValue(agility); }
 	/**
 	 * setter Method for the endurance value
 	 * @param endurance the value
 	 */
-	public default void setEndurance(int endurance) { this.enduranceProperty().set(endurance); }
+	public default void setEndurance(int endurance) { this.getAttribute(Attributes.ENDURANCE).setValue(endurance); }
 	/**
 	 * setter Method for the intelligence value
 	 * @param intelligence the value
 	 */
-	public default void setIntelligence(int intelligence) { this.intelligenceProperty().set(intelligence); }
+	public default void setIntelligence(int intelligence) { this.getAttribute(Attributes.INTELLIGENCE).setValue(intelligence); }
 	/**
 	 * setter Method for the wisdom value
 	 * @param wisdom the value
 	 */
-	public default void setWisdom(int wisdom) { this.wisdomProperty().set(wisdom); }
+	public default void setWisdom(int wisdom) { this.getAttribute(Attributes.WISDOM).setValue(wisdom); }
 }
 
 
