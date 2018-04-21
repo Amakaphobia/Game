@@ -5,20 +5,11 @@ import javafx.scene.Parent;
 import common.map.I_GameMap;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.skillSet.I_SkillSet;
-import event.I_Event;
 
-public abstract class FightableActorBase extends ClassedActorBase implements I_EventTarget {
+@SuppressWarnings("javadoc")
+public abstract class FightableActorBase extends ClassedActorBase {
 
 
-
-	/**
-	 *
-	 * @param name
-	 * @param bildPath
-	 * @param Map
-	 * @param SkillSet
-	 * @param AttributeSet
-	 */
 	public FightableActorBase(
 			String name, String bildPath,
 			I_GameMap Map,
@@ -32,10 +23,5 @@ public abstract class FightableActorBase extends ClassedActorBase implements I_E
 
 	@Override
 	public abstract Parent getInfoView();
-
-	@Override
-	public void handleEvent(I_Event<? super I_EventTarget> event) {
-		event.execute(this);
-	}
 
 }
