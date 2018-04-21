@@ -1,4 +1,4 @@
-package entity.basic.entityBase.container;
+package entity.basic.actorBase.container;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -7,15 +7,15 @@ import common.check.AttributeCheck;
 import common.check.I_Check;
 import common.check.I_CheckResult;
 import common.check.SkillCheck;
+import entity.basic.actorBase.SkilledActorBase;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
-import entity.basic.entityBase.SkilledEntityBase;
 import entity.basic.skillSet.I_SkillSet;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.Skills;
 
-@SuppressWarnings("javadoc")
+
 public class SkillAttDele implements Serializable {
 
 	//Objs
@@ -53,7 +53,7 @@ public class SkillAttDele implements Serializable {
 	public void removeSkill(Skills SkillId) { this.SkillSet.removeSkill(SkillId); }
 
 	public I_CheckResult doCheck(
-			final SkilledEntityBase Actor,
+			final SkilledActorBase Actor,
 			final Skills SkillId,
 			final int threshold,
 			final int bonus) {
@@ -79,7 +79,7 @@ public class SkillAttDele implements Serializable {
 	}
 
 	public I_CheckResult doCheck(
-			final SkilledEntityBase Actor,
+			final SkilledActorBase Actor,
 			final Attributes AttributeId,
 			final int threshold,
 			final int bonus) {

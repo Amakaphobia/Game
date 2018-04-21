@@ -1,4 +1,4 @@
-package entity.basic.entityBase;
+package entity.basic.actorBase;
 
 import java.util.Optional;
 
@@ -6,17 +6,16 @@ import javafx.scene.Parent;
 
 import common.check.I_CheckResult;
 import common.map.I_GameMap;
+import entity.basic.actorBase.container.SkillAttDele;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
-import entity.basic.entityBase.container.SkillAttDele;
 import entity.basic.skillSet.I_SkillSet;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.Skills;
 import event.I_Event;
 
-@SuppressWarnings("javadoc")
-public abstract class SkilledEntityBase extends MoveableEntityBase implements I_EventTarget{
+public abstract class SkilledActorBase extends MoveableActorBase implements I_EventTarget{
 
 	/**this container holds the entities skills and attributes*/
 	protected final SkillAttDele SkillAndAtt = new SkillAttDele();
@@ -24,7 +23,7 @@ public abstract class SkilledEntityBase extends MoveableEntityBase implements I_
 
 	// Constructor
 
-	public SkilledEntityBase(
+	public SkilledActorBase(
 			String name, String bildPath,
 			I_GameMap Map,
 			I_SkillSet SkillSet, I_AttributeSet AttributeSet) {
@@ -54,6 +53,19 @@ public abstract class SkilledEntityBase extends MoveableEntityBase implements I_
 	public int getAttributeLevel(Attributes AttributeId) {
 		return this.SkillAndAtt.getAttribute(AttributeId).getValue();
 	}
+	public int getDerivedAttributeModifier(Attributes AttributeId) {
+		return this.getAttribute(AttributeId).getDerivedModifier();
+	}
+	public String getDerivedAttributeModifierAsString(Attributes AttributeId) {
+		StringBuilder strb = new StringBuilder();
+		int modifier = this.getDerivedAttributeModifier(AttributeId);
+		strb.append(modifier >= 0 ? "+ " : "- ");
+		if(modifier < 0)
+			modifier *= -1;
+		strb.append(modifier);
+		return strb.toString();
+	}
+
 	public void changeAttribute(Attributes AttributeId, int change) {
 		this.SkillAndAtt.changeAttribute(AttributeId, change);
 	}

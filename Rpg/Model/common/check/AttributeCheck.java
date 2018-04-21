@@ -1,7 +1,7 @@
 package common.check;
 
+import entity.basic.actorBase.SkilledActorBase;
 import entity.basic.attributeSet.Attributes;
-import entity.basic.entityBase.SkilledEntityBase;
 
 /**
  * This Class is a implementation of the {@link I_Check} Interface.
@@ -21,7 +21,7 @@ public class AttributeCheck extends CheckBase {
 	 * @param threshold the threshold that is given
 	 * @param bonus the bonus that get added to the result
 	 */
-	public AttributeCheck(SkilledEntityBase Actor, Attributes AttributeId, int threshold, int bonus) {
+	public AttributeCheck(SkilledActorBase Actor, Attributes AttributeId, int threshold, int bonus) {
 		super(Actor, threshold, bonus);
 		this.AttributeId = AttributeId;
 	}

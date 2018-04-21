@@ -1,6 +1,6 @@
 package event;
 
-import entity.basic.entityBase.I_EventTarget;
+import entity.basic.actorBase.I_EventTarget;
 
 /**
  * This Interface is implemented by events (attacks, spells, natural catastrophes,...).

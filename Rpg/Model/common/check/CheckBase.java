@@ -2,8 +2,8 @@ package common.check;
 
 import dicemachine.DiceMachine;
 import dicemachine.I_DiceMachine;
+import entity.basic.actorBase.SkilledActorBase;
 import entity.basic.attributeSet.Attributes;
-import entity.basic.entityBase.SkilledEntityBase;
 import entity.basic.skillSet.Skills;
 
 /**
@@ -19,7 +19,7 @@ public abstract class CheckBase implements I_Check{
 	/**the {@link I_DiceMachine} used to generate the check result*/
 	protected I_DiceMachine DiceMachine;
 	/**the actor that is performing the check*/
-	protected SkilledEntityBase Actor;
+	protected SkilledActorBase Actor;
 	/**the threshold that is to be reached*/
 	protected int threshold;
 	/**the bonus or malus added to the check by circumstances*/
@@ -38,7 +38,7 @@ public abstract class CheckBase implements I_Check{
 	 * @param threshold the threshold that is given
 	 * @param bonus the bonus that get added to the result by circumstances
 	 */
-	public CheckBase(SkilledEntityBase Actor, int threshold, int bonus) {
+	public CheckBase(SkilledActorBase Actor, int threshold, int bonus) {
 		super();
 		this.Actor = Actor;
 		this.threshold = threshold;

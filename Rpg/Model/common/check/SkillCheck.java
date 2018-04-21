@@ -1,6 +1,6 @@
 package common.check;
 
-import entity.basic.entityBase.SkilledEntityBase;
+import entity.basic.actorBase.SkilledActorBase;
 import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")
@@ -9,7 +9,7 @@ public class SkillCheck extends CheckBase {
 	private Skills SkillId;
 	private int skillLevel;
 
-	public SkillCheck(SkilledEntityBase Actor, Skills SkillId, int threshold, int bonus) {
+	public SkillCheck(SkilledActorBase Actor, Skills SkillId, int threshold, int bonus) {
 		super(Actor, threshold, bonus);
 		this.SkillId = SkillId;
 

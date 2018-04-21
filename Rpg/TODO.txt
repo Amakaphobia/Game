@@ -6,19 +6,18 @@ Functional
 	eventtarget interface
 Base
     Entity 
-    	(targetable) not in Entity Base  
-    SkilledEntityBase
-    	delegate functioncalls from SEB to containerclasses
-    		less clutter!
-    	introduce containerclass for skillset + attribute set
-    	     introduce containerclass for that container + health + spellbook .....
+    	(targetable) not in Entity Base
+    Classed Entity base
+    	remember class skills on new class  
+    General Entity
+     	introduce containerclass for that container + health + spellbook .....
     Savingthrow
         predicat (Difference Skill-/Att-check and saving throw?)
-    Checks
-    	CheckBaseclass for stuff that attribute and skill checks have in common.
     Logger
     	personal history logger (?)
     	datafile logger?
+    DiceMachine
+    	getMaxRoll out of HPC
     IG TimeHandler
     Dialog Handler
     incomingevent

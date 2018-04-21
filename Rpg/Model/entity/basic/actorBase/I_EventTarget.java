@@ -1,4 +1,4 @@
-package entity.basic.entityBase;
+package entity.basic.actorBase;
 
 import event.I_Event;
 

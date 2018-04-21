@@ -1,4 +1,4 @@
-package entity.basic.entityBase;
+package entity.basic.actorBase;
 
 import javafx.scene.Parent;
 
@@ -7,7 +7,7 @@ import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.skillSet.I_SkillSet;
 import event.I_Event;
 
-public abstract class FightableEntityBase extends ClassedEntityBase implements I_EventTarget {
+public abstract class FightableActorBase extends ClassedActorBase implements I_EventTarget {
 
 
 
@@ -19,7 +19,7 @@ public abstract class FightableEntityBase extends ClassedEntityBase implements I
 	 * @param SkillSet
 	 * @param AttributeSet
 	 */
-	public FightableEntityBase(
+	public FightableActorBase(
 			String name, String bildPath,
 			I_GameMap Map,
 			I_SkillSet SkillSet, I_AttributeSet AttributeSet) {

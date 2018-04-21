@@ -1,4 +1,4 @@
-package entity.basic.entityBase;
+package entity.basic.actorBase;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -8,8 +8,9 @@ import boxes.Pair;
 import common.map.I_GameMap;
 import dicemachine.DiceMachine;
 import dicemachine.I_DiceMachine;
+import entity.basic.EntityBase;
 
-public abstract class MoveableEntityBase extends EntityBase {
+public abstract class MoveableActorBase extends EntityBase {
 
 
 	// Dicemachine
@@ -43,7 +44,7 @@ public abstract class MoveableEntityBase extends EntityBase {
 
 	// Constructor
 
-	public MoveableEntityBase(String name, String bildPath, I_GameMap Map) {
+	public MoveableActorBase(String name, String bildPath, I_GameMap Map) {
 		super(name, bildPath);
 		this.Map = Map;
 	}

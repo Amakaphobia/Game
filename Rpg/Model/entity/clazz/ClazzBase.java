@@ -6,7 +6,7 @@ import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import entity.basic.entityBase.ClassedEntityBase;
+import entity.basic.actorBase.ClassedActorBase;
 import entity.basic.skillSet.Skills;
 
 public abstract class ClazzBase implements Serializable{
@@ -37,13 +37,13 @@ public abstract class ClazzBase implements Serializable{
 
 	// Entity Handling
 
-	protected ClassedEntityBase entity;
+	protected ClassedActorBase entity;
 
-	public void registerEntity(ClassedEntityBase sub) {
+	public void registerEntity(ClassedActorBase sub) {
 		this.entity = sub;
 	}
 
-	public void unregisterEntity(ClassedEntityBase sub) {
+	public void unregisterEntity(ClassedActorBase sub) {
 		if(this.entity.equals(sub))
 			this.entity = null;
 	}

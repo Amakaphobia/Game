@@ -3,7 +3,7 @@ package common.map;
 import javafx.beans.property.IntegerProperty;
 
 import boxes.Pair;
-import entity.basic.entityBase.MoveableEntityBase;
+import entity.basic.actorBase.MoveableActorBase;
 
 /**
  * This interface is implemented by all gamemap classes. it handles positioning of entities and moving them.
@@ -22,11 +22,11 @@ public interface I_GameMap {
 	}
 
 	/**
-	 * tests if a {@link MoveableEntityBase} is inside the maps boundaries
+	 * tests if a {@link MoveableActorBase} is inside the maps boundaries
 	 * @param Entity the Entity you want to test
 	 * @return true if the entity is inside the boundary
 	 */
-	public default boolean testBoundary(MoveableEntityBase Entity) {
+	public default boolean testBoundary(MoveableActorBase Entity) {
 		return this.testBoundary(Entity.getLocation());
 	}
 
