@@ -60,4 +60,13 @@ public abstract class MoveableActorBase extends EntityBase {
 	@Override
 	public abstract Parent getInfoView();
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		if(obj == null) return false;
+		if(!(obj instanceof MoveableActorBase)) return false;
+
+		return super.equals(obj);
+	}
+
 }
