@@ -6,8 +6,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * This class is used to represent an Attribute. It holds a Name (strength, perception, agility, endurance,
- * intelligence , wisdom) and the associated value.
+ * This class is used to represent an Attribute. It holds a Name (strength, dexterity, constitution,
+ * intelligence , wisdom, charisma) and the associated value.
  * @author Dave
  *
  */

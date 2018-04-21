@@ -55,7 +55,7 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 * Getter Method for the endurance value
 	 * @return a the integer inside the endurance property
 	 */
-	public default int getEndurance() { return this.getAttribute(Attributes.CONSTITUTION).getValue(); }
+	public default int getConstitution() { return this.getAttribute(Attributes.CONSTITUTION).getValue(); }
 	/**
 	 * Getter Method for the intelligence value
 	 * @return a the integer inside the intelligence property
@@ -87,15 +87,15 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 */
 	public default void setStrength(int strength) { this.getAttribute(Attributes.STRENGTH).setValue(strength); }
 	/**
-	 * setter Method for the perception value
+	 * setter Method for the Dexterity value
 	 * @param dexterity the value
 	 */
 	public default void setDexterity(int dexterity) { this.getAttribute(Attributes.DEXTERITY).setValue(dexterity); }
 	/**
 	 * setter Method for the endurance value
-	 * @param endurance the value
+	 * @param constitution the value
 	 */
-	public default void setEndurance(int endurance) { this.getAttribute(Attributes.CONSTITUTION).setValue(endurance); }
+	public default void setConstitution(int constitution) { this.getAttribute(Attributes.CONSTITUTION).setValue(constitution); }
 	/**
 	 * setter Method for the intelligence value
 	 * @param intelligence the value
@@ -112,28 +112,3 @@ public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 	 */
 	public default void setCharisma(int charisma) { this.getAttribute(Attributes.CHARISMA).setValue(charisma); }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

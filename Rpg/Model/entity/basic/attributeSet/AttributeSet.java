@@ -128,7 +128,7 @@ public class AttributeSet implements I_AttributeSet {
 		AttributeSet other = (AttributeSet) obj;
 		return this.getStrength() == other.getStrength() &&
 				this.getDexterity() == other.getDexterity() &&
-				this.getEndurance() == other.getEndurance() &&
+				this.getConstitution() == other.getConstitution() &&
 				this.getIntelligence() == other.getIntelligence() &&
 				this.getWisdom() == other.getWisdom() &&
 				this.getCharisma() == other.getCharisma();
