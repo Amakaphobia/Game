@@ -109,7 +109,7 @@ public class HealthPointContainer implements Serializable{
 		this.Parent = Parent;
 
 		this.HpList = FXCollections.observableArrayList();
-		this.maximumHealth = new SimpleIntegerProperty(0);
+		this.maximumHealth = new SimpleIntegerProperty(1);
 
 		// CurrentHealthChangeListener which will update the parent of this container according to the changes
 		this.currentHealth = new SimpleIntegerProperty(0);
