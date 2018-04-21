@@ -1,4 +1,4 @@
-package entity;
+package model.entity.basic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
