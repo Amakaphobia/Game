@@ -70,7 +70,7 @@ class SkillTest {
 
 	@Test
 	void testGetMainAttribute() {
-		assertEquals(Attributes.AGILITY, e1.getMainAttribute());
+		assertEquals(Attributes.DEXTERITY, e1.getMainAttribute());
 	}
 
 	@Test
