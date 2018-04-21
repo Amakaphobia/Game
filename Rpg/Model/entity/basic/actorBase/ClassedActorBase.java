@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 
 import common.map.I_GameMap;
 import entity.basic.actorBase.container.HealthPointContainer;
+import entity.basic.actorBase.container.I_HasHp;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.skillSet.I_SkillSet;
@@ -37,6 +38,10 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 			this.Hp.addHitDie(strb.toString());
 	}
 
+	/**
+	 * {@inheritDoc}<br>
+	 * It will set {@link #setLiving(boolean)} to false.
+	 */
 	@Override
 	public void onHealthZero() {
 		this.setLiving(false);
