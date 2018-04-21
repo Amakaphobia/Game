@@ -25,10 +25,17 @@ public class Attribute implements Serializable
 	 * @param value the value
 	 */
 	public Attribute(Attributes name, int value) {
-		this.value = new SimpleIntegerProperty(value);
+		this.value = new SimpleIntegerProperty();
 		this.derivedModifier = new SimpleIntegerProperty();
 
-		this.derivedModifier.bind(this.value.subtract(10).divide(2));
+		this.value.addListener((ov, oldVal, newVal) -> {
+			this.derivedModifier.set(
+					(int)Math.floor(
+							(newVal.intValue() - 10) / 2d )
+			);
+		});
+		this.value.set(value);
+
 		this.name = name;
 	}
 
@@ -64,6 +71,9 @@ public class Attribute implements Serializable
 	 * @return the derivedModifier string
 	 */
 	public String getDerivedAttributeModifierAsString() {
+		if(this.getDerivedModifier() == 0)
+			return "";
+
 		StringBuilder strb = new StringBuilder();
 		int modifier = this.getDerivedModifier();
 		strb.append(modifier >= 0 ? "+ " : "- ");
