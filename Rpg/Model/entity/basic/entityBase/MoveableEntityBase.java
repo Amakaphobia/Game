@@ -11,8 +11,6 @@ import dicemachine.I_DiceMachine;
 
 public abstract class MoveableEntityBase extends EntityBase {
 
-	/**serial*/
-	private static final long serialVersionUID = 2400225046351524396L;
 
 	// Dicemachine
 	protected I_DiceMachine DiceMachine = new DiceMachine();

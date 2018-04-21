@@ -9,8 +9,7 @@ import event.I_Event;
 
 public abstract class FightableEntityBase extends SkilledEntityBase implements I_EventTarget {
 
-	/**serial*/
-	protected static final long serialVersionUID = -4691887039931978132L;
+
 
 	/**
 	 *

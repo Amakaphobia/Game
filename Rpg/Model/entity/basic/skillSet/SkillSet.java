@@ -1,6 +1,5 @@
 package entity.basic.skillSet;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,10 +11,8 @@ import java.util.Optional;
  * @author Dave
  *
  */
-public class SkillSet implements I_SkillSet, Serializable{
+public class SkillSet implements I_SkillSet{
 
-	/**serial*/
-	private static final long serialVersionUID = 6020275397583604437L;
 	/**the list that holds the all skills in this Set*/
 	private List<Skill> skilllist;
 

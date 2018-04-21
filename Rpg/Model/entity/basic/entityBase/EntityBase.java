@@ -19,8 +19,6 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 
 	// TODO ticking?
 
-	/**serial*/
-	protected static final long serialVersionUID = -8965100601145336638L;
 
 	/**set this to true if the object ticks*/
 	protected boolean living = false;

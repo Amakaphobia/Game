@@ -1,5 +1,6 @@
 package entity.basic.entityBase.container;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 import common.check.AttributeCheck;
@@ -15,7 +16,7 @@ import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")
-public class SkillAttDele {
+public class SkillAttDele implements Serializable {
 
 	//Objs
 
@@ -28,7 +29,6 @@ public class SkillAttDele {
 	public I_AttributeSet getAttributeSet() { return this.AttributeSet; }
 
 	//Const
-
 	public SkillAttDele() {
 		super();
 	}

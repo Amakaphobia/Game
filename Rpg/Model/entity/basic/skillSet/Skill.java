@@ -14,8 +14,6 @@ import entity.basic.attributeSet.Attributes;
  *
  */
 public class Skill implements Serializable{
-	/**serial*/
-	private static final long serialVersionUID = 1418267970463202521L;
 
 	/**holds the name of the Skill*/
 	private final Skills name;

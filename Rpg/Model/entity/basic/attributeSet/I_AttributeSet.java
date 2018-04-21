@@ -1,5 +1,7 @@
 package entity.basic.attributeSet;
 
+import java.io.Serializable;
+
 import javafx.beans.property.IntegerProperty;
 
 /**
@@ -7,7 +9,7 @@ import javafx.beans.property.IntegerProperty;
  * @author Dave
  *
  */
-public interface I_AttributeSet{
+public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 
 /*
  * O------------------------------------------------------------------------------------------------------------------O

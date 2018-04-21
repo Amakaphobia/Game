@@ -13,8 +13,6 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public class Attribute implements Serializable
 {
-	/**serial*/
-	private static final long serialVersionUID = -7052775875998858697L;
 	/**holds the value of the Attribute*/
 	private final IntegerProperty value;
 	/**holds the name of the Attribute*/
@@ -29,7 +27,7 @@ public class Attribute implements Serializable
 	public Attribute(Attributes name, int value) {
 		this.value = new SimpleIntegerProperty(value);
 		this.derivedModifier = new SimpleIntegerProperty();
-		
+
 		this.derivedModifier.bind(this.value.subtract(10).divide(2));
 		this.name = name;
 	}
@@ -49,7 +47,7 @@ public class Attribute implements Serializable
 	 * @param value the value you want the attribute to be set to
 	 */
 	public void setValue(int value) { this.value.set(value); }
-	
+
 	/**
 	 * used to access the {@link Attribute#derivedModifier} property of this attribute
 	 * @return the Property object that contains the derived modifier
@@ -60,7 +58,7 @@ public class Attribute implements Serializable
 	 * @return the derived modifier as an integer
 	 */
 	public int getDerivedModifier() { return (int)Math.floor(this.derivedModifier.get()); }
-	
+
 	/**
 	 * Used to access the name of the attribute
 	 * @return the name as a string

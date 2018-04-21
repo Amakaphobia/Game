@@ -1,5 +1,6 @@
 package dicemachine;
 
+import java.io.Serializable;
 import java.util.StringTokenizer;
 
 /**
@@ -15,7 +16,7 @@ import java.util.StringTokenizer;
  *
  */
 @FunctionalInterface
-public interface I_DiceMachine {
+public interface I_DiceMachine extends Serializable{
 
 	/**
 	 * this method is used to analyze the dicecode and compute the actual integer

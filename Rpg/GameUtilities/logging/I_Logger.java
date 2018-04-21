@@ -1,5 +1,6 @@
 package logging;
 
+import java.io.Serializable;
 import java.util.function.Supplier;
 
 /**
@@ -8,7 +9,7 @@ import java.util.function.Supplier;
  * @author Dave
  *
  */
-public interface I_Logger {
+public interface I_Logger extends Serializable{
 	/**
 	 * Used to access logging at the complete level
 	 * @param msgGenerator A {@link Supplier} that supplies the String to log.

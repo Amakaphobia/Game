@@ -9,18 +9,21 @@ import common.map.I_GameMap;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
+import entity.basic.entityBase.container.HealthPointContainer;
 import entity.basic.entityBase.container.SkillAttDele;
 import entity.basic.skillSet.I_SkillSet;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.Skills;
+import entity.clazz.ClazzBase;
 import event.I_Event;
 
 @SuppressWarnings("javadoc")
 public abstract class SkilledEntityBase extends MoveableEntityBase implements I_EventTarget{
-	/**serial*/
-	private static final long serialVersionUID = -6626140214455088421L;
 
-	private final SkillAttDele SkillAndAtt = new SkillAttDele();
+	/**this container holds the entity's skills and attributes*/
+	protected final SkillAttDele SkillAndAtt = new SkillAttDele();
+
+	protected final HealthPointContainer Hp = new HealthPointContainer();
 
 
 	// Constructor
@@ -35,8 +38,8 @@ public abstract class SkilledEntityBase extends MoveableEntityBase implements I_
 		this.SkillAndAtt.setAttributeSet(AttributeSet);
 	}
 
-	public void updateMaxHealth(String hitDieCode) {
-		// TODO onClassLevelUp
+	public void onClassLevelUp(ClazzBase clazz) {
+
 	}
 
 	@Override
@@ -45,7 +48,6 @@ public abstract class SkilledEntityBase extends MoveableEntityBase implements I_
 	}
 
 	//Skill
-
 	public Optional<Skill> getSkill(Skills SkillId) { return this.SkillAndAtt.getSkill(SkillId); }
 	public int getSkillLevel(Skills SkillId) { return this.SkillAndAtt.getSkillLevel(SkillId); }
 	public I_CheckResult doCheck(final Skills SkillId, final int threshold, final int bonus) {

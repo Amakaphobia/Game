@@ -1,14 +1,15 @@
 package entity.basic.skillSet;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * this Interface will be implemented by all Skillsetimplementations. 
+ * this Interface will be implemented by all Skillsetimplementations.
  * It handles the accessing adding, removing and leveling of skills.
  * @author hdaiv_000
  *
  */
-public interface I_SkillSet extends Iterable<Skill>{
+public interface I_SkillSet extends Serializable, Iterable<Skill>{
 	/**
 	 * This method is used to get a Optional ontaining a searched Skill
 	 * @param id a {@link Skills} enum that defines what skill is searched
@@ -25,7 +26,7 @@ public interface I_SkillSet extends Iterable<Skill>{
 	 * This method is remove a known SKill from the list completly
 	 * @param id the {@link Skills} enum that defines the skill you want to remove
 	 */
-	public abstract void removeSkill(Skills id);	
+	public abstract void removeSkill(Skills id);
 	/**
 	 * this method is used to add a Skill at lvl1 to the skillset. See {@link I_SkillSet#addSkill(Skills, int)}.
 	 * @param id the id of the skill you want to add
@@ -41,7 +42,7 @@ public interface I_SkillSet extends Iterable<Skill>{
 	public default boolean hasSkill(Skills id) {
 		return this.getSkill(id).isPresent();
 	}
-	
+
 	/**
 	 * This method is used to get a integer containing the actual lvl of the given {@link Skills}
 	 * @param id the Skill you are looking for
@@ -50,7 +51,7 @@ public interface I_SkillSet extends Iterable<Skill>{
 	public default int getSkillLevel(Skills id) {
 		return this.getSkill(id).orElse(Skill.empty()).getValue();
 	}
-	
+
 	/**
 	 * This method is used to train a learned skill by given levels
 	 * @param id the {@link Skills} you want to train
@@ -59,7 +60,7 @@ public interface I_SkillSet extends Iterable<Skill>{
 	public default void trainSkill(Skills id, int levelGain) {
 		int oldLevel = this.getSkillLevel(id);
 		int testLevel = oldLevel + levelGain;
-		
+
 		if(testLevel > 0)
 			this.getSkill(id).ifPresent(skill -> skill.setValue(testLevel));
 		else
