@@ -62,14 +62,12 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 	 * @return a optional containing the found skill or empty if the skill is not part of this set.
 	 */
 	public Optional<Skill> getSkill(Skills SkillId) { return this.SkillAndAtt.getSkill(SkillId); }
-
 	/**
 	 * @see I_SkillSet#getSkillLevel(Skills)
 	 * @param SkillId the Skill you are looking for
 	 * @return the level of the skill as an Integer. 0 if it is not known.
 	 */
 	public int getSkillLevel(Skills SkillId) { return this.SkillAndAtt.getSkillLevel(SkillId); }
-
 	/**
 	 * @see SkillCheck#doCheck()
 	 * @param SkillId the id of the skill you want to check
