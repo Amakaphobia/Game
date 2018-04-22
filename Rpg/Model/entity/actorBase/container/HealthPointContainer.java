@@ -243,11 +243,20 @@ public class HealthPointContainer implements Serializable{
 
 	@Override
 	public boolean equals(Object obj) {
-		throw new RuntimeException("Das ist noch nicht implementiert!");
+		if(obj == this) return true;
+		if(obj == null) return false;
+		if(!(obj instanceof HealthPointContainer)) return false;
+
+		HealthPointContainer other = (HealthPointContainer) obj;
+
+		return this.HpList.equals(other.HpList);
 	}
 
 	@Override
 	public int hashCode() {
-		throw new RuntimeException("Das ist noch nicht implementiert!");
+		return this.HpList.stream()
+				.map(Pair::getKey)
+				.mapToInt(String::hashCode)
+				.sum();
 	}
 }
