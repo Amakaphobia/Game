@@ -1,7 +1,7 @@
 package common.check;
 
 import entity.actorBase.SkilledActorBase;
-import entity.basic.enums.skillsattributes.Skills;
+import entity.basic.common.enums.skillsattributes.Skills;
 
 @SuppressWarnings("javadoc")
 public class SkillCheck extends CheckBase {

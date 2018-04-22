@@ -1,4 +1,4 @@
-package entity.basic.enums.skillsattributes;
+package entity.basic.common.enums.skillsattributes;
 
 import java.io.Serializable;
 import java.util.Arrays;

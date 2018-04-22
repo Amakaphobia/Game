@@ -1,4 +1,4 @@
-package entity.basic.enums.alignment;
+package entity.basic.common.enums.alignment;
 
 import java.util.stream.Stream;
 

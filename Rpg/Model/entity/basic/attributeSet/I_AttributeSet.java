@@ -2,7 +2,7 @@ package entity.basic.attributeSet;
 
 import java.io.Serializable;
 
-import entity.basic.enums.skillsattributes.Attributes;
+import entity.basic.common.enums.skillsattributes.Attributes;
 
 /**
  * This Interface is implemented by AttributeSets of entities.

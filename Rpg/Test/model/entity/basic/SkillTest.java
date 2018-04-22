@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import entity.basic.enums.skillsattributes.Attributes;
-import entity.basic.enums.skillsattributes.Skills;
+import entity.basic.common.enums.skillsattributes.Attributes;
+import entity.basic.common.enums.skillsattributes.Skills;
 import entity.basic.skillSet.Skill;
 
 @SuppressWarnings("javadoc")

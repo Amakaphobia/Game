@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import entity.basic.enums.skillsattributes.Attributes;
+import entity.basic.common.enums.skillsattributes.Attributes;
 
 /**
  * This class is used to represent an Attribute. It holds a Name (strength, dexterity, constitution,

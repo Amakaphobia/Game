@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import entity.basic.enums.skillsattributes.Skills;
+import entity.basic.common.enums.skillsattributes.Skills;
 
 /**
  * This class represents the skills a character has learned so far. It contains a list and is itself a {@link Iterable}

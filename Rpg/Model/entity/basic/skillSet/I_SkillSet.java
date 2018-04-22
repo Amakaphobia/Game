@@ -3,7 +3,7 @@ package entity.basic.skillSet;
 import java.io.Serializable;
 import java.util.Optional;
 
-import entity.basic.enums.skillsattributes.Skills;
+import entity.basic.common.enums.skillsattributes.Skills;
 
 /**
  * this Interface will be implemented by all Skillset implementations.

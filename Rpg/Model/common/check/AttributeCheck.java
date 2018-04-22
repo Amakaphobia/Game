@@ -1,7 +1,7 @@
 package common.check;
 
 import entity.actorBase.SkilledActorBase;
-import entity.basic.enums.skillsattributes.Attributes;
+import entity.basic.common.enums.skillsattributes.Attributes;
 
 /**
  * This Class is a implementation of the {@link I_Check} Interface.
