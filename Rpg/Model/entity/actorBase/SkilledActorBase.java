@@ -10,6 +10,7 @@ import common.check.SkillCheck;
 import common.map.I_GameMap;
 import entity.actorBase.container.SkillAttDele;
 import entity.basic.EntityBase;
+import entity.basic.alignment.Alignment;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
@@ -33,6 +34,13 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 	/**this container holds the entities skills and attributes*/
 	protected final SkillAttDele SkillAndAtt;
 
+	/**holds the alignment of this Actor*/
+	private Alignment Alignment;
+	/**@return the alignment*/
+	public Alignment getAlignment() { return this.Alignment; }
+	/**@param alignment the alignment to set*/
+	public void setAlignment(Alignment alignment) { this.Alignment = alignment; }
+
 	/**
 	 * Constructor
 	 * @param name the name of this Actor
@@ -40,14 +48,17 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 	 * @param Map the gamemap
 	 * @param SkillSet the skillset of this actor
 	 * @param AttributeSet the attribute table of this actor
+	 * @param Alignment the alignment of this actor
 	 */
 	public SkilledActorBase(
 			String name, String bildPath,
 			I_GameMap Map,
-			I_SkillSet SkillSet, I_AttributeSet AttributeSet) {
+			I_SkillSet SkillSet, I_AttributeSet AttributeSet,
+			Alignment Alignment) {
 
 		super(name, bildPath, Map);
 		this.SkillAndAtt = new SkillAttDele(this,SkillSet, AttributeSet);
+		this.Alignment = Alignment;
 	}
 
 	/**{@inheritDoc}*/
@@ -155,6 +166,8 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 
 	@Override
 	public abstract Parent getInfoView();
+
+
 
 
 }
