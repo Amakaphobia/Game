@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 import entity.basic.common.SizeLogic;
 import entity.basic.common.enums.size.Sizes;
 
-@SuppressWarnings("javadoc")
+@SuppressWarnings("javadoc") // TODO
 public abstract class RaceBase {
 
 	protected StringProperty name;
@@ -14,6 +14,7 @@ public abstract class RaceBase {
 	public String getName() { return this.nameProperty().get(); }
 	public void setName(String name) { this.nameProperty().set(name); }
 
+	/**delegate container for size*/
 	protected SizeLogic Size;
 	/**
 	 * @return the current size
