@@ -8,6 +8,7 @@ import entity.actorBase.container.I_HasHp;
 import entity.basic.alignment.Alignment;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
+import entity.basic.race.RaceBase;
 import entity.basic.skillSet.I_SkillSet;
 import entity.clazz.ClazzBase;
 
@@ -20,9 +21,10 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	public ClassedActorBase(
 			String name, String bildPath,
 			I_GameMap Map,
+			RaceBase Race,
 			I_SkillSet SkillSet, I_AttributeSet AttributeSet,
 			Alignment Alignment) {
-		super(name, bildPath, Map, SkillSet, AttributeSet, Alignment);
+		super(name, bildPath, Map, Race, SkillSet, AttributeSet, Alignment);
 
 		this.Hp = new HealthPointContainer(this);
 	}

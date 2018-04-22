@@ -14,6 +14,7 @@ import entity.basic.alignment.Alignment;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
+import entity.basic.race.RaceBase;
 import entity.basic.skillSet.I_SkillSet;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.Skills;
@@ -29,7 +30,7 @@ import event.I_EventTarget;
  * @author Dave
  *
  */
-public abstract class SkilledActorBase extends MoveableActorBase implements I_EventTarget{
+public abstract class SkilledActorBase extends RacialActorBase implements I_EventTarget{
 
 	/**this container holds the entities skills and attributes*/
 	protected final SkillAttDele SkillAndAtt;
@@ -46,6 +47,7 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 	 * @param name the name of this Actor
 	 * @param bildPath the path to the picture of this entity
 	 * @param Map the gamemap
+	 * @param Race The Race of the Actor
 	 * @param SkillSet the skillset of this actor
 	 * @param AttributeSet the attribute table of this actor
 	 * @param Alignment the alignment of this actor
@@ -53,10 +55,11 @@ public abstract class SkilledActorBase extends MoveableActorBase implements I_Ev
 	public SkilledActorBase(
 			String name, String bildPath,
 			I_GameMap Map,
+			RaceBase Race,
 			I_SkillSet SkillSet, I_AttributeSet AttributeSet,
 			Alignment Alignment) {
 
-		super(name, bildPath, Map);
+		super(name, bildPath, Map, Race);
 		this.SkillAndAtt = new SkillAttDele(this,SkillSet, AttributeSet);
 		this.Alignment = Alignment;
 	}
