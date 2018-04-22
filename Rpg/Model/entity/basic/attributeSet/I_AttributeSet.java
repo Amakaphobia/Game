@@ -11,6 +11,17 @@ import entity.basic.common.enums.skillsattributes.Attributes;
  */
 public interface I_AttributeSet extends Serializable, Iterable<Attribute>{
 
+	/**
+	 * Use this Method to add a Decorator AttributeSet to this attribute set
+	 * @param other the AttributeSet you want to add
+	 */
+	public abstract void addDecorator(I_AttributeSet other);
+
+	/**
+	 * Use this Method to remove a Decorator AttributeSet from this attribute set
+	 * @param other the AttributeSet you want to remove
+	 */
+	public void removeDecorator(I_AttributeSet other);
 /*
  * O------------------------------------------------------------------------------------------------------------------O
  * |																												  |

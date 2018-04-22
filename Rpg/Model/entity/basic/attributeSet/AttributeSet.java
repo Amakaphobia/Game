@@ -21,25 +21,7 @@ import entity.basic.common.enums.skillsattributes.Attributes;
  */
 public class AttributeSet implements I_AttributeSet {
 
-	//TODO Test
-	/**
-	 * Use this Method to add a Decorator AttributeSet to this attribute set
-	 * @param other the AttributeSet you want to add
-	 */
-	public void setDecorator(I_AttributeSet other) {
-		for(Attribute e : other)
-			this.getAttribute(e.getName()).addDecorator(e);
 
-	}
-
-	/**
-	 * Use this Method to remove a Decorator AttributeSet from this attribute set
-	 * @param other the AttributeSet you want to remove
-	 */
-	public void removeDecorator(I_AttributeSet other) {
-		for(Attribute e : other)
-			this.getAttribute(e.getName()).removeFirstDecorator(e);
-	}
 
 	/**this map holds the {@link Attribute}s of this set. It is accessed by providing the correct {@link Attributes}*/
 	private Map<Attributes, Attribute> attMap;
@@ -93,6 +75,20 @@ public class AttributeSet implements I_AttributeSet {
 	public Attribute getAttribute(Attributes id) {
 		return this.attMap.get(id);
 	}
+
+	//TODO Test
+		@Override
+		public void addDecorator(I_AttributeSet other) {
+			for(Attribute e : other)
+				this.getAttribute(e.getName()).addDecorator(e);
+
+		}
+
+		@Override
+		public void removeDecorator(I_AttributeSet other) {
+			for(Attribute e : other)
+				this.getAttribute(e.getName()).removeFirstDecorator(e);
+		}
 
 	//Iterable Methods + Iterator
 

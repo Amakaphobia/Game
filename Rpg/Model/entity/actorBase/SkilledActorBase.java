@@ -60,7 +60,8 @@ public abstract class SkilledActorBase extends RacialActorBase implements I_Even
 			Alignment Alignment) {
 
 		super(name, bildPath, Map, Race);
-		this.SkillAndAtt = new SkillAttDele(this,SkillSet, AttributeSet);
+		AttributeSet.addDecorator(this.Race.getAttributeModifier());
+		this.SkillAndAtt = new SkillAttDele(this, SkillSet, AttributeSet);
 		this.Alignment = Alignment;
 	}
 
