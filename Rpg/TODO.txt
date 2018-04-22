@@ -13,6 +13,10 @@ Base
     	remember class skills on new class  
     General Entity
      	introduce containerclass for that container + health + spellbook .....
+     HPContainer
+     	equals
+     	hc
+     	Docu
     Savingthrow
         predicat (Difference Skill-/Att-check and saving throw?)
     Logger

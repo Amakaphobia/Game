@@ -19,6 +19,7 @@ public class DiceMachine implements I_DiceMachine{
 	/**holds the {@link Random} object that generates random Numbers*/
 	private Random dice = new Random();
 
+	// TODO UnitTest
 	@Override
 	public int getRoll(String diceCode) {
 		IntBinaryOperator combiner = null;;
