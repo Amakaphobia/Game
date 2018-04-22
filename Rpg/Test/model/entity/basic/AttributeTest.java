@@ -76,9 +76,9 @@ class AttributeTest {
 
 	@Test
 	void testGetName() {
-		assertEquals("Wisdom", wis4.getName());
-		assertEquals("Dexterity", dex1.getName());
-		assertEquals(dex1.getName(), dex2.getName());
+		assertEquals("Wisdom", wis4.getNameId());
+		assertEquals("Dexterity", dex1.getNameId());
+		assertEquals(dex1.getNameId(), dex2.getNameId());
 	}
 
 	@Test

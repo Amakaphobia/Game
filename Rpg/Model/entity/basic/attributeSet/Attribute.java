@@ -15,6 +15,30 @@ import entity.basic.common.enums.skillsattributes.Attributes;
  */
 public class Attribute implements Serializable
 {
+	//TODO TEST
+	private Attribute Decorator;
+
+	public void addDecorator(Attribute Decorator) {
+		if(this.Decorator == null) {
+			this.Decorator = Decorator;
+			this.derivedModifier.set(this.calcDerivedModifier());
+		}
+		else
+			this.Decorator.addDecorator(Decorator);
+	}
+
+	public void removeFirstDecorator(Attribute other) {
+		if(this.Decorator == null) return;
+		if(this.Decorator.equals(other)) {
+			this.Decorator = other.Decorator;
+			this.derivedModifier.set(this.calcDerivedModifier());
+		}
+		else
+			this.Decorator.removeFirstDecorator(other);
+	}
+
+
+
 	/**holds the value of the Attribute*/
 	private final IntegerProperty value;
 	/**holds the name of the Attribute*/
@@ -30,15 +54,20 @@ public class Attribute implements Serializable
 		this.value = new SimpleIntegerProperty();
 		this.derivedModifier = new SimpleIntegerProperty();
 
-		this.value.addListener((ov, oldVal, newVal) -> {
-			this.derivedModifier.set(
-					(int)Math.floor(
-							(newVal.intValue() - 10) / 2d )
-			);
-		});
+		this.value.addListener((ov, oldVal, newVal) ->
+			this.derivedModifier.set(this.calcDerivedModifier()));
+
 		this.value.set(value);
 
 		this.name = name;
+	}
+
+	/**
+	 * Used internally to calculate the derived modifier of a given Attribute
+	 * @return
+	 */
+	private int calcDerivedModifier() {
+		return (int) Math.floor( (this.getValue() - 10) / 2d );
 	}
 
 	/**
@@ -50,7 +79,10 @@ public class Attribute implements Serializable
 	 * return the level of this attribute as a Integer
 	 * @return the level of this attribute
 	 */
-	public int getValue() { return this.value.get(); }
+	public int getValue() {
+		return this.Decorator == null ?
+				this.value.get() :
+				this.value.get() + this.Decorator.getValue(); }
 	/**
 	 * used to set the level of this attribute
 	 * @param value the value you want the attribute to be set to
@@ -89,7 +121,12 @@ public class Attribute implements Serializable
 	 * Used to access the name of the attribute
 	 * @return the name as a string
 	 */
-	public String getName() { return this.name.getId(); }
+	public String getNameId() { return this.name.getId(); }
+	/**
+	 * Used to access the Id
+	 * @return the Attribute Id
+	 */
+	public Attributes getName() { return this.name; }
 
 	@Override
 	public boolean equals(Object obj) {

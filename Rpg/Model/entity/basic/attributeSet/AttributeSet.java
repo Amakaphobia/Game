@@ -21,7 +21,17 @@ import entity.basic.common.enums.skillsattributes.Attributes;
  */
 public class AttributeSet implements I_AttributeSet {
 
+	//TODO Test
+	public void setDecorator(I_AttributeSet Decorator) {
+		for(Attribute e : Decorator)
+			this.getAttribute(e.getName()).addDecorator(e);
 
+	}
+
+	public void removeDecorator(I_AttributeSet Decorator) {
+		for(Attribute e : Decorator)
+			this.getAttribute(e.getName()).removeFirstDecorator(e);
+	}
 
 	/**this map holds the {@link Attribute}s of this set. It is accessed by providing the correct {@link Attributes}*/
 	private Map<Attributes, Attribute> attMap;
