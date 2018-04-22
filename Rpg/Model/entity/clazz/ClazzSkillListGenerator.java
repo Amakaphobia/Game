@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Skills;
 
 /**

@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import entity.actorBase.ClassedActorBase;
+import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Skills;
 
 @SuppressWarnings("javadoc")
