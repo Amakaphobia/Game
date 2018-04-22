@@ -157,16 +157,17 @@ public class HealthPointContainer implements Serializable{
 		// bind currentHealthPercent to currenthealth / max health * 100
 		this.currentHealthPercent = new SimpleDoubleProperty();
 
-		this.currentHealthPercent.bind(
-			this.currentHealth.divide(
-				this.maximumHealth
-			).multiply(100));
+		this.currentHealth.addListener((ov, oldVal, newVal) -> {
+			this.currentHealthPercent.set(newVal.doubleValue()/this.getMaxHealth() * 100d);
+		});
 
 		//implementing listener to hitdielist to update max and current hit die on a new hitdie
 		ListChangeListener<Pair<String, Integer>> listener =
 			c -> {
 				while(c.next()) {
 					if(c.wasPermutated() || c.wasUpdated()) continue;
+
+					final int firstOne = this.HpList.size() == 1 ? 1 : 0;
 
 					final int hpChange =
 						c.getAddedSubList().stream()
@@ -177,9 +178,7 @@ public class HealthPointContainer implements Serializable{
 							.mapToInt(Pair::getValue)
 							.sum();
 
-					this.maximumHealth.set(this.getMaxHealth() + hpChange);
-					if(this.HpList.size() == 1)
-						this.maximumHealth.set(this.getMaxHealth() -1);
+					this.maximumHealth.set(this.getMaxHealth() + hpChange - firstOne);
 
 					this.currentHealth.set(this.getCurrentHealth() + hpChange);
 				}
