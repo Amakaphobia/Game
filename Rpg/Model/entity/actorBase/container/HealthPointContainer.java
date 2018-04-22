@@ -1,6 +1,7 @@
 package entity.actorBase.container;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -9,6 +10,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 import boxes.Pair;
 import dicemachine.DiceMachine;
@@ -33,7 +38,6 @@ public class HealthPointContainer implements Serializable{
 	 * @return the {@link #HpList} of this object
 	 */
 	public ObservableList<Pair<String, Integer>> getHpList() { return this.HpList; }
-
 
 	/**This Property holds the maximum Health value*/
 	private final IntegerProperty maximumHealth;
@@ -91,12 +95,30 @@ public class HealthPointContainer implements Serializable{
 	}
 
 	/**
-	 * this method is used to after heal computation to add the computed heal to the current health
+	 * this method is used after heal computation to add the computed heal to the current health
+	 * @param heal the total amount of heal received
+	 * @param canOverHeal set this to true if currentHealth can get bigger than maxhealth
+	 */
+	public void takeHeal(int heal, boolean canOverHeal) {
+
+		int newHealth;
+		if(canOverHeal)
+			newHealth = this.getCurrentHealth() + heal;
+		else {
+			int test = this.getCurrentHealth() + heal;
+			newHealth = test > this.getMaxHealth() ? this.getMaxHealth() : test;
+		}
+
+		this.currentHealth.set(newHealth);
+	}
+
+	/**
+	 * this method is used after heal computation to add the computed heal to the current health it calls
+	 * {@link #takeHeal(int, boolean)} with heal, false
 	 * @param heal the total amount of heal received
 	 */
 	public void takeHeal(int heal) {
-		int newHealth = this.getCurrentHealth() + heal;
-		this.currentHealth.set(newHealth);
+		this.takeHeal(heal, false);
 	}
 
 	/** Constructor
@@ -156,6 +178,8 @@ public class HealthPointContainer implements Serializable{
 							.sum();
 
 					this.maximumHealth.set(this.getMaxHealth() + hpChange);
+					if(this.HpList.size() == 1)
+						this.maximumHealth.set(this.getMaxHealth() -1);
 
 					this.currentHealth.set(this.getCurrentHealth() + hpChange);
 				}
@@ -163,6 +187,32 @@ public class HealthPointContainer implements Serializable{
 
 		this.HpList.addListener(listener);
 	}
+
+	/**
+	 * This method is used to generate a compressed list of all diceCodes in this Objects {@link #HpList}
+	 * @return List Containing strings like: <br>
+	 * "xdy(+1)" grouped by the part after x<br>
+	 * all x with the same key get added up so that a HpList containing the dice code 1d6 twice gets turned into a
+	 * list with one Element (2d6)
+	 */
+	public List<String> getAllCodes(){
+		return
+			this.HpList.stream()
+				.map(Pair::getKey)
+				.collect(groupingBy(s -> s.substring(s.indexOf("d")+1) ))
+				.entrySet().stream()
+				.map(entry -> {
+					int totalOfOneSize =
+						entry.getValue().stream()
+							.map(dC -> dC.substring(0, dC.indexOf("d")))
+							.mapToInt(Integer::valueOf)
+							.sum();
+
+					return String.format("%sd%s", totalOfOneSize, entry.getKey());
+				})
+				.collect(toList());
+	}
+
 
 	/**
 	 * This Method is used to add a new HitDie to this HealthContainer
@@ -173,6 +223,7 @@ public class HealthPointContainer implements Serializable{
 		this.HpList.add(new Pair<>(diceCode, Dm.getRoll(diceCode)));
 	}
 
+
 	/**
 	 * This Method is used to add a new hitdie and force the maximum result
 	 * @param diceCode the dicecode of the new hitdie
@@ -180,5 +231,24 @@ public class HealthPointContainer implements Serializable{
 	public void addHitDieMax(String diceCode) {
 		DiceMachine Dm = new DiceMachine();
 		this.HpList.add(new Pair<>(diceCode, Dm.getRollMax(diceCode)));
+	}
+
+	//obj-methods
+
+	@Override
+	public String toString() {
+		return this.getAllCodes().stream()
+					.collect(joining(System.lineSeparator()));
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		throw new RuntimeException("Das ist noch nicht implementiert!");
+	}
+
+	@Override
+	public int hashCode() {
+		throw new RuntimeException("Das ist noch nicht implementiert!");
 	}
 }
