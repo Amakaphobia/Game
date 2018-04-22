@@ -1,7 +1,6 @@
 package entity.actorBase.container;
 
 import java.io.Serializable;
-import java.util.StringTokenizer;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -144,16 +143,22 @@ public class HealthPointContainer implements Serializable{
 		//implementing listener to hitdielist to update max and current hit die on a new hitdie
 		ListChangeListener<Pair<String, Integer>> listener =
 			c -> {
-				final int hpGained =
-					c.getAddedSubList().stream()
-						.mapToInt(p -> p.getValue())
-						.sum();
+				while(c.next()) {
+					if(c.wasPermutated() || c.wasUpdated()) continue;
 
-				int newMaxhp = this.getMaxHealth() + hpGained;
-				this.maximumHealth.set(newMaxhp);
+					final int hpChange =
+						c.getAddedSubList().stream()
+							.mapToInt(Pair::getValue)
+							.sum()
+						-
+						c.getRemoved().stream()
+							.mapToInt(Pair::getValue)
+							.sum();
 
-				int newCurrentHp = this.getCurrentHealth() + hpGained;
-				this.currentHealth.set(newCurrentHp);
+					this.maximumHealth.set(this.getMaxHealth() + hpChange);
+
+					this.currentHealth.set(this.getCurrentHealth() + hpChange);
+				}
 			};
 
 		this.HpList.addListener(listener);
@@ -165,8 +170,7 @@ public class HealthPointContainer implements Serializable{
 	 */
 	public void addHitDie(String diceCode) {
 		I_DiceMachine Dm = new DiceMachine();
-		int erg = Dm.getRoll(diceCode);
-		this.HpList.add(new Pair<>(diceCode, erg));
+		this.HpList.add(new Pair<>(diceCode, Dm.getRoll(diceCode)));
 	}
 
 	/**
@@ -174,19 +178,7 @@ public class HealthPointContainer implements Serializable{
 	 * @param diceCode the dicecode of the new hitdie
 	 */
 	public void addHitDieMax(String diceCode) {
-		StringTokenizer strk = new StringTokenizer(diceCode, "d");
-		I_DiceMachine Dm = new DiceMachine();
-
-		int multiplikator = 0;
-		if(strk.hasMoreTokens())
-			multiplikator = Dm.getRoll(strk.nextToken());
-
-		int singleErg = 0;
-		if(strk.hasMoreTokens())
-			singleErg = Dm.getRoll(strk.nextToken());
-
-		int erg = multiplikator * singleErg;
-
-		this.HpList.add(new Pair<>(diceCode, erg));
+		DiceMachine Dm = new DiceMachine();
+		this.HpList.add(new Pair<>(diceCode, Dm.getRollMax(diceCode)));
 	}
 }
