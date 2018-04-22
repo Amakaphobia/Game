@@ -11,6 +11,9 @@ Base
     	(targetable) not in Entity Base
     Classed Entity base
     	remember class skills on new class  
+    Races
+    	I dont even know :D
+    Traits?
     General Entity
      	introduce containerclass for that container + health + spellbook .....
      HPContainer
