@@ -1,7 +1,7 @@
 package entity.basic.skillSet;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +18,7 @@ public class SkillSet implements I_SkillSet{
 
 	/**empty constructor, sets up with an empty skill list*/
 	public SkillSet() {
-		this(new ArrayList<Skill>());
+		this(new LinkedList<Skill>());
 	}
 	/**
 	 * Constructor
@@ -27,7 +27,7 @@ public class SkillSet implements I_SkillSet{
 	 */
 	public SkillSet(List<Skill> liste) {
 		super();
-		this.skillList = liste;
+		this.skillList = new LinkedList<>(liste);
 	}
 
 	/**
@@ -55,8 +55,7 @@ public class SkillSet implements I_SkillSet{
 
 	@Override
 	public void removeSkill(Skills id) {
-		this.getSkill(id)
-			.ifPresent(s -> this.skillList.remove(s));
+		this.skillList.removeIf(e -> e.getName() == id);
 	}
 
 	@Override
