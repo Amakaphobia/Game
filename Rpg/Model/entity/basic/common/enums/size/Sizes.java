@@ -1,16 +1,37 @@
 package entity.basic.common.enums.size;
 
-@SuppressWarnings("javadoc")
+/**
+ * This enum defines all possible sizes a Actor can have.
+ * @author Dave
+ *
+ */
 public enum Sizes {
 
+	/**6 in. or less<br>1/8 lb. or less*/
 	FINE("Fine", 8, -16, 16, 0, 0, 1/8, 1/4),
+
+	/**6 in. - 1 ft.<br>1/8 lb. - 1 lb.*/
 	DIMINUTIVE("Diminutive", 4, -12, 12, 0, 0, 1/4, 1/2),
+
+	/**1 ft. - 2 ft.<br>1 lb. - 8 lb.*/
 	TINY("Tiny", 2, -8, 8, 0, 0, 1/2, 3/4),
+
+	/**2 ft. - 4 ft.<br>8 lb. - 60 lb.*/
 	SMALL("Small", 1, -4, 4, 5, 5, 3/4, 1),
+
+	/**4 ft. - 8 ft.<br>60 lb. - 500 lb.*/
 	MEDIUM("Medium", 0, 0, 0, 5, 5, 1, 1.5),
+
+	/**8 ft. - 16 ft.<br>500 lb. - 2 tons*/
 	LARGE("Large", -1, 4, -4, 10, 5, 2, 3),
+
+	/**16 ft. - 32 ft.<br>2 tons - 16 tons*/
 	HUGE("Huge", -2, +8, -8, 15, 10, 4, 6),
+
+	/**32 ft. - 64 ft.<br>16 tons - 125 tons*/
 	GARGANTUAN("Gargantuan", -4, 12, -12, 20, 15, 8, 12),
+
+	/**64 ft. or more<br>125 tons or more*/
 	COLOSSAL("Colossal", -8, 16, -16, 30, 20, 16, 24);
 
 	/**the name of the SizeLogic*/
@@ -31,9 +52,9 @@ public enum Sizes {
 	/**@return the hideModifier*/
 	public int getHideModifier() { return this.hideModifier; }
 
-	/**true if this creatures longest axis isnt its height*/
+	/**true if this creatures longest axis isn't its height*/
 	private boolean isLong = false;
-	/**@param isLong set to true if this creatures longest axis isnt its height*/
+	/**@param isLong set to true if this creatures longest axis isn't its height*/
 	public void setLong(boolean isLong) { this.isLong = isLong; }
 	/**@return the isLong*/
 	public boolean isLong() { return this.isLong; }
@@ -53,10 +74,11 @@ public enum Sizes {
 	/**@return the naturalReachIfTall*/
 	public int getNaturalReachIfTall() { return this.naturalReachIfTall; }
 
-
+	/**modifier for carry weight if creature is biped*/
 	private double carryModifierIfBiped;
 	/**@return the carryModifierIfBiped*/
 	public double getCarryModifierIfBiped() { return this.carryModifierIfBiped; }
+	/**modifier for carry weight if creature is Quadruped*/
 	private double carryModifierIfQuadruped;
 	/**@return the carryModifierIfQuadruped*/
 	public double getCarryModifierIfQuadruped() { return this.carryModifierIfQuadruped; }
