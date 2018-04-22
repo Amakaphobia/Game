@@ -2,6 +2,7 @@ package model.entity.basic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,15 @@ class AttributeTest {
 //		list = IntStream.rangeClosed(1, 45)
 //				.mapToObj(i -> new Attribute(Attributes.STRENGTH, i))
 //				.collect(Collectors.toList());
+	}
+
+	@Test
+	void testAddDecorator() {
+		fail("ohoh");
+	}
+	@Test
+	void testremoveFirstDecorator() {
+		fail("ohoh");
 	}
 
 	@Test

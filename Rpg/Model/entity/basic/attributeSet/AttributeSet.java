@@ -22,14 +22,22 @@ import entity.basic.common.enums.skillsattributes.Attributes;
 public class AttributeSet implements I_AttributeSet {
 
 	//TODO Test
-	public void setDecorator(I_AttributeSet Decorator) {
-		for(Attribute e : Decorator)
+	/**
+	 * Use this Method to add a Decorator AttributeSet to this attribute set
+	 * @param other the AttributeSet you want to add
+	 */
+	public void setDecorator(I_AttributeSet other) {
+		for(Attribute e : other)
 			this.getAttribute(e.getName()).addDecorator(e);
 
 	}
 
-	public void removeDecorator(I_AttributeSet Decorator) {
-		for(Attribute e : Decorator)
+	/**
+	 * Use this Method to remove a Decorator AttributeSet from this attribute set
+	 * @param other the AttributeSet you want to remove
+	 */
+	public void removeDecorator(I_AttributeSet other) {
+		for(Attribute e : other)
 			this.getAttribute(e.getName()).removeFirstDecorator(e);
 	}
 

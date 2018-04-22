@@ -16,17 +16,26 @@ import entity.basic.common.enums.skillsattributes.Attributes;
 public class Attribute implements Serializable
 {
 	//TODO TEST
+	/**Holds the Decorator Attribute for this Attribute*/
 	private Attribute Decorator;
 
-	public void addDecorator(Attribute Decorator) {
+	/**
+	 * this method is used to add a decorator to this Attribute
+	 * @param other the Attribute you want to add
+	 */
+	public void addDecorator(Attribute other) {
 		if(this.Decorator == null) {
-			this.Decorator = Decorator;
+			this.Decorator = other;
 			this.derivedModifier.set(this.calcDerivedModifier());
 		}
 		else
-			this.Decorator.addDecorator(Decorator);
+			this.Decorator.addDecorator(other);
 	}
 
+	/**
+	 * this method is used to remove a decorator to this Attribute
+	 * @param other the Attribute you want to remove
+	 */
 	public void removeFirstDecorator(Attribute other) {
 		if(this.Decorator == null) return;
 		if(this.Decorator.equals(other)) {
@@ -43,8 +52,10 @@ public class Attribute implements Serializable
 	private final IntegerProperty value;
 	/**holds the name of the Attribute*/
 	private final Attributes name;
-	/**holds the derived modifier<br>the derived modifier is defined as the attributevalue subtracted by 10 and halfed (rounded down)*/
+	/**holds the derived modifier<br>the derived modifier is defined as the AttributeValue subtracted by
+	 * 10 and halved (rounded down)*/
 	private final IntegerProperty derivedModifier;
+
 	/**
 	 * Constructor
 	 * @param name the name of the Attribute
@@ -64,7 +75,8 @@ public class Attribute implements Serializable
 
 	/**
 	 * Used internally to calculate the derived modifier of a given Attribute
-	 * @return
+	 * @return the derived modifier calculated as follows: <br>
+	 * 			<code>(value - 10)/2 rounded down </code>
 	 */
 	private int calcDerivedModifier() {
 		return (int) Math.floor( (this.getValue() - 10) / 2d );
