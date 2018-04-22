@@ -115,7 +115,7 @@ public class AttributeSet implements I_AttributeSet {
 
 	@Override
 	public String toString() {
-		// TODO
+		// TODO fix toString
 		String ret = "";
 		for(Attribute e : this)
 			ret = ret.concat(e.toString()).concat(" ");

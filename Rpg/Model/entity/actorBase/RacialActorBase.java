@@ -7,7 +7,7 @@ import entity.basic.common.SizeLogic;
 import entity.basic.common.enums.size.Sizes;
 import entity.basic.race.RaceBase;
 
-@SuppressWarnings("javadoc") //TODO
+@SuppressWarnings("javadoc") //TODO Docu
 public abstract class RacialActorBase extends MoveableActorBase {
 
 	/**
@@ -40,7 +40,7 @@ public abstract class RacialActorBase extends MoveableActorBase {
 	}
 
 	protected void extractRaceEffects() {
-		//TODO
+		//TODO extractRaceEffects
 	}
 
 	//Delegates

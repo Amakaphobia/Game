@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.common.enums.size.Sizes;
 
-@SuppressWarnings("javadoc") // TODO
+@SuppressWarnings("javadoc") // TODO docu
 public abstract class RaceBase {
 
 	protected final StringProperty name;
@@ -24,9 +24,9 @@ public abstract class RaceBase {
 
 	//http://paizo.com/pathfinderRPG/prd/coreRulebook/races.html
 
-	//Weaponfamiliarity
-	//Languages
-	//traits ?!
+	//TODO Weaponfamiliarity
+	//TODO Languages
+	//TODO traits ?!
 
 	//Constructor
 

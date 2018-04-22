@@ -27,7 +27,7 @@ public abstract class MoveableActorBase extends EntityBase {
 	public int getX() { return this.xProperty().get(); }
 	public int getY() { return this.yProperty().get(); }
 
-	// TODO
+	// TODO Test
 	public void setX(int value) {
 		if(this.Map.testBoundaryX(value))
 			this.xProperty().set(value);
