@@ -8,9 +8,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import entity.basic.enums.skillsattributes.Skills;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.SkillSet;
-import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")
 class SkillSetTest {

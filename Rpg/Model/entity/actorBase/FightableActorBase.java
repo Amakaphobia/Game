@@ -3,8 +3,8 @@ package entity.actorBase;
 import javafx.scene.Parent;
 
 import common.map.I_GameMap;
-import entity.basic.alignment.Alignment;
 import entity.basic.attributeSet.I_AttributeSet;
+import entity.basic.enums.alignment.Alignment;
 import entity.basic.race.RaceBase;
 import entity.basic.skillSet.I_SkillSet;
 

@@ -3,6 +3,8 @@ package entity.basic.skillSet;
 import java.io.Serializable;
 import java.util.Optional;
 
+import entity.basic.enums.skillsattributes.Skills;
+
 /**
  * this Interface will be implemented by all Skillset implementations.
  * It handles the accessing adding, removing and leveling of skills.

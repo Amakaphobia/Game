@@ -3,7 +3,7 @@ package entity.clazz;
 import java.io.Serializable;
 import java.util.List;
 
-import entity.basic.skillSet.Skills;
+import entity.basic.enums.skillsattributes.Skills;
 
 /**
  * Enum identifying available classes.

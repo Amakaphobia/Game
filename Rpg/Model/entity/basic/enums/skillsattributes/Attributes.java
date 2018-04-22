@@ -1,11 +1,9 @@
-package entity.basic.attributeSet;
+package entity.basic.enums.skillsattributes;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import entity.basic.skillSet.Skills;
 
 /**
  * Used to define the possible attributes.

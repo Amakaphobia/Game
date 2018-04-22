@@ -7,12 +7,17 @@ Functional
     isTargetable (event) implement if the class should be able to handle events
 	eventtarget interface
 Base
+	Attribute and Skill 
+		Decorator
     Entity 
     	(targetable) not in Entity Base
+    	implment class hierachy like character creation.
     Classed Entity base
     	remember class skills on new class  
     Races
     	I dont even know :D
+    	Maybe Decorator?
+    	Maybe halfhalf base?
     Traits?
     General Entity
      	introduce containerclass for that container + health + spellbook .....

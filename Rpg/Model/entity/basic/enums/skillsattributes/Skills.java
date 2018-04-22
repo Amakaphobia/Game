@@ -1,8 +1,6 @@
-package entity.basic.skillSet;
+package entity.basic.enums.skillsattributes;
 
 import java.io.Serializable;
-
-import entity.basic.attributeSet.Attributes;
 
 /**
  * This Enum represents all learnable skills. It is used as Key.

@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import entity.actorBase.ClassedActorBase;
-import entity.basic.skillSet.Skills;
+import entity.basic.enums.skillsattributes.Skills;
 
 @SuppressWarnings("javadoc")
 public abstract class ClazzBase implements Serializable{

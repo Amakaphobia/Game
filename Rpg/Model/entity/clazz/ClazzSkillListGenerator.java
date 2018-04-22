@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import entity.basic.skillSet.Skills;
+import entity.basic.enums.skillsattributes.Skills;
 
 /**
  * Mock DB class to find Skill-Lists for Class Skills

@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 import boxes.Pair;
 import entity.actorBase.container.SkillAttDele;
 import entity.basic.attributeSet.AttributeSet;
-import entity.basic.attributeSet.Attributes;
 import entity.basic.attributeSet.I_AttributeSet;
+import entity.basic.enums.skillsattributes.Attributes;
+import entity.basic.enums.skillsattributes.Skills;
 import entity.basic.skillSet.I_SkillSet;
 import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.SkillSet;
-import entity.basic.skillSet.Skills;
 
 @SuppressWarnings("javadoc")
 class SkillAttDeleTest{

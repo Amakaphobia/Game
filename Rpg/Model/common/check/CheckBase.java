@@ -3,8 +3,8 @@ package common.check;
 import dicemachine.DiceMachine;
 import dicemachine.I_DiceMachine;
 import entity.actorBase.SkilledActorBase;
-import entity.basic.attributeSet.Attributes;
-import entity.basic.skillSet.Skills;
+import entity.basic.enums.skillsattributes.Attributes;
+import entity.basic.enums.skillsattributes.Skills;
 
 /**
  * This is a basic implementation of the {@link I_Check} Interface. It provides basic utilities such as a default dice

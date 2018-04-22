@@ -1,29 +1,28 @@
-package entity.basic.alignment;
+package entity.basic.enums.alignment;
 
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 /**
- * This Enum represents an Actors alignment y-Axis. It ranges from good to evil.
+ * This Enum represents an Actors alignment X-Axis. It ranges from chaotic to Lawful.
  * @author Dave
  *
  */
-public enum Goodness {
-
+public enum Order {
 	/**
-	 * An Evil actor
+	 * An actor doesnt care for laws
 	 */
-	EVIL(-1,"Evil"),
+	CHAOTIC(-1, "Chaotic"),
 
 	/**
-	 * An Neutral actor
+	 * An actor is neutral
 	 */
 	NEUTRAL(0, "Neutral"),
 
 	/**
-	 * An good actor
+	 * An actor cares for laws
 	 */
-	GOOD(1, "Good");
+	LAWFUL(1, "Lawful");
 
 	/**holds the vector value of this object*/
 	private int id;
@@ -35,7 +34,7 @@ public enum Goodness {
 	 * @param id the vector
 	 * @param nameId the name
 	 */
-	private Goodness(int id, String nameId) {
+	private Order(int id, String nameId) {
 		this.id=id;
 		this.nameId = nameId;
 	}
@@ -57,10 +56,10 @@ public enum Goodness {
 	 * @param i the step size
 	 * @return the new alignment
 	 */
-	public Goodness step(int i) {
-		Goodness ret;
+	public Order step(int i) {
+		Order ret;
 		try {
-			ret = Goodness.valueOf(this.id + i);
+			ret = Order.valueOf(this.id + i);
 		}catch(NoSuchElementException e) {
 			ret = this;
 		}
@@ -72,13 +71,15 @@ public enum Goodness {
 	 * @param i the vector
 	 * @return the new alignment
 	 */
-	public static Goodness valueOf(int i) {
+	public static Order valueOf(int i) {
 		return
-			Stream.of(Goodness.values())
+			Stream.of(Order.values())
 				.filter(o -> o.getId() == i)
 				.findFirst()
 				.orElseThrow(() ->
 					new NoSuchElementException(String.format("The Requested Element: %s does not exist", i)));
 	}
+
+
 
 }

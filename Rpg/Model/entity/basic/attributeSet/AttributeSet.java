@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import entity.basic.enums.skillsattributes.Attributes;
+
 /**
  * The class represents the Attribute values of an actor.</br>
  *

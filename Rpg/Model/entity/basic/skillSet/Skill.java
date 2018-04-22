@@ -5,7 +5,8 @@ import java.io.Serializable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import entity.basic.attributeSet.Attributes;
+import entity.basic.enums.skillsattributes.Attributes;
+import entity.basic.enums.skillsattributes.Skills;
 
 /**
  * This class is used to represent a Skill. It holds a Name (Swimming, Performing, Smithing) and the associated value.
