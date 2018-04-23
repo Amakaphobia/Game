@@ -1,8 +1,9 @@
 package entity.basic.skillSet;
 
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import entity.basic.common.enums.skillsattributes.Skills;
@@ -16,20 +17,59 @@ import entity.basic.common.enums.skillsattributes.Skills;
 public class SkillSet implements I_SkillSet{
 
 	/**the list that holds the all skills in this Set*/
-	private List<Skill> skillList;
+	private final Map<Skills, I_Skill> skillList;
+
+	//Constructor
 
 	/**empty constructor, sets up with an empty skill list*/
 	public SkillSet() {
-		this(new LinkedList<Skill>());
+		super();
+		this.skillList = new HashMap<>();
 	}
+
 	/**
 	 * Constructor
 	 * it uses initiates itself with the list parameter variable
 	 * @param liste a list of {@link Skill}s that should be used by this set
 	 */
-	public SkillSet(List<Skill> liste) {
-		super();
-		this.skillList = new LinkedList<>(liste);
+	public SkillSet(List<I_Skill> liste) {
+		this();
+		for(I_Skill e : liste)
+			this.addSkill(e.getName(), e.getValue());
+	}
+
+	//Deocrator
+
+	@Override
+	public void addDecorator(I_SkillSet other) {
+		for(I_Skill e : other)
+			this.getSkill(e.getName())
+				.ifPresent(s -> s.addDecorator(e));
+
+	}
+	@Override
+	public void removeFirstDecorator(I_SkillSet other) {
+		for(I_Skill e : other)
+			this.getSkill(e.getName())
+				.ifPresent(s -> s.removeFirstDecorator(e));
+
+	}
+
+	//SkillSet
+	//TODO Test empty optional
+	@Override
+	public Optional<I_Skill> getSkill(Skills id) {
+		return Optional.ofNullable(this.skillList.get(id));
+	}
+
+	@Override
+	public void addSkill(Skills id, int level) {
+		this.skillList.putIfAbsent(id, new Skill(id, level));
+	}
+
+	@Override
+	public void removeSkill(Skills id) {
+		this.skillList.remove(id);
 	}
 
 	/**
@@ -38,32 +78,14 @@ public class SkillSet implements I_SkillSet{
 	 */
 	public int size() { return this.skillList.size(); }
 
-	@Override
-	public Optional<Skill> getSkill(Skills id) {
-		return this.skillList.stream()
-				.filter(skill -> id.equals(skill.getName()))
-				.findFirst();
-	}
+	//Iterable
 
 	@Override
-	public void addSkill(Skills id, int level) {
-		final Optional<Skill> skill = this.getSkill(id);
-
-		if(skill.isPresent())
-			return;
-
-		this.skillList.add(new Skill(id, level));
+	public Iterator<I_Skill> iterator() {
+		return this.skillList.values().iterator();
 	}
 
-	@Override
-	public void removeSkill(Skills id) {
-		this.skillList.removeIf(e -> e.getName() == id);
-	}
-
-	@Override
-	public Iterator<Skill> iterator() {
-		return this.skillList.iterator();
-	}
+	//Obj
 
 	@Override
 	public String toString() {
@@ -86,7 +108,7 @@ public class SkillSet implements I_SkillSet{
 		int count = 1;
 		int mult, hash;
 
-		for(Skill e : this.skillList) {
+		for(I_Skill e : this) {
 			mult = 1;
 			hash = e.hashCode();
 			for(int i = 0; i < count; i++)

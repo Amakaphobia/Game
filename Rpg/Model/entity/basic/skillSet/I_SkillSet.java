@@ -3,6 +3,7 @@ package entity.basic.skillSet;
 import java.io.Serializable;
 import java.util.Optional;
 
+import common.decorator.I_SimpleDecoratorContainer;
 import entity.basic.common.enums.skillsattributes.Skills;
 
 /**
@@ -11,13 +12,13 @@ import entity.basic.common.enums.skillsattributes.Skills;
  * @author hdaiv_000
  *
  */
-public interface I_SkillSet extends Serializable, Iterable<Skill>{
+public interface I_SkillSet extends I_SimpleDecoratorContainer<I_SkillSet>, Serializable, Iterable<I_Skill>{
 	/**
 	 * This method is used to get a Optional containing a searched Skill
 	 * @param id a {@link Skills} enum that defines what skill is searched
 	 * @return a optional containing the found skill or empty if the skill is not part of this set.
 	 */
-	public abstract Optional<Skill> getSkill(Skills id);
+	public abstract Optional<I_Skill> getSkill(Skills id);
 	/**
 	 * this method is used to add a Skill at a certain level to the skill set.
 	 * @param id the {@link Skills} Identifier of the skill you want to add
