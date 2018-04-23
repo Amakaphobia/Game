@@ -43,6 +43,6 @@ public class ClazzSkillListGenerator
 	 * @return {@link List} containing all Class-{@link Skills}.
 	 */
 	private static List<Skills> getMageSkills(){
-		return Arrays.asList(Skills.SWIMMING);
+		return Arrays.asList(Skills.SWIM);
 	}
 }

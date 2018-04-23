@@ -20,7 +20,7 @@ class SkillSetTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		s1.addSkill(Skills.ACROBATIC, 2);
-		s1.addSkill(Skills.SWIMMING, 3);
+		s1.addSkill(Skills.SWIM, 3);
 
 	}
 
@@ -37,7 +37,7 @@ class SkillSetTest {
 		SkillSet tmp = new SkillSet(
 			Arrays.asList(
 				new Skill(Skills.ACROBATIC, 2),
-				new Skill(Skills.SWIMMING, 3)));
+				new Skill(Skills.SWIM, 3)));
 
 		assertEquals(s1.hashCode(), tmp.hashCode());
 
@@ -83,7 +83,7 @@ class SkillSetTest {
 		SkillSet tmp = new SkillSet(
 				Arrays.asList(
 					new Skill(Skills.ACROBATIC, 2),
-					new Skill(Skills.SWIMMING, 3)));
+					new Skill(Skills.SWIM, 3)));
 		assertEquals(tmp, s1);
 		tmp.trainSkill(Skills.ACROBATIC, 1);
 

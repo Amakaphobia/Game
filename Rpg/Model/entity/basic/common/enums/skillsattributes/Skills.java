@@ -16,12 +16,49 @@ public enum Skills implements Serializable{
 	/**
 	 * Acrobatic is used to represent things like abseiling, jumping, general Acrobatic stuff
 	 */
-	ACROBATIC("Acrobatic", Attributes.DEXTERITY, false),
+	ACROBATIC("Acrobatic", Attributes.DEXTERITY, true),
+
+	APPRAISE("Appraise", Attributes.INTELLIGENCE, true),
+	BLUFF("Bluff", Attributes.CHARISMA, true),
+	CLIMB("Climb", Attributes.STRENGTH, true),
+	CRAFT("Craft", Attributes.INTELLIGENCE, true),
+	DIPLOMACY("Diplomacy", Attributes.CHARISMA, true),
+	DISABLE_DEVICE("Disable Device", Attributes.DEXTERITY, false),
+	DISGUISE("Disguise", Attributes.CHARISMA, true),
+	ESCAPE_ARTIST("Escape Artist", Attributes.DEXTERITY, true),
+	FLY("Fly", Attributes.DEXTERITY, true),
+	HANDLE_ANIMAL("Handle Animal", Attributes.CHARISMA, false),
+	HEAL("Heal", Attributes.WISDOM, true),
+	INTIMIDATE("Intimidate", Attributes.CHARISMA, true),
+	KNOWLEDGE_ARCANA("Knowledge: Arcana", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_DUNGEONEERING("Knowledge: Dungeoneering", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_ENGINEERING("Knowledge: Engineering", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_GEOGRAPHY("Knowledge: Geography", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_HISTORY("Knowledge: History", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_LOCAL("Knowledge: Local", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_NATURE("Knowledge: Nature", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_NOBILITY("Knowledge: Nobility", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_PLANES("Knowledge: Planes", Attributes.INTELLIGENCE, false),
+	KNOWLEDGE_RELIGION("Knowledge: Religion", Attributes.INTELLIGENCE, false),
+	LINGUISTISCS("Linguistics", Attributes.INTELLIGENCE, false),
+	PERCEPTION("Perception", Attributes.WISDOM, true),
+	PERFORM("Perform", Attributes.CHARISMA, true),
+	PROFESSION_FIRST("Profession", Attributes.WISDOM, false),
+	PROFESSION_SECOND("Profession", Attributes.WISDOM, false),
+	PROFESSION_THIRD("Profession", Attributes.WISDOM, false),
+	RIDE("Ride", Attributes.DEXTERITY, true),
+	SENSE_MOTIVE("Sense Motive", Attributes.WISDOM, true),
+	SLEIGHT_OF_HAND("Sleight of Hand", Attributes.DEXTERITY, false),
+	SPELLCRAFT("Spellcraft", Attributes.INTELLIGENCE, false),
+	STEALTH("Stealth", Attributes.DEXTERITY, true),
+	SURVIVAL("Survival", Attributes.WISDOM, true),
 
 	/**
 	 * This is used to move in water.
 	 */
-	SWIMMING("Swimming", Attributes.STRENGTH, true);
+	SWIM("Swim", Attributes.STRENGTH, true),
+
+	USE_MAGIC_DEVICE("Use magic device", Attributes.CHARISMA, false);
 
 	/**
 	 * Constructor

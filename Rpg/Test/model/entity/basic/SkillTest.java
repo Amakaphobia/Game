@@ -26,8 +26,8 @@ class SkillTest {
 		e1 = new Skill(Skills.ACROBATIC, 1);
 		e2 = new Skill(Skills.ACROBATIC, 2);
 		e3 = new Skill(Skills.ACROBATIC, 3);
-		e4 = new Skill(Skills.SWIMMING, 2);
-		e5 = new Skill(Skills.SWIMMING, 3);
+		e4 = new Skill(Skills.SWIM, 2);
+		e5 = new Skill(Skills.SWIM, 3);
 		e6 = Skill.empty();
 	}
 

@@ -26,7 +26,7 @@ class SkillAttDeleTest{
 	private class Mockery{
 		I_SkillSet ss = new SkillSet(Arrays.asList(
 				new Skill(Skills.ACROBATIC,2),
-				new Skill(Skills.SWIMMING,5)
+				new Skill(Skills.SWIM,5)
 				));
 		I_AttributeSet as = new AttributeSet(10);
 
@@ -47,7 +47,7 @@ class SkillAttDeleTest{
 	void testSetSkillSet() {
 		I_SkillSet ss = new SkillSet(Arrays.asList(
 				new Skill(Skills.ACROBATIC,4),
-				new Skill(Skills.SWIMMING,5)
+				new Skill(Skills.SWIM,5)
 				));
 		Mockery m = new Mockery();
 		assertNotEquals(ss, m.sad.getSkillSet());
@@ -81,7 +81,7 @@ class SkillAttDeleTest{
 		Mockery m = new Mockery();
 		I_SkillSet ss = new SkillSet(Arrays.asList(
 				new Skill(Skills.ACROBATIC,2),
-				new Skill(Skills.SWIMMING,5)
+				new Skill(Skills.SWIM,5)
 				));
 
 		m.sad.trainSkill(Skills.ACROBATIC, 1);
@@ -94,7 +94,7 @@ class SkillAttDeleTest{
 	void testRemoveSkill() {
 		Mockery m = new Mockery();
 		m.sad.removeSkill(Skills.ACROBATIC);
-		assertEquals(new SkillSet(Arrays.asList(new Skill(Skills.SWIMMING, 5))), m.sad.getSkillSet());
+		assertEquals(new SkillSet(Arrays.asList(new Skill(Skills.SWIM, 5))), m.sad.getSkillSet());
 	}
 
 	@Test
