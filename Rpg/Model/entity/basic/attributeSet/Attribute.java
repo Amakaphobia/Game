@@ -1,7 +1,5 @@
 package entity.basic.attributeSet;
 
-import java.io.Serializable;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -14,7 +12,7 @@ import entity.basic.common.enums.skillsattributes.Attributes;
  * @author Dave
  *
  */
-public class Attribute extends DecoratorBase<I_Attribute, Integer> implements Serializable, I_Attribute
+public class Attribute extends DecoratorBase<I_Attribute, Integer> implements I_Attribute
 {
 
 	/**holds the value of the Attribute*/

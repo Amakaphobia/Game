@@ -1,5 +1,7 @@
 package entity.basic.attributeSet;
 
+import java.io.Serializable;
+
 import javafx.beans.property.IntegerProperty;
 
 import entity.basic.common.I_SimpleDecorator;
@@ -10,7 +12,7 @@ import entity.basic.common.enums.skillsattributes.Attributes;
  * @author Dave
  *
  */
-public interface I_Attribute extends I_SimpleDecorator<I_Attribute, Integer>, Iterable<I_Attribute>{
+public interface I_Attribute extends I_SimpleDecorator<I_Attribute, Integer>, Iterable<I_Attribute>, Serializable{
 
 	/**
 	 * Used internally to calculate the derived modifier of a given Attribute
