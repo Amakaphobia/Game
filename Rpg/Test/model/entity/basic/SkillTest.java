@@ -31,6 +31,12 @@ class SkillTest {
 		e6 = Skill.empty();
 	}
 
+
+	@Test
+	void testDecorating() {
+
+	}
+
 	@Test
 	void testHashCode() {
 		assertEquals(e1.hashCode(), new Skill(Skills.ACROBATIC, 1).hashCode());
@@ -65,7 +71,7 @@ class SkillTest {
 	void testSetValue() {
 		Skill tmp = new Skill(Skills.ACROBATIC, 1);
 		tmp.setValue(3);
-		assertEquals(3, tmp.getValue());
+		assertEquals(3, tmp.getValue().intValue());
 	}
 
 	@Test

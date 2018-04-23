@@ -57,7 +57,7 @@ class AttributeSetTest {
 
 	void testSetAgainstValue(I_AttributeSet set, int value, Supplier<String> message) {
 		for(Attribute e : set)
-			assertEquals(value, e.getValue(), message);
+			assertEquals(value, e.getValue().intValue(), message);
 	}
 
 	@Test
