@@ -21,27 +21,27 @@ class AttributeTest {
 		Attribute a2 = new Attribute(Attributes.DEXTERITY, 1);
 		Attribute a3 = new Attribute(Attributes.DEXTERITY, 5);
 
-		assertEquals(2, a1.getValue(), () -> "Initial Fuck up");
+		assertEquals(2, a1.getValue().intValue(), () -> "Initial Fuck up");
 
 		a1.addDecorator(a3);
 
-		assertEquals(7, a1.getValue(), () -> "Docrator first adding");
+		assertEquals(7, a1.getValue().intValue(), () -> "Docrator first adding");
 
 		a1.addDecorator(a2);
 
-		assertEquals(8, a1.getValue(), () -> "Decorator second adding");
+		assertEquals(8, a1.getValue().intValue(), () -> "Decorator second adding");
 
 		a1.removeFirstDecorator(a3);
 
-		assertEquals(3, a1.getValue(), () -> "remove middle decorator");
+		assertEquals(3, a1.getValue().intValue(), () -> "remove middle decorator");
 
 		a1.removeFirstDecorator(new Attribute(Attributes.DEXTERITY, 4));
 
-		assertEquals(3, a1.getValue(), () -> "remove nonexistant decorator");
+		assertEquals(3, a1.getValue().intValue(), () -> "remove nonexistant decorator");
 
 		a1.removeFirstDecorator(a2);
 
-		assertEquals(2, a1.getValue(), () -> "remove last decorator");
+		assertEquals(2, a1.getValue().intValue(), () -> "remove last decorator");
 
 	}
 
@@ -54,15 +54,15 @@ class AttributeTest {
 
 	@Test
 	void testGetValue() {
-		assertEquals(2, dex2.getValue());
-		assertEquals(4, wis4.getValue());
+		assertEquals(2, dex2.getValue().intValue());
+		assertEquals(4, wis4.getValue().intValue());
 	}
 
 	@Test
 	void testSetValue() {
 		Attribute tmp = new Attribute(Attributes.DEXTERITY, 2);
 		tmp.setValue(4);
-		assertEquals(4, tmp.getValue());
+		assertEquals(4, tmp.getValue().intValue());
 	}
 
 	@Test
