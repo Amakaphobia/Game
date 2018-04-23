@@ -1,4 +1,4 @@
-package entity.basic.common;
+package common.decorator;
 
 import java.util.Iterator;
 

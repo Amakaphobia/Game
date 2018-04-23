@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javafx.beans.property.IntegerProperty;
 
-import entity.basic.common.I_SimpleDecorator;
+import common.decorator.I_SimpleDecorator;
 import entity.basic.common.enums.skillsattributes.Attributes;
 
 /**

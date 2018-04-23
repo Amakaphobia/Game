@@ -3,7 +3,7 @@ package entity.basic.attributeSet;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import entity.basic.common.DecoratorBase;
+import common.decorator.DecoratorBase;
 import entity.basic.common.enums.skillsattributes.Attributes;
 
 /**

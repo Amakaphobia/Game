@@ -1,4 +1,4 @@
-package entity.basic.common;
+package common.decorator;
 
 /**
  * This Interface is Implemented by All decorator classes. It Provides support for adding and removing more of the
