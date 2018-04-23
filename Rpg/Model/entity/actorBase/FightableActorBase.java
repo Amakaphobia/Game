@@ -1,7 +1,5 @@
 package entity.actorBase;
 
-import javafx.scene.Parent;
-
 import common.map.I_GameMap;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.common.enums.alignment.Alignment;
@@ -21,11 +19,5 @@ public abstract class FightableActorBase extends ClassedActorBase {
 
 		super(name, bildPath, Map, Race, SkillSet, AttributeSet, alignment);
 	}
-
-	@Override
-	public abstract Parent buildRender();
-
-	@Override
-	public abstract Parent getInfoView();
 
 }

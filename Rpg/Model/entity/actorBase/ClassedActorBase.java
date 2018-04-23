@@ -1,7 +1,5 @@
 package entity.actorBase;
 
-import javafx.scene.Parent;
-
 import common.map.I_GameMap;
 import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
@@ -56,11 +54,5 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 		this.setLiving(true);
 
 	}
-
-	@Override
-	public abstract Parent buildRender();
-
-	@Override
-	public abstract Parent getInfoView();
 
 }

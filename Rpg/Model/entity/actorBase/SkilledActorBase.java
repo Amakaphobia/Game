@@ -2,8 +2,6 @@ package entity.actorBase;
 
 import java.util.Optional;
 
-import javafx.scene.Parent;
-
 import common.check.AttributeCheck;
 import common.check.I_CheckResult;
 import common.check.SkillCheck;
@@ -164,16 +162,4 @@ public abstract class SkilledActorBase extends RacialActorBase implements I_Even
 	public I_CheckResult doCheck(final Attributes AttributeId, final int threshold, final int bonus) {
 		return this.SkillAndAtt.doCheck(this, AttributeId, threshold, bonus);
 	}
-
-	//Abstract
-
-	@Override
-	public abstract Parent buildRender();
-
-	@Override
-	public abstract Parent getInfoView();
-
-
-
-
 }

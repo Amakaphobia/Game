@@ -56,10 +56,6 @@ public abstract class MoveableActorBase extends EntityBase {
 
 	public abstract Parent buildRender();
 
-	// inherited abstract stuff
-	@Override
-	public abstract Parent getInfoView();
-
 	@Override
 	public boolean equals(Object obj) {
 		if(obj == this) return true;
