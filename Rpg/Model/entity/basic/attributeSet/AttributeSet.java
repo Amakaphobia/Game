@@ -84,7 +84,7 @@ public class AttributeSet implements I_AttributeSet {
 	}
 
 	@Override
-	public void removeDecorator(I_AttributeSet other) {
+	public void removeFirstDecorator(I_AttributeSet other) {
 		for(Attribute e : other)
 			this.getAttribute(e.getName()).removeFirstDecorator(e);
 	}
@@ -148,4 +148,5 @@ public class AttributeSet implements I_AttributeSet {
 				this.getWisdom() == other.getWisdom() &&
 				this.getCharisma() == other.getCharisma();
 	}
+
 }
