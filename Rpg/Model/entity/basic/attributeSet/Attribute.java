@@ -15,7 +15,6 @@ import entity.basic.common.enums.skillsattributes.Attributes;
  */
 public class Attribute implements Serializable
 {
-	//this is a test
 	/**Holds the Decorator Attribute for this Attribute*/
 	private Attribute Decorator;
 
