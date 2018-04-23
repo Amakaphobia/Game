@@ -42,16 +42,26 @@ public class SkillSet implements I_SkillSet{
 
 	@Override
 	public void addDecorator(I_SkillSet other) {
-		for(I_Skill e : other)
+		for(I_Skill e : other) {
+			if(!this.skillList.containsKey(e.getName()))
+				this.addSkill(e.getName(), 0);
 			this.getSkill(e.getName())
-				.ifPresent(s -> s.addDecorator(e));
+			.get()
+			.addDecorator(e);
+		}
 
 	}
 	@Override
 	public void removeFirstDecorator(I_SkillSet other) {
-		for(I_Skill e : other)
-			this.getSkill(e.getName())
-				.ifPresent(s -> s.removeFirstDecorator(e));
+		for(I_Skill e : other) {
+			Skills name = e.getName();
+			if(!this.skillList.containsKey(name))
+				continue;
+			this.skillList.get(name)
+				.removeFirstDecorator(e);
+			if(this.getSkillLevel(name) == 0)
+				this.removeSkill(name);
+		}
 
 	}
 
