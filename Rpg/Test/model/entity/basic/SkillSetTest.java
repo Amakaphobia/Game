@@ -24,10 +24,32 @@ class SkillSetTest {
 
 	}
 
-
 	@Test
 	void testDecorating() {
 		SkillSet s2 = new SkillSet();
+		s2.trainSkill(Skills.KNOWLEDGE_ARCANA, 1);
+
+		SkillSet s3 = new SkillSet();
+		s3.trainSkill(Skills.KNOWLEDGE_ARCANA, 1);
+		s3.trainSkill(Skills.ACROBATIC, 2);
+
+		SkillSet s3b = new SkillSet();
+		s3b.trainSkill(Skills.KNOWLEDGE_ARCANA, 1);
+		s3b.trainSkill(Skills.ACROBATIC, 2);
+
+		s3.addDecorator(s1);
+		assertEquals(4, s3.getSkillLevel(Skills.ACROBATIC));
+		assertEquals(1, s3.getSkillLevel(Skills.KNOWLEDGE_ARCANA));
+
+		s3.addDecorator(s2);
+		assertEquals(2, s3.getSkillLevel(Skills.KNOWLEDGE_ARCANA));
+
+		s3.removeFirstDecorator(s1);
+		assertEquals(2, s3.getSkillLevel(Skills.ACROBATIC));
+		assertEquals(2, s3.getSkillLevel(Skills.KNOWLEDGE_ARCANA));
+
+		s3.removeFirstDecorator(s2);
+		assertEquals(s3b, s3);
 	}
 
 	@Test
@@ -75,7 +97,7 @@ class SkillSetTest {
 
 	@Test
 	void testToString() {
-		assertEquals("{SWIMMING=Swimming: 3, ACROBATIC=Acrobatic: 2}", s1.toString());
+		assertEquals("{SWIM=Swim: 3, ACROBATIC=Acrobatic: 2}", s1.toString());
 	}
 
 	@Test

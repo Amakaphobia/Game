@@ -1,6 +1,7 @@
 package model.entity.basic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,7 +35,23 @@ class SkillTest {
 
 	@Test
 	void testDecorating() {
+		Skill d1 = new Skill(Skills.ACROBATIC, 1);
+		Skill d2 = new Skill(Skills.ACROBATIC, 2);
+		Skill d3 = new Skill(Skills.ACROBATIC, 3);
 
+
+
+		assertEquals(1, d1.getValue().intValue());
+		d1.addDecorator(d2);
+		assertEquals(3, d1.getValue().intValue());
+		d1.addDecorator(d3);
+		assertEquals(6, d1.getValue().intValue());
+
+		d1.removeFirstDecorator(d2);
+		assertEquals(4, d1.getValue().intValue());
+
+		d1.removeFirstDecorator(d3);
+		assertEquals(1, d1.getValue().intValue());
 	}
 
 	@Test
@@ -47,7 +64,9 @@ class SkillTest {
 	@Test
 	void testIsUntrained() {
 		assertTrue(e4.isUntrained());
-		assertTrue(!e1.isUntrained());
+		assertTrue(e1.isUntrained());
+		Skill d1 = new Skill(Skills.KNOWLEDGE_ARCANA, 2);
+		assertFalse(d1.isUntrained());
 	}
 
 	@Test
