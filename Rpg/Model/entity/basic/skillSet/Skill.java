@@ -1,11 +1,9 @@
 package entity.basic.skillSet;
 
-import java.io.Serializable;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import entity.basic.common.enums.skillsattributes.Attributes;
+import entity.basic.common.DecoratorBase;
 import entity.basic.common.enums.skillsattributes.Skills;
 
 /**
@@ -14,7 +12,7 @@ import entity.basic.common.enums.skillsattributes.Skills;
  * @author Dave
  *
  */
-public class Skill implements Serializable{
+public class Skill extends DecoratorBase<I_Skill, Integer> implements I_Skill{
 
 	/**holds the name of the Skill*/
 	private final Skills name;
@@ -31,44 +29,19 @@ public class Skill implements Serializable{
 		this.value = new SimpleIntegerProperty(value);
 	}
 
-	/**
-	 * used to access the untrained value of this skills {@link Skills}.
-	 * @return true if this skill can be attempted untrained.
-	 */
-	public boolean isUntrained() { return this.name.isUntrained(); }
+	@Override
+	public Integer getValue() {
+		int sum = 0;
+		for(I_Skill e : this)
+			sum += e.valueProperty().get();
+		return sum;
+	}
 
-	/**
-	 * this method is used to expose the {@link Skill#name} to the outside.
-	 * @return the {@link Skills} id.
-	 */
+	@Override
 	public Skills getName() { return this.name; }
 
-	/**
-	 * Used to access the name of the skill
-	 * @return the name as a string
-	 */
-	public String getNameId() { return this.name.getId(); }
-
-	/**
-	 * Used to expose the IntegerProperty {@link Skill#value}
-	 * @return the valueProperty
-	 */
+	@Override
 	public IntegerProperty valueProperty() { return this.value; }
-	/**
-	 * this is used to expose the value of the {@link Skill#value} property.
-	 * @return the Integer value of this Skills level
-	 */
-	public int getValue() { return this.value.get(); }
-	/**
-	 * this method is used to set the value of this skills level {@link Skill#value}.
-	 * @param value the new level for this skill.
-	 */
-	public void setValue(int value) { this.value.set(value); }
-	/**
-	 * This method is used to identify the {@link Attributes} that effects this Skill
-	 * @return the Attribute identifier
-	 */
-	public Attributes getMainAttribute() { return this.name.getMainAttribute(); }
 
 	@Override
 	public boolean equals(Object obj) {
@@ -98,4 +71,7 @@ public class Skill implements Serializable{
 	public static Skill empty() {
 		return new Skill(Skills.EMPTY, 0);
 	}
+
+
+
 }
