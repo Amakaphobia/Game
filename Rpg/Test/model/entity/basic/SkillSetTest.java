@@ -24,6 +24,12 @@ class SkillSetTest {
 
 	}
 
+
+	@Test
+	void testDecorating() {
+
+	}
+
 	@Test
 	void testHashCode() {
 		assertEquals(s1.hashCode(), s1.hashCode());

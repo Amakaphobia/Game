@@ -47,10 +47,10 @@ class AttributeSetTest {
 		ll.get(0).addDecorator(ll.get(2));
 		this.testSetAgainstValue(ll.get(0), 9, () -> "Adding second decorator");
 
-		ll.get(0).removeDecorator(ll.get(1));
+		ll.get(0).removeFirstDecorator(ll.get(1));
 		this.testSetAgainstValue(ll.get(0), 6, () -> "Removing middle decorator");
 
-		ll.get(0).removeDecorator(ll.get(2));
+		ll.get(0).removeFirstDecorator(ll.get(2));
 		this.testSetAgainstValue(ll.get(0), 1, () -> "Removing last decorator");
 
 	}
