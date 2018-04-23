@@ -8,17 +8,7 @@ package common.decorator;
  * @param <S> The Type of the Object Itself
  * @param <R> the ReturnValue of the getValue method
  */
-public interface I_SimpleDecorator <S, R> extends Iterable<S>{
-	/**
-	 * this method is used to add a decorator to this Decorator
-	 * @param other the Decorator you want to add
-	 */
-	public abstract void addDecorator(S other);
-	/**
-	 * this method is used to remove a decorator to this decorator
-	 * @param other the decorator you want to remove
-	 */
-	public abstract void removeFirstDecorator(S other);
+public interface I_SimpleDecorator <S extends I_SimpleDecorator<S, R>, R> extends I_SimpleDecoratorContainer<S>, Iterable<S>{
 
 	/**
 	 * Used to access the decorator of this object
