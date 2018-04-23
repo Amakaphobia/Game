@@ -27,7 +27,7 @@ class SkillSetTest {
 
 	@Test
 	void testDecorating() {
-
+		SkillSet s2 = new SkillSet();
 	}
 
 	@Test
