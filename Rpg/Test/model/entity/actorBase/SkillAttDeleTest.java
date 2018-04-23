@@ -162,7 +162,7 @@ class SkillAttDeleTest{
 	void testToString() {
 		Mockery m1 = new Mockery();
 		String s = "Strength: 10 Dexterity: 10 Constitution: 10 Intelligence: 10 Wisdom: 10 Charisma: 10\n";
-		s = s.concat("{SWIMMING=Swimming: 5, ACROBATIC=Acrobatic: 2}");
+		s = s.concat("{SWIM=Swim: 5, ACROBATIC=Acrobatic: 2}");
 		assertEquals(s, m1.sad.toString());
 	}
 
