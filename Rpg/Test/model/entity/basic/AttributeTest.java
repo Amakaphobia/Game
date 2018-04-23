@@ -2,9 +2,7 @@ package model.entity.basic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import entity.basic.attributeSet.Attribute;
@@ -13,25 +11,38 @@ import entity.basic.common.enums.skillsattributes.Attributes;
 @SuppressWarnings("javadoc")
 class AttributeTest {
 
-//	static List<Attribute> list;
 	static Attribute dex2 = new Attribute(Attributes.DEXTERITY, 2);
 	static Attribute dex1 = new Attribute(Attributes.DEXTERITY, 1);
 	static Attribute wis4 = new Attribute(Attributes.WISDOM, 4);
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-//		list = IntStream.rangeClosed(1, 45)
-//				.mapToObj(i -> new Attribute(Attributes.STRENGTH, i))
-//				.collect(Collectors.toList());
-	}
+	@Test
+	void testAddAndRemoveDecorator() {
+		Attribute a1 = new Attribute(Attributes.DEXTERITY, 2);
+		Attribute a2 = new Attribute(Attributes.DEXTERITY, 1);
+		Attribute a3 = new Attribute(Attributes.DEXTERITY, 5);
 
-	@Test
-	void testAddDecorator() {
-		fail("ohoh");
-	}
-	@Test
-	void testremoveFirstDecorator() {
-		fail("ohoh");
+		assertEquals(2, a1.getValue(), () -> "Initial Fuck up");
+
+		a1.addDecorator(a3);
+
+		assertEquals(7, a1.getValue(), () -> "Docrator first adding");
+
+		a1.addDecorator(a2);
+
+		assertEquals(8, a1.getValue(), () -> "Decorator second adding");
+
+		a1.removeFirstDecorator(a3);
+
+		assertEquals(3, a1.getValue(), () -> "remove middle decorator");
+
+		a1.removeFirstDecorator(new Attribute(Attributes.DEXTERITY, 4));
+
+		assertEquals(3, a1.getValue(), () -> "remove nonexistant decorator");
+
+		a1.removeFirstDecorator(a2);
+
+		assertEquals(2, a1.getValue(), () -> "remove last decorator");
+
 	}
 
 	@Test
