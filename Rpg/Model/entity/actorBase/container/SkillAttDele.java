@@ -10,11 +10,12 @@ import common.check.SkillCheck;
 import entity.actorBase.SkilledActorBase;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.AttributeSet;
+import entity.basic.attributeSet.I_Attribute;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.common.enums.skillsattributes.Attributes;
 import entity.basic.common.enums.skillsattributes.Skills;
+import entity.basic.skillSet.I_Skill;
 import entity.basic.skillSet.I_SkillSet;
-import entity.basic.skillSet.Skill;
 import entity.basic.skillSet.SkillSet;
 
 /**
@@ -88,7 +89,7 @@ public class SkillAttDele implements Serializable {
 	 * @param SkillId a {@link Skills} enum that defines what skill is searched
 	 * @return a optional containing the found skill or empty if the skill is not part of this set.
 	 */
-	public Optional<Skill> getSkill(Skills SkillId) { return this.SkillSet.getSkill(SkillId); }
+	public Optional<I_Skill> getSkill(Skills SkillId) { return this.SkillSet.getSkill(SkillId); }
 	/**
 	 * @see I_SkillSet#getSkillLevel(Skills)
 	 * @param SkillId the Skill you are looking for
@@ -135,7 +136,7 @@ public class SkillAttDele implements Serializable {
 	 * @param AttributeId  {@link Attributes} value
 	 * @return the searched {@link Attribute}.
 	 */
-	public Attribute getAttribute(Attributes AttributeId) {
+	public I_Attribute getAttribute(Attributes AttributeId) {
 		return this.AttributeSet.getAttribute(AttributeId);
 	}
 	/**
@@ -152,7 +153,7 @@ public class SkillAttDele implements Serializable {
 	 * @param change the change positive for gain and negative for loss
 	 */
 	public void changeAttribute(Attributes AttributeId, int change) {
-		final Attribute ToChange = this.getAttribute(AttributeId);
+		final I_Attribute ToChange = this.getAttribute(AttributeId);
 		final int newLevel = ToChange.getValue() + change;
 
 		ToChange.setValue(newLevel >= 0 ? newLevel : 0);

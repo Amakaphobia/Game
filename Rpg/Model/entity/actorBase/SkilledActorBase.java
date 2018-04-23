@@ -11,13 +11,14 @@ import common.map.I_GameMap;
 import entity.actorBase.container.SkillAttDele;
 import entity.basic.EntityBase;
 import entity.basic.attributeSet.Attribute;
+import entity.basic.attributeSet.I_Attribute;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.common.enums.alignment.Alignment;
 import entity.basic.common.enums.skillsattributes.Attributes;
 import entity.basic.common.enums.skillsattributes.Skills;
 import entity.basic.race.RaceBase;
+import entity.basic.skillSet.I_Skill;
 import entity.basic.skillSet.I_SkillSet;
-import entity.basic.skillSet.Skill;
 import event.I_Event;
 import event.I_EventTarget;
 
@@ -35,6 +36,7 @@ public abstract class SkilledActorBase extends RacialActorBase implements I_Even
 	/**this container holds the entities skills and attributes*/
 	protected final SkillAttDele SkillAndAtt;
 
+	//TODO maybe move to BodyINformation?
 	/**holds the alignment of this Actor*/
 	private Alignment Alignment;
 	/**@return the alignment*/
@@ -77,7 +79,7 @@ public abstract class SkilledActorBase extends RacialActorBase implements I_Even
 	 * @param SkillId a {@link Skills} enum that defines what skill is searched
 	 * @return a optional containing the found skill or empty if the skill is not part of this set.
 	 */
-	public Optional<Skill> getSkill(Skills SkillId) { return this.SkillAndAtt.getSkill(SkillId); }
+	public Optional<I_Skill> getSkill(Skills SkillId) { return this.SkillAndAtt.getSkill(SkillId); }
 	/**
 	 * @see I_SkillSet#getSkillLevel(Skills)
 	 * @param SkillId the Skill you are looking for
@@ -117,7 +119,7 @@ public abstract class SkilledActorBase extends RacialActorBase implements I_Even
 	 * @param AttributeId  {@link Attributes} value
 	 * @return the searched {@link Attribute}.
 	 */
-	public Attribute getAttribute(Attributes AttributeId) { return this.SkillAndAtt.getAttribute(AttributeId); }
+	public I_Attribute getAttribute(Attributes AttributeId) { return this.SkillAndAtt.getAttribute(AttributeId); }
 	/**
 	 * This Method is used to get the Level of a given {@link Attributes}
 	 * @param AttributeId the Attribute searched for
