@@ -18,6 +18,8 @@ Base
     	I dont even know :D
     	Maybe Decorator?
     	Maybe halfhalf base?
+    Skill
+    	how to handle multiple performs or profession skills?
     Traits?
     General Entity
      	introduce containerclass for that container + health + spellbook .....
