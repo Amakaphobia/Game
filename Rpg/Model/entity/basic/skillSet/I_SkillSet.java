@@ -52,7 +52,7 @@ public interface I_SkillSet extends I_SimpleDecoratorContainer<I_SkillSet>, Seri
 	 * @return the level of the skill as an Integer. 0 if it is not known.
 	 */
 	public default int getSkillLevel(Skills id) {
-		return this.getSkill(id).orElse(Skill.empty()).getValue();
+		return this.getSkill(id).map(s -> s.getValue()).orElse(0);
 	}
 
 	/**
@@ -64,8 +64,12 @@ public interface I_SkillSet extends I_SimpleDecoratorContainer<I_SkillSet>, Seri
 		int oldLevel = this.getSkillLevel(id);
 		int testLevel = oldLevel + levelGain;
 
-		if(testLevel > 0)
-			this.getSkill(id).ifPresent(skill -> skill.setValue(testLevel));
+		if(testLevel > 0) {
+			Optional<I_Skill> s = this.getSkill(id);
+			if(s.isPresent())
+				s.get().setValue(testLevel);
+			else
+				this.addSkill(id, levelGain);}
 		else
 			this.removeSkill(id);
 	}
