@@ -76,19 +76,18 @@ public class AttributeSet implements I_AttributeSet {
 		return this.attMap.get(id);
 	}
 
-	//TODO Test
-		@Override
-		public void addDecorator(I_AttributeSet other) {
-			for(Attribute e : other)
-				this.getAttribute(e.getName()).addDecorator(e);
+	@Override
+	public void addDecorator(I_AttributeSet other) {
+		for(Attribute e : other)
+			this.getAttribute(e.getName()).addDecorator(e);
 
-		}
+	}
 
-		@Override
-		public void removeDecorator(I_AttributeSet other) {
-			for(Attribute e : other)
-				this.getAttribute(e.getName()).removeFirstDecorator(e);
-		}
+	@Override
+	public void removeDecorator(I_AttributeSet other) {
+		for(Attribute e : other)
+			this.getAttribute(e.getName()).removeFirstDecorator(e);
+	}
 
 	//Iterable Methods + Iterator
 
