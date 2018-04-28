@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import common.attack.I_Attack;
+import common.decorator.SimpleIntegerDecorator;
 import entity.actorBase.ClassedActorBase;
 import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Skills;
@@ -97,30 +98,36 @@ public abstract class ClazzBase implements Serializable{
 	// SavingThrowModifier
 
 	/**the modifier used for fortitude saves*/
-	private int fortitudeSaveModifier;
+	private SimpleIntegerDecorator fortitudeSaveModifier;
 	/**the modifier used for reflex saves*/
-	private int reflexSaveModifier;
+	private SimpleIntegerDecorator reflexSaveModifier;
 	/**the modifier used for will saves*/
-	private int willSaveModifer;
+	private SimpleIntegerDecorator willSaveModifer;
 
-	/**@return the fortitudeSaveModifier*/
-	public final int getFortitudeSaveModifier() { return this.fortitudeSaveModifier; }
+	/**@return the fortitudeSaveModifier value*/
+	public final int getFortitudeSaveModifierValue() { return this.fortitudeSaveModifier.getValue(); }
 	/**@param fortitudeSaveModifier the fortitudeSaveModifier to set*/
 	protected final void setFortitudeSaveModifier(int fortitudeSaveModifier) {
-		this.fortitudeSaveModifier = fortitudeSaveModifier;
+		this.fortitudeSaveModifier.setModifier(fortitudeSaveModifier);
 	}
-	/**@return the reflexSaveModifier*/
-	public final int getReflexSaveModifier() { return this.reflexSaveModifier; }
+	/**@return the reflexSaveModifier value*/
+	public final int getReflexSaveModifierValue() { return this.reflexSaveModifier.getValue(); }
 	/**@param reflexSaveModifier the reflexSaveModifier to set*/
 	protected final void setReflexSaveModifier(int reflexSaveModifier) {
-		this.reflexSaveModifier = reflexSaveModifier;
+		this.fortitudeSaveModifier.setModifier(reflexSaveModifier);
 	}
-	/**@return the willSaveModifer*/
-	public final int getWillSaveModifer() { return this.willSaveModifer; }
+	/**@return the willSaveModifer value*/
+	public final int getWillSaveModiferValue() { return this.willSaveModifer.getValue(); }
 	/**@param willSaveModifer the willSaveModifer to set*/
 	protected final void setWillSaveModifer(int willSaveModifer) {
-		this.willSaveModifer = willSaveModifer;
+		this.fortitudeSaveModifier.setModifier(willSaveModifer);
 	}
+	/**@return the fortitudeSaveModifier*/
+	public final SimpleIntegerDecorator getFortitudeSaveModifier() { return this.fortitudeSaveModifier; }
+	/**@return the reflexSaveModifier*/
+	public final SimpleIntegerDecorator getReflexSaveModifier() { return this.reflexSaveModifier; }
+	/**@return the willSaveModifer*/
+	public final SimpleIntegerDecorator getWillSaveModifer() { return this.willSaveModifer; }
 
 
 	//name + id
@@ -142,7 +149,7 @@ public abstract class ClazzBase implements Serializable{
 	/**the class skills of this class*/
 	private final List<Skills> classSkills;
 	/**
-	 * used to access the class skillls list
+	 * used to access the class skills list
 	 * @return the {@link #classSkills} object
 	 */
 	public List<Skills> getClassSkills() { return this.classSkills; }
@@ -171,9 +178,9 @@ public abstract class ClazzBase implements Serializable{
 
 		this.levelStrategies = this.buildLevelStrategies();
 
-		this.fortitudeSaveModifier = 0;
-		this.reflexSaveModifier = 0;
-		this.willSaveModifer = 0;
+		this.fortitudeSaveModifier = new SimpleIntegerDecorator(0);
+		this.reflexSaveModifier = new SimpleIntegerDecorator(0);
+		this.willSaveModifer = new SimpleIntegerDecorator(0);
 
 		this.baseAttacks = new ArrayList<>();
 

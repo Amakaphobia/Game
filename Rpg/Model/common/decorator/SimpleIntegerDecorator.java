@@ -1,6 +1,4 @@
-package common;
-
-import common.decorator.DecoratorBase;
+package common.decorator;
 
 /**
  * This is a very Simple Implementation of the {@link DecoratorBase} Class. <br>
@@ -11,7 +9,7 @@ import common.decorator.DecoratorBase;
  *
  * @see DecoratorBase
  */
-public class SimpleModifier extends DecoratorBase<SimpleModifier, Integer> {
+public class SimpleIntegerDecorator extends DecoratorBase<SimpleIntegerDecorator, Integer> {
 
 	/**holds the modifier*/
 	private int modifier;
@@ -24,7 +22,7 @@ public class SimpleModifier extends DecoratorBase<SimpleModifier, Integer> {
 	@Override
 	public Integer getValue() {
 		int sum = 0;
-		for(SimpleModifier e : this)
+		for(SimpleIntegerDecorator e : this)
 			sum += e.modifier;
 		return sum;
 	}
@@ -33,7 +31,7 @@ public class SimpleModifier extends DecoratorBase<SimpleModifier, Integer> {
 	 * Constructor
 	 * @param modifier the modifier of this object
 	 */
-	public SimpleModifier(int modifier) {
+	public SimpleIntegerDecorator(int modifier) {
 		this.modifier = modifier;
 	}
 
