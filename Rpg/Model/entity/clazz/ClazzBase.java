@@ -15,6 +15,8 @@ public abstract class ClazzBase implements Serializable{
 
 	// Entity Handling
 
+	//test
+
 	protected ClassedActorBase entity;
 
 	public void registerEntity(ClassedActorBase sub) { this.entity = sub; }
