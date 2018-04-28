@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import boxes.Pair;
 
 /**
- * This enum represents the 9 classical entity alignments of dnd.
+ * This enum represents the 9 classical Parent alignments of dnd.
  * @author Dave
  *
  */

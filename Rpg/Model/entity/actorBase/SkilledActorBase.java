@@ -45,7 +45,7 @@ public abstract class SkilledActorBase extends RacialActorBase implements I_Even
 	/**
 	 * Constructor
 	 * @param name the name of this Actor
-	 * @param bildPath the path to the picture of this entity
+	 * @param bildPath the path to the picture of this Parent
 	 * @param Map the gamemap
 	 * @param Race The Race of the Actor
 	 * @param SkillSet the skillset of this actor

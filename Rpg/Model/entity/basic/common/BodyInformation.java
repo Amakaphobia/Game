@@ -38,15 +38,15 @@ public class BodyInformation {
 	protected SizeLogic Size;
 	/**
 	 * @return the current size
-	 * @see entity.basic.common.SizeLogic#getSize()
+	 * @see SizeLogic#getSize()
 	 */
 	public Sizes getSize() { return this.Size.getSize(); }
 	/**
 	 * @param Size the {@link Sizes} to set
-	 * @see entity.basic.common.SizeLogic#setSize(entity.basic.common.enums.size.Sizes)
+	 * @see SizeLogic#setSize(Sizes)
 	 */
 	public void setSize(Sizes Size) { this.Size.setSize(Size); }
-	/**@see entity.basic.common.SizeLogic#clearSize()*/
+	/**@see SizeLogic#clearSize()*/
 	public void clearSize() {	this.Size.clearSize(); }
 
 

@@ -51,16 +51,16 @@ public abstract class RacialActorBase extends MoveableActorBase {
 	protected BodyInformation BodyInformation;
 	/**
 	 * @return the current size
-	 * @see entity.basic.common.BodyInformation#getSize()
+	 * @see Parent.basic.common.BodyInformation#getSize()
 	 */
 	public Sizes getSize() { return this.BodyInformation.getSize(); }
 	/**
 	 * @param Size Size the {@link Sizes} to set
-	 * @see entity.basic.common.BodyInformation#setSize(entity.basic.common.enums.size.Sizes)
+	 * @see Parent.basic.common.BodyInformation#setSize(Parent.basic.common.enums.size.Sizes)
 	 */
 	public void setSize(Sizes Size) { this.BodyInformation.setSize(Size); }
 	/**
-	 * @see entity.basic.common.BodyInformation#clearSize()
+	 * @see Parent.basic.common.BodyInformation#clearSize()
 	 */
 	public void clearSize() { this.BodyInformation.clearSize(); }
 

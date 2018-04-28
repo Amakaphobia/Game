@@ -33,7 +33,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	 */
 	public void setLiving(boolean value) { this.living = value; }
 
-	/**this StringProperty holds the unique ID of a entity*/
+	/**this StringProperty holds the unique ID of a Parent*/
 	protected final StringProperty id;
 	/**
 	 * this exposes the unique {@link EntityBase#id} to the outside
@@ -46,7 +46,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	 */
 	public String getId() { return this.id.get(); }
 
-	/**this StringProperty holds the name of the entity*/
+	/**this StringProperty holds the name of the Parent*/
 	protected final StringProperty name;
 	/**
 	 * this is used to expose the Property {@link EntityBase#name}.
@@ -72,7 +72,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	 */
 	public String getDescription() { return this.description.get(); }
 	/**
-	 * this method is used to set the description of a entity
+	 * this method is used to set the description of a Parent
 	 * @param text the text you want as a description
 	 */
 	public void setDescription(String text) { this.description.set(text); }
@@ -86,7 +86,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	 * Constructor
 	 * @param name the name you want the Entity to have
 	 * @param bildPath the path to the info image
-	 * @param description the description of this entity
+	 * @param description the description of this Parent
 	 */
 	public EntityBase(String name, String bildPath, String description) {
 		super();

@@ -24,7 +24,7 @@ public interface I_GameMap {
 	/**
 	 * tests if a {@link MoveableActorBase} is inside the maps boundaries
 	 * @param Entity the Entity you want to test
-	 * @return true if the entity is inside the boundary
+	 * @return true if the Parent is inside the boundary
 	 */
 	public default boolean testBoundary(MoveableActorBase Entity) {
 		return this.testBoundary(Entity.getLocation());
