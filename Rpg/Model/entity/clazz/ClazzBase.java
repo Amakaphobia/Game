@@ -46,7 +46,7 @@ public abstract class ClazzBase implements Serializable{
 	/**@return the hitdieCOde*/
 	public String getHitDieCode() { return this.hitDieCode; }
 
-	//leveling
+	//level handling
 
 	/**
 	 * this map holds all leveling strategies. those are consumers for clazzBase implementations that actually perform
