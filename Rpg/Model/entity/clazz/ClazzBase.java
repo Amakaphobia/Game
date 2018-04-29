@@ -11,12 +11,17 @@ import javafx.beans.property.StringProperty;
 
 import common.attack.I_Attack;
 import common.decorator.SimpleIntegerDecorator;
+import common.render.I_InfoAble;
 import entity.actorBase.ClassedActorBase;
 import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Skills;
+import entity.spellbook.I_Spell;
+import entity.spellbook.I_SpellStrategy;
+import entity.spellbook.SpellBase;
 
 /**
- * This is the base class for clazz implementations. it handles parent, name, id, leveling strategies, attacks and so on.
+ * This is the base class for clazz implementations. it handles parent, name, id, leveling strategies, attacks
+ * and so on.<br>
  * Its abstract method {@link #buildLevelStrategies()} needs to be overwritten to return a Map of level thresholds and
  * consumers for childclass for this class. on level up the class gets the requested consumer out of the map and
  * applies itself to it.
@@ -27,9 +32,47 @@ import entity.basic.common.enums.skillsattributes.Skills;
  * @see ClassedActorBase
  * @see Skills
  * @see I_Attack
- *
  */
-public abstract class ClazzBase implements Serializable{
+public abstract class ClazzBase implements I_InfoAble, Serializable{
+
+	// TODO ClassTraits
+
+	//Constructor
+
+	/**
+	 * Constructor {@link #ClazzBase(Clazzs)} also sets parent
+	 * @param id the {@link Clazzs} id of the this class
+	 * @param Parent the {@link ClassedActorBase} Parent object of this class
+	 */
+	public ClazzBase(Clazzs id, ClassedActorBase Parent) {
+		this(id);
+		this.Parent = Parent;
+	}
+
+	/**
+	 * Constructor
+	 * @param id the {@link Clazzs} id of the this class
+	 */
+	public ClazzBase(Clazzs id) {
+		this.name = new SimpleStringProperty(id.getId());
+		this.hitDieCode = id.getHitDieCode();
+		this.classSkills = id.getClassSkills();
+		this.id = id;
+
+		this.levelStrategies = this.buildLevelStrategies();
+
+		this.fortitudeSaveModifier = new SimpleIntegerDecorator(0);
+		this.reflexSaveModifier = new SimpleIntegerDecorator(0);
+		this.willSaveModifer = new SimpleIntegerDecorator(0);
+
+		this.baseAttacks = new ArrayList<>();
+
+		this.SpellStrategy = this.injectSpellStrategy();
+
+		// last steps - lets keep it that way
+		this.level = 0;
+		this.levelUp();
+	}
 
 	// Parent Handling
 
@@ -40,14 +83,13 @@ public abstract class ClazzBase implements Serializable{
 	/**Method used to unregister a parent*/
 	public void unregisterEntity() { this.Parent = null; }
 
-	//hit die
+	//level handling + hit die
 
 	/**the hitdie code this class gets on level up*/
 	private final String hitDieCode;
-	/**@return the hitdieCOde*/
+	/**@return the hitdie Code*/
 	public String getHitDieCode() { return this.hitDieCode; }
 
-	//level handling
 
 	/**
 	 * this map holds all leveling strategies. those are consumers for clazzBase implementations that actually perform
@@ -95,6 +137,89 @@ public abstract class ClazzBase implements Serializable{
 		return this.baseAttacks.get(index).getBaseAttackBonus();
 	}
 
+	// SpellStrategy
+
+	/**holds the strategy for spell casting*/
+	protected I_SpellStrategy SpellStrategy;
+	/**
+	 * This abstract Method is used internally during object construction in inject the right {@link I_SpellStrategy}
+	 * for this class.
+	 * @return a {@link I_SpellStrategy} implementation suitable for this class
+	 */
+	protected abstract I_SpellStrategy injectSpellStrategy();
+	/**
+	 * Delegator method for {@link I_SpellStrategy#isMagic()} of the {@link #SpellStrategy} object.
+	 * @see I_SpellStrategy
+	 * @return true if this class can cast spells, false if not
+	 */
+	public boolean isMagical() { return this.SpellStrategy.isMagic(); }
+	/**
+	 * This method is used to access all Spells this class can cast in a Single List. it is a delegator for
+	 * {@link I_SpellStrategy#getSpellsLearned()}.
+	 *
+	 * @return a List with all Spells this class has learned.
+	 *
+	 * @see List
+	 * @see I_Spell
+	 * @see I_SpellStrategy
+	 */
+	public List<SpellBase<?>> getSpellsLearned() { return this.SpellStrategy.getSpellsLearned(); }
+	/**
+	 * This method is used to access all Spells this class can learn in a Single List. it is a delegator for
+	 * {@link I_SpellStrategy#getSpellsComplete()}.
+	 *
+	 * @return a List with all Spells this class can learn.
+	 *
+	 * @see List
+	 * @see I_Spell
+	 * @see I_SpellStrategy
+	 */
+	public List <SpellBase<?>> getSpellsComplete() { return this.SpellStrategy.getSpellsComplete(); }
+	/**
+	 * This method is used to test if a Spell can be cast by this clazz. It is a delegator for
+	 * {@link I_SpellStrategy#canCast(SpellBase)}.
+	 *
+	 * @param Spell the Spell you want to test.
+	 *
+	 * @return True if class can cast this spell false if not
+	 *
+	 * @see I_Spell
+	 * @see I_SpellStrategy
+	 */
+	public boolean canCast(SpellBase<?> Spell) { return this.SpellStrategy.canCast(Spell); }
+	/**
+	 * Delegate Method
+	 * @return a List of spells in memory
+	 * @see I_SpellStrategy#getSpellsInMemory()
+	 */
+	public List<SpellBase<?>> getSpellsInMemory() { return SpellStrategy.getSpellsInMemory(); }
+	/**
+	 * Delegate Method
+	 * @param Spell the spell you want to test
+	 * @return true if memorize-able false if not
+	 * @see I_SpellStrategy#canCommitToMemory(SpellBase)
+	 */
+	public boolean canCommitToMemory(SpellBase<?> Spell) { return SpellStrategy.canCommitToMemory(Spell); }
+	/**
+	 * Delegate Method
+	 * @param Spell the spell you want to test
+	 * @return true if learn-able false if not
+	 * @see I_SpellStrategy#canLearn(SpellBase)
+	 */
+	public boolean canLearn(SpellBase<?> Spell) { return SpellStrategy.canLearn(Spell); }
+	/**
+	 * Delegate Method
+	 * @param Spell the spell you want to learn
+	 * @see I_SpellStrategy#learnSpell(SpellBase)
+	 */
+	public void learnSpell(SpellBase<?> Spell) { SpellStrategy.learnSpell(Spell); }
+	/**
+	 * Delegate Method
+	 * @param Spell the spell you want to memorize
+	 * @see I_SpellStrategy#memorizeSpell(SpellBase)
+	 */
+	public void memorizeSpell(SpellBase<?> Spell) { SpellStrategy.memorizeSpell(Spell); }
+
 	// SavingThrowModifier
 
 	/**the modifier used for fortitude saves*/
@@ -130,7 +255,7 @@ public abstract class ClazzBase implements Serializable{
 	public final SimpleIntegerDecorator getWillSaveModifer() { return this.willSaveModifer; }
 
 
-	//name + id
+	//name + id + class skills
 
 	/**the name of the class*/
 	protected final StringProperty name;
@@ -144,8 +269,6 @@ public abstract class ClazzBase implements Serializable{
 	/**@return the id*/
 	public final Clazzs getId() { return this.id; }
 
-	//class skills
-
 	/**the class skills of this class*/
 	private final List<Skills> classSkills;
 	/**
@@ -154,38 +277,10 @@ public abstract class ClazzBase implements Serializable{
 	 */
 	public List<Skills> getClassSkills() { return this.classSkills; }
 
-	//Constructor
-
-	/**
-	 * Constructor {@link #ClazzBase(Clazzs)} also sets parent
-	 * @param id the {@link Clazzs} id of the this class
-	 * @param Parent the {@link ClassedActorBase} Parent object of this class
-	 */
-	public ClazzBase(Clazzs id, ClassedActorBase Parent) {
-		this(id);
-		this.Parent = Parent;
+	@SuppressWarnings("javadoc")
+	public final static ClazzBase mock() {
+		//TODO remove when rdy
+		return null;
 	}
 
-	/**
-	 * Constructor
-	 * @param id the {@link Clazzs} id of the this class
-	 */
-	public ClazzBase(Clazzs id) {
-		this.name = new SimpleStringProperty(id.getId());
-		this.hitDieCode = id.getHitDieCode();
-		this.classSkills = id.getClassSkills();
-		this.id = id;
-
-		this.levelStrategies = this.buildLevelStrategies();
-
-		this.fortitudeSaveModifier = new SimpleIntegerDecorator(0);
-		this.reflexSaveModifier = new SimpleIntegerDecorator(0);
-		this.willSaveModifer = new SimpleIntegerDecorator(0);
-
-		this.baseAttacks = new ArrayList<>();
-
-		// last steps - lets keep it that way
-		this.level = 0;
-		this.levelUp();
-	}
 }
