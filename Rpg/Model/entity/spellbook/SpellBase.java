@@ -9,13 +9,12 @@ import event.I_EventTarget;
 
 /**
  * Simple Base implementation for Spell effects.
+ * range in feet and time in rounds
  * @author Dave
  *
  * @param <T> the type of the event target.
  */
 public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
-
-	//TODO docu
 
 	//TODO wirkungsbereich
 
@@ -42,27 +41,42 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 		this.spellLevel = new SimpleIntegerProperty(spellLevel);
 		this.spellName = new SimpleStringProperty(SpellName);
 		this.description = new SimpleStringProperty(description);
-		this.reichweite = new SimpleIntegerProperty(range);
+		this.range = new SimpleIntegerProperty(range);
 		this.castingTime = new SimpleIntegerProperty(castingTime);
 	}
 
+	/**holds the minimal spell level of this spell*/
 	private final IntegerProperty spellLevel;
+	/**@return the {@link #spellLevel} value*/
 	public final int getSpellLevel() { return this.spellLevel.get(); }
+	/**@return the {@link #spellLevel} property*/
 	public final IntegerProperty spellLevelProperty() { return this.spellLevel; }
 
+	/**holds the name of the spell*/
 	private final StringProperty spellName;
+	/**@return the {@link #spellName} value*/
 	public final String getSpellName() { return this.spellName.get(); }
+	/**@return the {@link #spellName} property*/
 	public final StringProperty spellNameProperty() { return this.spellName; }
 
+	/**holds the description of the spell*/
 	private final StringProperty description;
+	/**@return the {@link #description} value*/
 	public final String getDescription() { return this.description.get(); }
+	/**@return the {@link #description} property*/
 	public final StringProperty descriptionProperty() { return this.description; }
 
-	private final IntegerProperty reichweite;
-	public final int getReichweite() { return this.reichweite.get(); }
-	public final IntegerProperty reichweiteProperty() { return this.reichweite; }
+	/**holds the range (in feet) of the spell*/
+	private final IntegerProperty range;
+	/**@return the {@link #range} value*/
+	public final int getRange() { return this.range.get(); }
+	/**@return the {@link #range} property*/
+	public final IntegerProperty rangeProperty() { return this.range; }
 
+	/**holds the castingTime (in rounds) of the spell*/
 	private final IntegerProperty castingTime;
+	/**@return the {@link #castingTime} value*/
 	public final int getCastingTime() { return this.castingTime.get(); }
+	/**@return the {@link #castingTime} property*/
 	public final IntegerProperty castingTimeProperty() { return this.castingTime; }
 }
