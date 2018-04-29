@@ -26,7 +26,7 @@ public class BodyInformation {
 
 	/**
 	 * Constructor
-	 * @param Size the {@link SizeLogic} container of this actor
+	 * @param Size the {@link OverwriteableDefault} container of this actor
 	 */
 	public BodyInformation(OverwriteableDefault<Sizes> Size) {
 		super();
