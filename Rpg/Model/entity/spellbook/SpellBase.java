@@ -79,4 +79,25 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 	public final int getCastingTime() { return this.castingTime.get(); }
 	/**@return the {@link #castingTime} property*/
 	public final IntegerProperty castingTimeProperty() { return this.castingTime; }
+
+	//Object
+
+	@Override
+	public String toString() {
+		return String.format("Level %s Spell: %s", this.getSpellLevel(), this.getSpellName());
+	}
+
+	@Override
+	public int hashCode() { return this.getSpellName().hashCode(); }
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		if(obj == null) return false;
+		if(!(obj instanceof SpellBase<?>)) return false;
+
+		@SuppressWarnings("unchecked")
+		SpellBase<T> other = (SpellBase<T>) obj;
+		return this.getSpellName().equals(other.getSpellName());
+	}
 }
