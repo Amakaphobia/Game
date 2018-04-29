@@ -52,16 +52,17 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 		this.Hp = new HealthPointContainer(this);
 
 		this.Clazz = ClazzFactory.warriorMock(this); //TODO remove mock
-		this.prefferedClass = this.Clazz; //TODO PrefferedCLass of actor
+		this.prefferedClass = this.Clazz.getId(); //TODO PrefferedCLass of actor
 	}
 
 	//ClassBase Handling
 	//TODO multi-classing
+	//TODO isMulticlassed()
 
 	/**holds the classes of this actor*/
 	protected final ClazzBase Clazz;
 	/**holds the preferred class of this actor*/
-	private final ClazzBase prefferedClass;
+	private final Clazzs prefferedClass;
 
 	/**
 	 * Delegate Method
@@ -174,7 +175,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	}
 
 	/**
-	 * this method is called if one of the actors classes levels up. It handles the hitpoint growth.
+	 * this method is called if one of the actors classes levels up. It handles the HP growth.
 	 * @param Clazz the class that leveled
 	 */
 	protected void onClassLevelUpHitDie(ClazzBase Clazz) {
