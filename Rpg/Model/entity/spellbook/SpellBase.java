@@ -23,18 +23,26 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 
 	//TODO spelltype? mage cleric distinction?
 
+	/**
+	 * Constructor
+	 * @param spellLevel the spell level of the Spell
+	 * @param SpellName the name of the spell
+	 * @param description the descirption of the spell
+	 * @param range the range in feet
+	 * @param castingTime the castingTime in rounds
+	 */
 	public SpellBase(
 			int spellLevel,
 			String SpellName,
 			String description,
-			int reichweite,
+			int range,
 			int castingTime) {
 		super();
 
 		this.spellLevel = new SimpleIntegerProperty(spellLevel);
 		this.spellName = new SimpleStringProperty(SpellName);
 		this.description = new SimpleStringProperty(description);
-		this.reichweite = new SimpleIntegerProperty(reichweite);
+		this.reichweite = new SimpleIntegerProperty(range);
 		this.castingTime = new SimpleIntegerProperty(castingTime);
 	}
 
