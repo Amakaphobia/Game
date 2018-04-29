@@ -1,9 +1,11 @@
 package entity.actorBase;
 
+import javafx.scene.Parent;
+
+import common.OverwriteableDefault;
 import common.map.I_GameMap;
 import entity.basic.EntityBase;
 import entity.basic.common.BodyInformation;
-import entity.basic.common.SizeLogic;
 import entity.basic.common.enums.size.Sizes;
 import entity.basic.race.RaceBase;
 
@@ -35,7 +37,7 @@ public abstract class RacialActorBase extends MoveableActorBase {
 			RaceBase Race) {
 		super(name, bildPath, Map);
 		this.Race = Race;
-		this.BodyInformation = new BodyInformation(new SizeLogic(Race.getDefaultSize()));
+		this.BodyInformation = new BodyInformation(new OverwriteableDefault<>(Race.getDefaultSize()));
 		this.BodyInformation.setParent(this);
 	}
 

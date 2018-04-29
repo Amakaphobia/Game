@@ -1,5 +1,6 @@
 package entity.basic.common;
 
+import common.OverwriteableDefault;
 import entity.actorBase.RacialActorBase;
 import entity.basic.common.enums.size.Sizes;
 
@@ -27,7 +28,7 @@ public class BodyInformation {
 	 * Constructor
 	 * @param Size the {@link SizeLogic} container of this actor
 	 */
-	public BodyInformation( SizeLogic Size) {
+	public BodyInformation(OverwriteableDefault<Sizes> Size) {
 		super();
 		this.Size = Size;
 	}
@@ -35,19 +36,19 @@ public class BodyInformation {
 	//Size
 
 	/**delegate container for size*/
-	protected SizeLogic Size;
+	protected OverwriteableDefault<Sizes> Size;
 	/**
 	 * @return the current size
-	 * @see SizeLogic#getSize()
+	 * @see OverwriteableDefault#get()
 	 */
-	public Sizes getSize() { return this.Size.getSize(); }
+	public Sizes getSize() { return this.Size.get(); }
 	/**
 	 * @param Size the {@link Sizes} to set
-	 * @see SizeLogic#setSize(Sizes)
+	 * @see OverwriteableDefault#set(Object)
 	 */
-	public void setSize(Sizes Size) { this.Size.setSize(Size); }
-	/**@see SizeLogic#clearSize()*/
-	public void clearSize() {	this.Size.clearSize(); }
+	public void setSize(Sizes Size) { this.Size.set(Size); }
+	/**@see OverwriteableDefault#clearOverwrite()*/
+	public void clearSize() {	this.Size.clearOverwrite(); }
 
 
 	@Override
