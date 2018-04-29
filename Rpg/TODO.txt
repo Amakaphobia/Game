@@ -7,8 +7,9 @@ Functional
     isTargetable (event) implement if the class should be able to handle events
 	eventtarget interface
 Base
-	Attribute and Skill 
-		Decorator
+	SpellStuff
+		wirkungsbereich
+			shapeclass maybe extends moveable entity?
     Entity 
     	(targetable) not in Entity Base
     	implment class hierachy like character creation.
@@ -33,7 +34,6 @@ Base
     	personal history logger (?)
     	datafile logger?
     DiceMachine
-    	getMaxRoll out of HPC
     IG TimeHandler
     Dialog Handler
     incomingevent
