@@ -9,6 +9,7 @@ import entity.basic.common.enums.clazz.Clazzs;
 import entity.spellbook.I_SpellStrategy;
 import entity.spellbook.strategies.NonMagical;
 
+@SuppressWarnings("javadoc") //TODO Docu
 public class ClazzFactory {
 
 	public ClazzFactory() {
@@ -20,7 +21,6 @@ public class ClazzFactory {
 	}
 
 	//TODO remove mock
-	@SuppressWarnings("javadoc")
 	private static class WarriorMock extends ClazzBase{
 
 		public WarriorMock(ClassedActorBase Parent) {
