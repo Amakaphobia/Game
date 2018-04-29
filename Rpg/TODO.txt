@@ -6,6 +6,8 @@ Functional
     eventhandler(incomingevent(source, target, command))
     isTargetable (event) implement if the class should be able to handle events
 	eventtarget interface
+Moving Candidates
+	Overwrite able Default -> Tools maybe
 Base
 	SpellStuff
 		wirkungsbereich
