@@ -13,16 +13,33 @@ import entity.basic.race.RaceBase;
 import entity.basic.skillSet.I_SkillSet;
 import entity.clazz.ClazzBase;
 import entity.clazz.ClazzFactory;
-import entity.spellbook.SpellBase;
+import entity.magic.SpellBase;
 
-@SuppressWarnings("javadoc") //TODO docu
+
+/**
+ * This Level of the Actor handles Health and Class. It implements {@link I_HasHp}.
+ *
+ * @author Dave
+ */
 public abstract class ClassedActorBase extends SkilledActorBase implements I_HasHp{
 
 	/**this container holds the entities Hp*/
 	protected final HealthPointContainer Hp;
 
 	//Constructor
-
+	/**
+	 * Constructor
+	 * @param name the name
+	 * @param bildPath the bild path
+	 * @param Map the map
+	 * @param Race the {@link RaceBase}
+	 * @param SkillSet the {@link I_SkillSet}
+	 * @param AttributeSet the {@link I_AttributeSet}
+	 * @param Alignment the {@link Alignment}
+	 * @param clazz the {@link ClazzBase}
+	 *
+	 * @see SkilledActorBase#SkilledActorBase(String, String, I_GameMap, RaceBase, I_SkillSet, I_AttributeSet, Alignment)
+	 */
 	public ClassedActorBase(
 			String name, String bildPath,
 			I_GameMap Map,
@@ -35,12 +52,16 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 		this.Hp = new HealthPointContainer(this);
 
 		this.Clazz = ClazzFactory.warriorMock(this); //TODO remove mock
+		this.prefferedClass = this.Clazz; //TODO PrefferedCLass of actor
 	}
 
 	//ClassBase Handling
 	//TODO multi-classing
 
+	/**holds the classes of this actor*/
 	protected final ClazzBase Clazz;
+	/**holds the preferred class of this actor*/
+	private final ClazzBase prefferedClass;
 
 	/**
 	 * Delegate Method
@@ -121,35 +142,41 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return the fortitude save modifier of this actor
 	 * @see ClazzBase#getFortitudeSaveModifierValue()
 	 */
-	public final int getFortitudeSaveModifierValue() { return Clazz.getFortitudeSaveModifierValue(); }
+	public int getFortitudeSaveModifierValue() { return Clazz.getFortitudeSaveModifierValue(); }
 	/**
 	 * Delegate Method
 	 * @return the reflex save modifier of this actor
 	 * @see ClazzBase#getReflexSaveModifierValue()
 	 */
-	public final int getReflexSaveModifierValue() { return Clazz.getReflexSaveModifierValue(); }
+	public int getReflexSaveModifierValue() { return Clazz.getReflexSaveModifierValue(); }
 	/**
 	 * Delegate Method
 	 * @return the will save modifier of this actor
 	 * @see entity.clazz.ClazzBase#getWillSaveModiferValue()
 	 */
-	public final int getWillSaveModiferValue() { return Clazz.getWillSaveModiferValue(); }
+	public int getWillSaveModiferValue() { return Clazz.getWillSaveModiferValue(); }
 
 	/**
 	 * Delegate Method
 	 * @return the class id of this actor
 	 * @see ClazzBase#getId()
 	 */
-	public final Clazzs getClassId() { return Clazz.getId(); }
-
-
+	public Clazzs getClassId() { return Clazz.getId(); }
 
 	//Leveling
 
+	/**
+	 * this method is called if one of the actors classes levels up
+	 * @param clazz the class that leveled
+	 */
 	public void onClassLevelUp(ClazzBase clazz) {
 		this.onClassLevelUpHitDie(clazz);
 	}
 
+	/**
+	 * this method is called if one of the actors classes levels up. It handles the hitpoint growth.
+	 * @param Clazz the class that leveled
+	 */
 	protected void onClassLevelUpHitDie(ClazzBase Clazz) {
 		StringBuilder strb = new StringBuilder(Clazz.getHitDieCode());
 		strb.append(this.getDerivedAttributeModifierAsString(Attributes.CONSTITUTION));
@@ -159,8 +186,6 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 			this.Hp.addHitDie(strb.toString());
 	}
 
-
-
 	//I_HasHp
 
 	/**
@@ -168,18 +193,29 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * It will set {@link #setLiving(boolean)} to false.
 	 */
 	@Override
-	public void onHealthZero() {
-		this.setLiving(false);
-	}
+	public void onHealthZero() { this.setLiving(false); }
 
 	/**
 	 * {@inheritDoc}<br>
 	 * It will set {@link #setLiving(boolean)} to true.
 	 */
 	@Override
-	public void onHealthNoLongerZero() {
-		this.setLiving(true);
+	public void onHealthNoLongerZero() { this.setLiving(true); }
 
+	//Object
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		if(obj == null) return false;
+		if(!(obj instanceof ClassedActorBase)) return false;
+
+		ClassedActorBase other = (ClassedActorBase)obj;
+
+		return
+				this.Hp.equals(other.Hp)
+			&&  this.Clazz.equals(other.Clazz)
+			&&  this.prefferedClass.equals(other.prefferedClass)
+			&&  super.equals(other);
 	}
-
 }

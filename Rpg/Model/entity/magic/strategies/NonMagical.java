@@ -1,10 +1,10 @@
-package entity.spellbook.strategies;
+package entity.magic.strategies;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.spellbook.I_SpellStrategy;
-import entity.spellbook.SpellBase;
+import entity.magic.I_SpellStrategy;
+import entity.magic.SpellBase;
 
 @SuppressWarnings("javadoc") //TODO Docu
 public class NonMagical implements I_SpellStrategy{

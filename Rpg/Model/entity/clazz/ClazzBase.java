@@ -15,9 +15,9 @@ import common.render.I_InfoAble;
 import entity.actorBase.ClassedActorBase;
 import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Skills;
-import entity.spellbook.I_Spell;
-import entity.spellbook.I_SpellStrategy;
-import entity.spellbook.SpellBase;
+import entity.magic.I_Spell;
+import entity.magic.I_SpellStrategy;
+import entity.magic.SpellBase;
 
 /**
  * This is the base class for clazz implementations. it handles parent, name, id, leveling strategies, attacks
@@ -276,11 +276,5 @@ public abstract class ClazzBase implements I_InfoAble, Serializable{
 	 * @return the {@link #classSkills} object
 	 */
 	public List<Skills> getClassSkills() { return this.classSkills; }
-
-	@SuppressWarnings("javadoc")
-	public final static ClazzBase mock() {
-		//TODO remove when rdy
-		return null;
-	}
 
 }

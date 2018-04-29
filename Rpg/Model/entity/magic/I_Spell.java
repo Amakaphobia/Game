@@ -1,4 +1,4 @@
-package entity.spellbook;
+package entity.magic;
 
 import java.io.Serializable;
 

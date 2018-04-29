@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 
 import entity.actorBase.ClassedActorBase;
 import entity.basic.common.enums.clazz.Clazzs;
-import entity.spellbook.I_SpellStrategy;
-import entity.spellbook.strategies.NonMagical;
+import entity.magic.I_SpellStrategy;
+import entity.magic.strategies.NonMagical;
 
 @SuppressWarnings("javadoc") //TODO Docu
 public class ClazzFactory {
