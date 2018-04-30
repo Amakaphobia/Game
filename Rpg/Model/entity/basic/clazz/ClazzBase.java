@@ -1,4 +1,4 @@
-package entity.clazz;
+package entity.basic.clazz;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -3,8 +3,8 @@ package entity.basic.common.enums.clazz;
 import java.io.Serializable;
 import java.util.List;
 
+import entity.basic.clazz.ClazzSkillListGenerator;
 import entity.basic.common.enums.skillsattributes.Skills;
-import entity.clazz.ClazzSkillListGenerator;
 
 /**
  * Enum identifying available classes.

@@ -1,4 +1,4 @@
-package entity.clazz;
+package entity.basic.clazz;
 
 import java.util.ArrayList;
 import java.util.Arrays;

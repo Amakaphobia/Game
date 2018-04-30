@@ -7,12 +7,12 @@ import common.map.I_GameMap;
 import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
 import entity.basic.attributeSet.I_AttributeSet;
+import entity.basic.clazz.ClazzBase;
 import entity.basic.common.enums.alignment.Alignment;
 import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Attributes;
 import entity.basic.race.RaceBase;
 import entity.basic.skillSet.I_SkillSet;
-import entity.clazz.ClazzBase;
 import entity.magic.SpellBase;
 
 
@@ -57,7 +57,6 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 
 	//ClassBase Handling
 	//TODO Docu an multiclassing
-	//TODO multi-classing
 
 	/**holds the classes of this actor*/
 	protected final List<ClazzBase> Clazzes;
@@ -120,7 +119,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to check
-	 * @return true if the spell is castable
+	 * @return true if the spell is cast-able
 	 * @see ClazzBase#canCast(SpellBase)
 	 */
 	public boolean canCast(SpellBase<?> Spell) { 
@@ -221,7 +220,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	/**
 	 * Delegate Method
 	 * @return the will save modifier of this actor
-	 * @see entity.clazz.ClazzBase#getWillSaveModiferValue()
+	 * @see entity.basic.clazz.ClazzBase#getWillSaveModiferValue()
 	 */
 	public int getWillSaveModiferValue() { 
 		return this.Clazzes.stream()
