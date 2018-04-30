@@ -1,6 +1,7 @@
 package entity.actorBase;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import common.map.I_GameMap;
 import entity.actorBase.container.HealthPointContainer;
@@ -12,7 +13,6 @@ import entity.basic.common.enums.skillsattributes.Attributes;
 import entity.basic.race.RaceBase;
 import entity.basic.skillSet.I_SkillSet;
 import entity.clazz.ClazzBase;
-import entity.clazz.ClazzFactory;
 import entity.magic.SpellBase;
 
 
@@ -51,32 +51,40 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 
 		this.Hp = new HealthPointContainer(this);
 
-		this.Clazz = ClazzFactory.warriorMock(this); //TODO remove mock
-		this.prefferedClass = this.Clazz.getId(); //TODO PrefferedCLass of actor
+		this.Clazzes = null; //TODO remove mock
+		this.prefferedClass = this.Clazzes.get(0).getId(); //TODO PrefferedCLass of actor
 	}
 
 	//ClassBase Handling
+	//TODO Docu an multiclassing
 	//TODO multi-classing
-	//TODO isMulticlassed()
 
 	/**holds the classes of this actor*/
-	protected final ClazzBase Clazz;
+	protected final List<ClazzBase> Clazzes;
 	/**holds the preferred class of this actor*/
 	private final Clazzs prefferedClass;
 
 	/**
-	 * Delegate Method
-	 * @return the hitdie code
-	 * @see ClazzBase#getHitDieCode()
+	 * This method checks if an actor is multiclassed. If the list {@link #Clazzes} has a size 
+	 * bigger than 1 it returns true otherwise false.
+	 * @return true if multiclassed false if not
 	 */
-	public String getHitDieCode() { return Clazz.getHitDieCode(); }
+	public boolean isMulticlassed() {
+		return this.Clazzes.size() > 1;
+	}
+	
+	
 	/**
 	 * Delegate Method
 	 * @param index the index of the base attack you want
 	 * @return the base attack bonus if the given int
 	 * @see ClazzBase#getBaseAttackBonus(int)
 	 */
-	public int getBaseAttackBonus(int index) { return Clazz.getBaseAttackBonus(index); }
+	public int getBaseAttackBonus(int index) {
+		return this.Clazzes.stream()
+			.mapToInt(c -> c.getBaseAttackBonus(index))
+			.sum(); 
+	}
 
 
 	/**
@@ -84,58 +92,110 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return true if this actor can cast spells false if not
 	 * @see ClazzBase#isMagical()
 	 */
-	public boolean isMagical() { return Clazz.isMagical(); }
+	public boolean isMagical() { 
+		return this.Clazzes.stream()
+			.map(c -> c.isMagical())
+			.collect(Collectors.reducing(false, (a, b) -> a || b));
+	}
 	/**
 	 * Delegate Method
 	 * @return a list of all learned spells
 	 * @see ClazzBase#getSpellsLearned()
 	 */
-	public List<SpellBase<?>> getSpellsLearned() { return Clazz.getSpellsLearned(); }
+	public List<SpellBase<?>> getSpellsLearned() { 
+		return this.Clazzes.stream()
+				.flatMap(c -> c.getSpellsLearned().stream())
+				.collect(Collectors.toList());
+	}
 	/**
 	 * Delegate Method
 	 * @return a List of all spells this character can learn
 	 * @see ClazzBase#getSpellsComplete()
 	 */
-	public List<SpellBase<?>> getSpellsComplete() { return Clazz.getSpellsComplete(); }
+	public List<SpellBase<?>> getSpellsComplete() { 
+		return this.Clazzes.stream()
+				.flatMap(c -> c.getSpellsComplete().stream())
+				.collect(Collectors.toList()); 
+	}
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to check
 	 * @return true if the spell is castable
 	 * @see ClazzBase#canCast(SpellBase)
 	 */
-	public boolean canCast(SpellBase<?> Spell) { return Clazz.canCast(Spell); }
+	public boolean canCast(SpellBase<?> Spell) { 
+		return 
+			this.Clazzes.stream()
+				.filter(ClazzBase::isMagical)
+				.filter(c -> 
+					c.getSpellsInMemory().stream()
+						.filter(s -> s.equals(Spell))
+						.findFirst()
+						.isPresent())
+				.findFirst()
+				.isPresent();
+	}
 	/**
 	 * Delegate Method
 	 * @return all spells currently in memory
 	 * @see ClazzBase#getSpellsInMemory()
 	 */
-	public List<SpellBase<?>> getSpellsInMemory() { return Clazz.getSpellsInMemory(); }
+	public List<SpellBase<?>> getSpellsInMemory() { 
+		return this.Clazzes.stream()
+					.filter(ClazzBase::isMagical)
+					.flatMap(c -> c.getSpellsInMemory().stream())
+					.collect(Collectors.toList());
+	}
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to test
 	 * @return true if you can commit the spell to memory false if not
 	 * @see ClazzBase#canCommitToMemory(SpellBase)
 	 */
-	public boolean canCommitToMemory(SpellBase<?> Spell) { return Clazz.canCommitToMemory(Spell); }
+	public boolean canCommitToMemory(SpellBase<?> Spell) { 
+		return this.Clazzes.stream()
+					.filter(ClazzBase::isMagical)
+					.filter(c -> c.canCommitToMemory(Spell))
+					.findFirst()
+					.isPresent();
+	}
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to learn
 	 * @return true if you can learn the spell false if not
 	 * @see ClazzBase#canLearn(SpellBase)
 	 */
-	public boolean canLearn(SpellBase<?> Spell) { return Clazz.canLearn(Spell); }
+	public boolean canLearn(SpellBase<?> Spell) { 
+		return this.Clazzes.stream()
+					.filter(ClazzBase::isMagical)
+					.filter(c -> c.canLearn(Spell))
+					.findFirst()
+					.isPresent();
+	}
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to learn
 	 * @see ClazzBase#learnSpell(SpellBase)
 	 */
-	public void learnSpell(SpellBase<?> Spell) { Clazz.learnSpell(Spell); }
+	public void learnSpell(SpellBase<?> Spell, Clazzs clazzId) {
+		this.Clazzes.stream()
+			.filter(ClazzBase::isMagical)
+			.filter(c -> c.getId().equals(clazzId))
+			.findFirst()
+			.ifPresent(c -> c.learnSpell(Spell));
+	}
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to memorize
 	 * @see ClazzBase#memorizeSpell(SpellBase)
 	 */
-	public void memorizeSpell(SpellBase<?> Spell) { Clazz.memorizeSpell(Spell); }
+	public void memorizeSpell(SpellBase<?> Spell, Clazzs clazzId) {
+		this.Clazzes.stream()
+			.filter(ClazzBase::isMagical)
+			.filter(c -> c.getId().equals(clazzId))
+			.findFirst()
+			.ifPresent(c -> c.memorizeSpell(Spell));
+	}
 
 
 	/**
@@ -143,26 +203,42 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return the fortitude save modifier of this actor
 	 * @see ClazzBase#getFortitudeSaveModifierValue()
 	 */
-	public int getFortitudeSaveModifierValue() { return Clazz.getFortitudeSaveModifierValue(); }
+	public int getFortitudeSaveModifierValue() { 
+		return this.Clazzes.stream()
+				.mapToInt(ClazzBase::getFortitudeSaveModifierValue)
+				.sum();
+	}
 	/**
 	 * Delegate Method
 	 * @return the reflex save modifier of this actor
 	 * @see ClazzBase#getReflexSaveModifierValue()
 	 */
-	public int getReflexSaveModifierValue() { return Clazz.getReflexSaveModifierValue(); }
+	public int getReflexSaveModifierValue() { 
+		return this.Clazzes.stream()
+				.mapToInt(ClazzBase::getReflexSaveModifierValue)
+				.sum();
+	}
 	/**
 	 * Delegate Method
 	 * @return the will save modifier of this actor
 	 * @see entity.clazz.ClazzBase#getWillSaveModiferValue()
 	 */
-	public int getWillSaveModiferValue() { return Clazz.getWillSaveModiferValue(); }
+	public int getWillSaveModiferValue() { 
+		return this.Clazzes.stream()
+				.mapToInt(ClazzBase::getWillSaveModiferValue)
+				.sum();
+	}
 
 	/**
 	 * Delegate Method
 	 * @return the class id of this actor
 	 * @see ClazzBase#getId()
 	 */
-	public Clazzs getClassId() { return Clazz.getId(); }
+	public List<Clazzs> getClassId() { 
+		return this.Clazzes.stream()
+				.map(ClazzBase::getId)
+				.collect(Collectors.toList());
+	}
 
 	//Leveling
 
@@ -215,7 +291,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 
 		return
 				this.Hp.equals(other.Hp)
-			&&  this.Clazz.equals(other.Clazz)
+			&&  this.Clazzes.equals(other.Clazzes)
 			&&  this.prefferedClass.equals(other.prefferedClass)
 			&&  super.equals(other);
 	}

@@ -134,7 +134,22 @@ public abstract class ClazzBase implements I_InfoAble, Serializable{
 	 * @return the searched Base Attack Bonus
 	 */
 	public int getBaseAttackBonus(int index) {
-		return this.baseAttacks.get(index).getBaseAttackBonus();
+		int baseAttackBonus;
+		
+		try {
+			baseAttackBonus = this.baseAttacks.get(index).getBaseAttackBonus();
+		}catch(IndexOutOfBoundsException  e) {
+			baseAttackBonus = 0;
+		}
+		
+		return baseAttackBonus;
+	}
+	/**
+	 * This method gives a count of possible attacks er combat round.
+	 * @return count of attacks
+	 */
+	public int getBaseAttackCount() {
+		return this.baseAttacks.size();
 	}
 
 	// SpellStrategy
