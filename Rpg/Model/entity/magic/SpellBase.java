@@ -1,10 +1,12 @@
 package entity.magic;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+import entity.basic.common.enums.MagicSchools;
 import event.I_EventTarget;
 
 /**
@@ -20,7 +22,9 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 
 	//TODO rettungswurf? maybe part of event
 
-	//TODO spelltype? mage cleric distinction?
+	//TODO spelltype? mage cleric distinction? class?
+	
+	//TODO spelltype school
 
 	/**
 	 * Constructor
@@ -31,6 +35,7 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 	 * @param castingTime the castingTime in rounds
 	 */
 	public SpellBase(
+			MagicSchools school,
 			int spellLevel,
 			String SpellName,
 			String description,
@@ -38,11 +43,13 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 			int castingTime) {
 		super();
 
+		this.school = new SimpleObjectProperty<>(school);
 		this.spellLevel = new SimpleIntegerProperty(spellLevel);
 		this.spellName = new SimpleStringProperty(SpellName);
 		this.description = new SimpleStringProperty(description);
 		this.range = new SimpleIntegerProperty(range);
 		this.castingTime = new SimpleIntegerProperty(castingTime);
+		
 	}
 
 	/**holds the minimal spell level of this spell*/
@@ -79,6 +86,11 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 	public final int getCastingTime() { return this.castingTime.get(); }
 	/**@return the {@link #castingTime} property*/
 	public final IntegerProperty castingTimeProperty() { return this.castingTime; }
+	
+	
+	private final ObjectProperty<MagicSchools> school;
+	public final MagicSchools getSchool() { return this.school.get(); }
+	public final ObjectProperty<MagicSchools> schoolProperty() { return this.school; }
 
 	//Object
 
