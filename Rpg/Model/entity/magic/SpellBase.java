@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 import entity.basic.common.enums.MagicSchools;
 import event.I_EventTarget;
 
@@ -23,14 +24,15 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 	//TODO rettungswurf? maybe part of event
 
 	//TODO spelltype? mage cleric distinction? class?
-	
+
 	//TODO spelltype school
 
 	/**
 	 * Constructor
+	 * @param school the school of the spell
 	 * @param spellLevel the spell level of the Spell
 	 * @param SpellName the name of the spell
-	 * @param description the descirption of the spell
+	 * @param description the description of the spell
 	 * @param range the range in feet
 	 * @param castingTime the castingTime in rounds
 	 */
@@ -49,7 +51,7 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 		this.description = new SimpleStringProperty(description);
 		this.range = new SimpleIntegerProperty(range);
 		this.castingTime = new SimpleIntegerProperty(castingTime);
-		
+
 	}
 
 	/**holds the minimal spell level of this spell*/
@@ -86,10 +88,13 @@ public abstract class SpellBase<T extends I_EventTarget> implements I_Spell<T> {
 	public final int getCastingTime() { return this.castingTime.get(); }
 	/**@return the {@link #castingTime} property*/
 	public final IntegerProperty castingTimeProperty() { return this.castingTime; }
-	
-	
+
+
+	/**holds this spell school*/
 	private final ObjectProperty<MagicSchools> school;
+	/**@return this spells school*/
 	public final MagicSchools getSchool() { return this.school.get(); }
+	/**@return the school property of this object*/
 	public final ObjectProperty<MagicSchools> schoolProperty() { return this.school; }
 
 	//Object
