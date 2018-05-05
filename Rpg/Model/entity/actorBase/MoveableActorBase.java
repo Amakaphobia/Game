@@ -38,10 +38,20 @@ public abstract class MoveableActorBase extends EntityBase {
 	}
 
 	// Constructor
-
+	/**
+	 * Constructor
+	 * Creates a Living move able Actor.
+	 *
+	 * @see EntityBase
+	 *
+	 * @param name
+	 * @param bildPath
+	 * @param Map
+	 */
 	public MoveableActorBase(String name, String bildPath, I_GameMap Map) {
 		super(name, bildPath);
 		this.Map = Map;
+		this.setLiving(true);
 	}
 
 	// Rendering
