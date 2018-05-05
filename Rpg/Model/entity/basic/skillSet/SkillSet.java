@@ -1,10 +1,10 @@
 package entity.basic.skillSet;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 import entity.basic.common.enums.skillsattributes.Skills;
 
@@ -24,7 +24,7 @@ public class SkillSet implements I_SkillSet{
 	/**empty constructor, sets up with an empty skill list*/
 	public SkillSet() {
 		super();
-		this.skillList = new HashMap<>();
+		this.skillList = new TreeMap<>();
 	}
 
 	/**
@@ -124,6 +124,7 @@ public class SkillSet implements I_SkillSet{
 			for(int i = 0; i < count; i++)
 				mult *= hash;
 			erg += mult;
+			count++;
 		}
 		return erg;
 	}
