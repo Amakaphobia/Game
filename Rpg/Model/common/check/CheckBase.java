@@ -1,5 +1,6 @@
 package common.check;
 
+import dicemachine.DiceCodeBase;
 import dicemachine.I_DiceCode;
 import entity.actorBase.SkilledActorBase;
 import entity.basic.common.enums.skillsattributes.Attributes;
@@ -22,12 +23,14 @@ public abstract class CheckBase implements I_Check{
 	/**the bonus or malus added to the check by circumstances*/
 	protected int situationalBonus;
 	/**holds the die identifier default is set to 1d20*/
-	protected I_DiceCode die = I_DiceCode.roll(1, 20);
+	protected I_DiceCode die = DiceCodeBase.roll(1, 20);
 	/**
-	 * this Method is used to change the dice used for this check in base xdy form
+	 * this Method is used to change the dice used for this check
 	 * @param die the die you want to use
 	 */
-	public void setDie(I_DiceCode die) { this.die = die; }
+	public void setDie(I_DiceCode die) {
+		this.die = die;
+	}
 
 	/**
 	 * Constructor
@@ -53,8 +56,8 @@ public abstract class CheckBase implements I_Check{
 	public I_CheckResult doCheck() {
 
 		this.die
-			.add(this.computeBonus())
-			.add(this.situationalBonus);
+			.addModifier(this.computeBonus())
+			.addModifier(this.situationalBonus);
 
 		int erg = this.die.getValue() - this.threshold;
 

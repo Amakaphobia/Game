@@ -28,7 +28,7 @@ public enum Clazzs implements Serializable
 	/**the Class Name*/
 	private String id;
 	/**the hitdie of the class*/
-	private DiceCodeBase hitDieCode;
+	private I_DiceCode hitDieCode;
 
 	/**
 	 * Constructor
@@ -37,7 +37,7 @@ public enum Clazzs implements Serializable
 	 */
 	private Clazzs(String id, int diceSize) {
 		this.id = id;
-		this.hitDieCode = I_DiceCode.roll(1, diceSize);
+		this.hitDieCode = DiceCodeBase.roll(1, diceSize);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public enum Clazzs implements Serializable
 	 * Access the hitdie code
 	 * @return the hitdie code
 	 */
-	public DiceCodeBase getHitDieCode() { return this.hitDieCode; }
+	public I_DiceCode getHitDieCode() { return this.hitDieCode; }
 
 	/**
 	 * This Method is used to get a List of all {@link Skills}, which are class skills of this class

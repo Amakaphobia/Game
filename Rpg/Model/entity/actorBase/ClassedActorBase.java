@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.map.I_GameMap;
+import dicemachine.DiceCodeBase;
+import dicemachine.I_DiceCode;
 import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
 import entity.basic.attributeSet.I_AttributeSet;
@@ -268,12 +270,17 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @param Clazz the class that leveled
 	 */
 	protected void onClassLevelUpHitDie(ClazzBase Clazz) {
-		StringBuilder strb = new StringBuilder(Clazz.getHitDieCode());
-		strb.append(this.getDerivedAttributeModifierAsString(Attributes.CONSTITUTION));
+		I_DiceCode die = DiceCodeBase.flat(0);
+		try {
+			die = Clazz.getHitDieCode().clone();
+		} catch (CloneNotSupportedException e) { e.printStackTrace(); }
+
+		die.addModifier(this.getDerivedAttributeModifier(Attributes.CONSTITUTION));
+
 		if(Clazz.getLevel() == 1)
-			this.Hp.addHitDieMax(strb.toString());
+			this.Hp.addHitDieMax(die);
 		else
-			this.Hp.addHitDie(strb.toString());
+			this.Hp.addHitDie(die);
 	}
 
 	//I_HasHp
