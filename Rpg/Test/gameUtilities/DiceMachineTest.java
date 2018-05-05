@@ -43,7 +43,6 @@ class DiceMachineTest {
 		IntStream.rangeClosed(1, 100).forEach(x ->
 			IntStream.rangeClosed(1, 100).forEach(y ->
 				IntStream.rangeClosed(-20, 20).forEach(z -> {
-					char op = z < 0 ? '-' : '+';
 					I_DiceCode die = DiceCodeBase.roll(x, y);
 
 					I_DiceCode other = DiceCodeBase.flat(z);
