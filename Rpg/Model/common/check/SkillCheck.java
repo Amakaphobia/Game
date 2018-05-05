@@ -27,7 +27,7 @@ public class SkillCheck extends CheckBase {
 
 	@Override
 	protected int computeBonus() {
-		return this.bonus +
+		return this.situationalBonus +
 				skillLevel +
 				this.Actor.getAttribute(SkillId.getMainAttribute()).getDerivedModifier();
 

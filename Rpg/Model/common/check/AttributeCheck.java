@@ -28,7 +28,7 @@ public class AttributeCheck extends CheckBase {
 
 	@Override
 	protected int computeBonus() {
-		return this.Actor.getAttribute(this.AttributeId).getDerivedModifier() + this.bonus;
+		return this.Actor.getAttribute(this.AttributeId).getDerivedModifier() + this.situationalBonus;
 	}
 
 
