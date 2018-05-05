@@ -23,6 +23,10 @@ import entity.magic.SpellBase;
  * This Level of the Actor handles Health and Class. It implements {@link I_HasHp}.
  *
  * @author Dave
+ *
+ * @see HealthPointContainer
+ * @see ClazzBase
+ * @see Clazzs
  */
 public abstract class ClassedActorBase extends SkilledActorBase implements I_HasHp{
 
