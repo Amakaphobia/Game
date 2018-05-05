@@ -48,8 +48,6 @@ class HealthPointContainerTest {
 		Hpc.addHitDie(I_DiceCode.roll(1, 8));
 		Hpc.addHitDie(I_DiceCode.roll(2, 8));
 
-		System.out.println(Hpc.getAllCodes());
-
 		assertEquals(Hpc.getAllCodes().get(0), "6d6");
 		assertEquals(Hpc.getAllCodes().get(1), "3d8");
 	}
