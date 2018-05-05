@@ -8,7 +8,7 @@ public abstract class DiceCodeBase
 
 	protected final boolean negative;
 
-	public DiceCodeBase(boolean negative) {
+	protected DiceCodeBase(boolean negative) {
 		super();
 		this.negative = negative;
 	}
@@ -20,6 +20,9 @@ public abstract class DiceCodeBase
 		return sum;
 	}
 
+	protected abstract int getMaxPersonal();
+	protected abstract int getPersonal();
+
 	@Override
 	public int max() {
 		int sum = 0;
@@ -29,7 +32,14 @@ public abstract class DiceCodeBase
 		return sum;
 	}
 
-	protected abstract int getMaxPersonal();
+	@Override
+	public int get() {
+		int sum = 0;
+		for(I_DiceCode e : this)
+			if(e instanceof DiceCodeBase)
+				sum += ((DiceCodeBase)e).getPersonal();
+		return sum;
+	}
 
 	@Override
 	public I_DiceCode clone() throws CloneNotSupportedException {

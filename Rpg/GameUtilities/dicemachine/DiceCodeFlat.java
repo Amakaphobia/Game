@@ -4,24 +4,16 @@ public class DiceCodeFlat extends DiceCodeBase {
 
 	private int flat;
 
-	public DiceCodeFlat(int flat, boolean negative) {
+	DiceCodeFlat(int flat, boolean negative) {
 		super(negative);
 		this.flat = flat;
-	}
-
-	@Override
-	public int get() {
-		return
-				this.negative ?
-				-this.flat :
-				 this.flat;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder strb = new StringBuilder();
 
-		strb.append(this.get());
+		strb.append(this.getPersonal());
 
 		if(this.hasDecorator()) {
 			DiceCodeBase other = (DiceCodeBase) this.getDecorator();
@@ -51,6 +43,14 @@ public class DiceCodeFlat extends DiceCodeBase {
 
 	@Override
 	protected int getMaxPersonal() {
-		return this.get();
+		return this.getPersonal();
+	}
+
+	@Override
+	protected int getPersonal() {
+		return
+				this.negative ?
+				-this.flat :
+				 this.flat;
 	}
 }
