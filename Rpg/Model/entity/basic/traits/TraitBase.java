@@ -2,28 +2,25 @@ package entity.basic.traits;
 
 import entity.basic.EntityBase;
 
-@SuppressWarnings("javadoc") //TODO Docu
+/**
+ * BaseClass for Traits handles equality and stuff.
+ * @author Dave
+ *
+ * @param <T> the type of the trait target
+ */
 public abstract class TraitBase<T extends EntityBase> implements I_Trait<T>{
 
+	/**the trait id unique for each trait*/
 	private final int id;
+	/**the id that the next trait will get*/
 	private static int nextId = 0;
+	/**@return use this to access this traits id*/
 	public final int getId() { return this.id; }
 
-	protected I_Trait<? super T> Trait;
-
-	public TraitBase(I_Trait<? super T> Trait) {
-		this.Trait = Trait;
+	/**Constructor*/
+	public TraitBase() {
 		this.id = nextId++;
 	}
-
-
-	//I_Trait Delegate
-
-	@Override
-	public void applyTo(T TraitTarget) { this.Trait.applyTo(TraitTarget); }
-
-	@Override
-	public void removeFrom(T traitTarget) { this.Trait.removeFrom(traitTarget); }
 
 	//obj
 
