@@ -64,15 +64,15 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	private final Clazzs prefferedClass;
 
 	/**
-	 * This method checks if an actor is multiclassed. If the list {@link #Clazzes} has a size 
+	 * This method checks if an actor is multiclassed. If the list {@link #Clazzes} has a size
 	 * bigger than 1 it returns true otherwise false.
 	 * @return true if multiclassed false if not
 	 */
 	public boolean isMulticlassed() {
 		return this.Clazzes.size() > 1;
 	}
-	
-	
+
+
 	/**
 	 * Delegate Method
 	 * @param index the index of the base attack you want
@@ -82,7 +82,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	public int getBaseAttackBonus(int index) {
 		return this.Clazzes.stream()
 			.mapToInt(c -> c.getBaseAttackBonus(index))
-			.sum(); 
+			.sum();
 	}
 
 
@@ -91,7 +91,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return true if this actor can cast spells false if not
 	 * @see ClazzBase#isMagical()
 	 */
-	public boolean isMagical() { 
+	public boolean isMagical() {
 		return this.Clazzes.stream()
 			.map(c -> c.isMagical())
 			.collect(Collectors.reducing(false, (a, b) -> a || b));
@@ -101,7 +101,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return a list of all learned spells
 	 * @see ClazzBase#getSpellsLearned()
 	 */
-	public List<SpellBase<?>> getSpellsLearned() { 
+	public List<SpellBase<?>> getSpellsLearned() {
 		return this.Clazzes.stream()
 				.flatMap(c -> c.getSpellsLearned().stream())
 				.collect(Collectors.toList());
@@ -111,10 +111,10 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return a List of all spells this character can learn
 	 * @see ClazzBase#getSpellsComplete()
 	 */
-	public List<SpellBase<?>> getSpellsComplete() { 
+	public List<SpellBase<?>> getSpellsComplete() {
 		return this.Clazzes.stream()
 				.flatMap(c -> c.getSpellsComplete().stream())
-				.collect(Collectors.toList()); 
+				.collect(Collectors.toList());
 	}
 	/**
 	 * Delegate Method
@@ -122,11 +122,11 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return true if the spell is cast-able
 	 * @see ClazzBase#canCast(SpellBase)
 	 */
-	public boolean canCast(SpellBase<?> Spell) { 
-		return 
+	public boolean canCast(SpellBase<?> Spell) {
+		return
 			this.Clazzes.stream()
 				.filter(ClazzBase::isMagical)
-				.filter(c -> 
+				.filter(c ->
 					c.getSpellsInMemory().stream()
 						.filter(s -> s.equals(Spell))
 						.findFirst()
@@ -139,7 +139,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return all spells currently in memory
 	 * @see ClazzBase#getSpellsInMemory()
 	 */
-	public List<SpellBase<?>> getSpellsInMemory() { 
+	public List<SpellBase<?>> getSpellsInMemory() {
 		return this.Clazzes.stream()
 					.filter(ClazzBase::isMagical)
 					.flatMap(c -> c.getSpellsInMemory().stream())
@@ -151,7 +151,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return true if you can commit the spell to memory false if not
 	 * @see ClazzBase#canCommitToMemory(SpellBase)
 	 */
-	public boolean canCommitToMemory(SpellBase<?> Spell) { 
+	public boolean canCommitToMemory(SpellBase<?> Spell) {
 		return this.Clazzes.stream()
 					.filter(ClazzBase::isMagical)
 					.filter(c -> c.canCommitToMemory(Spell))
@@ -164,7 +164,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return true if you can learn the spell false if not
 	 * @see ClazzBase#canLearn(SpellBase)
 	 */
-	public boolean canLearn(SpellBase<?> Spell) { 
+	public boolean canLearn(SpellBase<?> Spell) {
 		return this.Clazzes.stream()
 					.filter(ClazzBase::isMagical)
 					.filter(c -> c.canLearn(Spell))
@@ -174,6 +174,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to learn
+	 * @param clazzId the class of the actor that attempts learning the spell
 	 * @see ClazzBase#learnSpell(SpellBase)
 	 */
 	public void learnSpell(SpellBase<?> Spell, Clazzs clazzId) {
@@ -186,6 +187,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	/**
 	 * Delegate Method
 	 * @param Spell the spell you want to memorize
+	 * @param clazzId the class of the actor that attempts learning the spell
 	 * @see ClazzBase#memorizeSpell(SpellBase)
 	 */
 	public void memorizeSpell(SpellBase<?> Spell, Clazzs clazzId) {
@@ -202,7 +204,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return the fortitude save modifier of this actor
 	 * @see ClazzBase#getFortitudeSaveModifierValue()
 	 */
-	public int getFortitudeSaveModifierValue() { 
+	public int getFortitudeSaveModifierValue() {
 		return this.Clazzes.stream()
 				.mapToInt(ClazzBase::getFortitudeSaveModifierValue)
 				.sum();
@@ -212,7 +214,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return the reflex save modifier of this actor
 	 * @see ClazzBase#getReflexSaveModifierValue()
 	 */
-	public int getReflexSaveModifierValue() { 
+	public int getReflexSaveModifierValue() {
 		return this.Clazzes.stream()
 				.mapToInt(ClazzBase::getReflexSaveModifierValue)
 				.sum();
@@ -222,7 +224,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return the will save modifier of this actor
 	 * @see entity.basic.clazz.ClazzBase#getWillSaveModiferValue()
 	 */
-	public int getWillSaveModiferValue() { 
+	public int getWillSaveModiferValue() {
 		return this.Clazzes.stream()
 				.mapToInt(ClazzBase::getWillSaveModiferValue)
 				.sum();
@@ -233,7 +235,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @return the class id of this actor
 	 * @see ClazzBase#getId()
 	 */
-	public List<Clazzs> getClassId() { 
+	public List<Clazzs> getClassId() {
 		return this.Clazzes.stream()
 				.map(ClazzBase::getId)
 				.collect(Collectors.toList());
