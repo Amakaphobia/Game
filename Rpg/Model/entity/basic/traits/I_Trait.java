@@ -26,4 +26,13 @@ public interface I_Trait<T extends EntityBase> extends Serializable{
 	 * @param traitTarget the target for this trait
 	 */
 	public abstract void removeFrom(T traitTarget);
+
+	/**
+	 * this method is used to check if a trait can be applied to a given target.
+	 * @param traitTarget the trait target you want to test.
+	 * @return true if a target can have this trait
+	 */
+	public default boolean testTarget(T traitTarget) {
+		return true;
+	}
 }
