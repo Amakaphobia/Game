@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
 import boxes.Pair;
+import dicemachine.I_DiceCode;
 import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
 
@@ -23,8 +24,8 @@ class HealthPointContainerTest {
 
 		HealthPointContainer hpc = new HealthPointContainer(Parent);
 
-		hpc.addHitDieMax("1d6");
-		hpc.addHitDieMax("1d6");
+		hpc.addHitDieMax(I_DiceCode.roll(1, 6));
+		hpc.addHitDieMax(I_DiceCode.roll(1, 6));
 
 		return hpc;
 	}
@@ -40,12 +41,14 @@ class HealthPointContainerTest {
 	@Test
 	void testGetAllCodes() {
 		HealthPointContainer Hpc = this.buildOne();
-		Hpc.addHitDie("1d6");
-		Hpc.addHitDie("1d6");
-		Hpc.addHitDie("1d6");
-		Hpc.addHitDie("1d6");
-		Hpc.addHitDie("1d8");
-		Hpc.addHitDie("2d8");
+		Hpc.addHitDie(I_DiceCode.roll(1, 6));
+		Hpc.addHitDie(I_DiceCode.roll(1, 6));
+		Hpc.addHitDie(I_DiceCode.roll(1, 6));
+		Hpc.addHitDie(I_DiceCode.roll(1, 6));
+		Hpc.addHitDie(I_DiceCode.roll(1, 8));
+		Hpc.addHitDie(I_DiceCode.roll(2, 8));
+
+		System.out.println(Hpc.getAllCodes());
 
 		assertEquals(Hpc.getAllCodes().get(0), "6d6");
 		assertEquals(Hpc.getAllCodes().get(1), "3d8");
@@ -55,7 +58,7 @@ class HealthPointContainerTest {
 	void testGetMaxHealth() {
 		HealthPointContainer Hpc = this.buildOne();
 		assertEquals(12, Hpc.getMaxHealth());
-		Hpc.addHitDie("1d6");
+		Hpc.addHitDie(I_DiceCode.roll(1, 6));
 		assertTrue(Hpc.getMaxHealth() <= 18 && Hpc.getMaxHealth() > 12);
 	}
 
@@ -113,7 +116,7 @@ class HealthPointContainerTest {
 	@Test
 	void testAddHitDie() {
 		HealthPointContainer Hpc = this.buildOne();
-		Hpc.addHitDie("1d6");
+		Hpc.addHitDie(I_DiceCode.roll(1, 6));
 		assertEquals("3d6", Hpc.getAllCodes().get(0));
 
 		assertTrue(Hpc.getMaxHealth() <= 18 && Hpc.getMaxHealth() > 12);
@@ -122,11 +125,11 @@ class HealthPointContainerTest {
 	@Test
 	void testAddHitDieMax() {
 		HealthPointContainer Hpc = this.buildOne();
-		Hpc.addHitDieMax("1d6");
+		Hpc.addHitDieMax(I_DiceCode.roll(1, 6));
 		assertEquals("3d6", Hpc.getAllCodes().get(0));
 
 		assertTrue(Hpc.getMaxHealth() == 18);
-		Hpc.addHitDieMax("1d10");
+		Hpc.addHitDieMax(I_DiceCode.roll(1, 10));
 		assertTrue(Hpc.getMaxHealth() == 28);
 	}
 
@@ -150,7 +153,7 @@ class HealthPointContainerTest {
 
 		assertEquals(Hpc1, Hpc1);
 		assertEquals(Hpc1, Hpc2);
-		Hpc2.addHitDie("1d6");
+		Hpc1.addHitDie(I_DiceCode.roll(1, 6));
 		assertNotEquals(Hpc1, Hpc2);
 	}
 
@@ -161,7 +164,7 @@ class HealthPointContainerTest {
 
 		assertEquals(Hpc1.hashCode(), Hpc2.hashCode());
 		assertEquals(Hpc1.hashCode(), Hpc1.hashCode());
-		Hpc2.addHitDie("1d6");
+		Hpc1.addHitDie(I_DiceCode.roll(1, 6));
 		assertNotEquals(Hpc1.hashCode(), Hpc2.hashCode());
 	}
 
@@ -169,7 +172,7 @@ class HealthPointContainerTest {
 	void testToString() {
 		HealthPointContainer Hpc = this.buildOne();
 		assertEquals("2d6", Hpc.toString());
-		Hpc.addHitDie("1d8");
+		Hpc.addHitDie(I_DiceCode.roll(1, 8));
 		assertEquals("2d6"+System.lineSeparator() +"1d8", Hpc.toString());
 	}
 }
