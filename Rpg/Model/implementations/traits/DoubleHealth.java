@@ -16,7 +16,7 @@ import entity.basic.traits.TraitBase;
 public class DoubleHealth extends TraitBase<ClassedActorBase> {
 
 	public DoubleHealth() {
-		super();
+		super("DoubleHealth", "doubles Health");
 	}
 
 	@Override
@@ -27,6 +27,12 @@ public class DoubleHealth extends TraitBase<ClassedActorBase> {
 	@Override
 	public void removeFrom(ClassedActorBase traitTarget) {
 		traitTarget.getHp().maxHealthProperty().set(traitTarget.getHp().getMaxHealth() / 2);
+	}
+
+	@Override
+	public Parent getInfoView() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
