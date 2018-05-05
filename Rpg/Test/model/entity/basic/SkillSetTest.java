@@ -97,7 +97,7 @@ class SkillSetTest {
 
 	@Test
 	void testToString() {
-		assertEquals("{SWIM=Swim: 3, ACROBATIC=Acrobatic: 2}", s1.toString());
+		assertEquals("{ACROBATIC=Acrobatic: 2, SWIM=Swim: 3}", s1.toString());
 	}
 
 	@Test

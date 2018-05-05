@@ -24,13 +24,16 @@ import entity.basic.skillSet.SkillSet;
 class SkillAttDeleTest{
 
 	private class Mockery{
-		I_SkillSet ss = new SkillSet(Arrays.asList(
-				new Skill(Skills.ACROBATIC,2),
-				new Skill(Skills.SWIM,5)
-				));
+		I_SkillSet ss = new SkillSet();
+
 		I_AttributeSet as = new AttributeSet(10);
 
 		SkillAttDele sad = new SkillAttDele(null, ss, as);
+
+		Mockery(){
+			ss.addSkill(Skills.ACROBATIC,2);
+			ss.addSkill(Skills.SWIM,5);
+		}
 	}
 
 	@Test
@@ -162,7 +165,7 @@ class SkillAttDeleTest{
 	void testToString() {
 		Mockery m1 = new Mockery();
 		String s = "Strength: 10 Dexterity: 10 Constitution: 10 Intelligence: 10 Wisdom: 10 Charisma: 10\n";
-		s = s.concat("{SWIM=Swim: 5, ACROBATIC=Acrobatic: 2}");
+		s = s.concat("{ACROBATIC=Acrobatic: 2, SWIM=Swim: 5}");
 		assertEquals(s, m1.sad.toString());
 	}
 
