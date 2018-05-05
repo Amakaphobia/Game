@@ -23,6 +23,44 @@ public abstract class DiceCodeBase
 	protected abstract int getMaxPersonal();
 	protected abstract int getPersonal();
 
+	public static I_DiceCode flat(int flat, boolean negative) {
+		return new DiceCodeFlat(flat, negative);
+	}
+
+	public static I_DiceCode flat(int flat) {
+		return DiceCodeBase.flat(flat, false);
+	}
+	public static I_DiceCode roll(int count, int size, boolean negative) {
+		return new DiceCodeRoll(count, size, negative);
+	}
+	public static I_DiceCode roll(int count, int size) {
+		return DiceCodeBase.roll(count, size, false);
+	}
+
+	@Override
+	public I_DiceCode add(int flat) {
+		this.addDecorator(DiceCodeBase.flat(flat, false));
+		return this;
+	}
+
+	@Override
+	public I_DiceCode add(int count, int size) {
+		this.addDecorator(DiceCodeBase.roll(count, size, false));
+		return this;
+	}
+
+	@Override
+	public I_DiceCode subtract(int flat) {
+		this.addDecorator(DiceCodeBase.flat(flat, true));
+		return this;
+	}
+
+	@Override
+	public I_DiceCode subtract(int count, int size) {
+		this.addDecorator(DiceCodeBase.roll(count, size, true));
+		return this;
+	}
+
 	@Override
 	public int max() {
 		int sum = 0;
