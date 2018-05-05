@@ -1,5 +1,9 @@
 package entity.actorBase.container;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,13 +15,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
-
 import boxes.Pair;
-import dicemachine.DiceMachine;
-import dicemachine.I_DiceMachine;
+import dicemachine.DiceCodeBase;
 import entity.actorBase.ClassedActorBase;
 
 /**
@@ -217,9 +216,8 @@ public class HealthPointContainer implements Serializable{
 	 * This Method is used to add a new HitDie to this HealthContainer
 	 * @param diceCode the dicecode of the new hitdie
 	 */
-	public void addHitDie(String diceCode) {
-		I_DiceMachine Dm = new DiceMachine();
-		this.HpList.add(new Pair<>(diceCode, Dm.getRoll(diceCode)));
+	public void addHitDie(DiceCodeBase diceCode) {
+		this.HpList.add(new Pair<>(diceCode.toString(), diceCode.getValue()));
 	}
 
 
@@ -227,9 +225,8 @@ public class HealthPointContainer implements Serializable{
 	 * This Method is used to add a new hitdie and force the maximum result
 	 * @param diceCode the dicecode of the new hitdie
 	 */
-	public void addHitDieMax(String diceCode) {
-		DiceMachine Dm = new DiceMachine();
-		this.HpList.add(new Pair<>(diceCode, Dm.getRollMax(diceCode)));
+	public void addHitDieMax(DiceCodeBase diceCode) {
+		this.HpList.add(new Pair<>(diceCode.toString(), diceCode.getMax()));
 	}
 
 	//obj-methods

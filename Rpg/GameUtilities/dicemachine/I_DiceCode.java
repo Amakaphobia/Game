@@ -6,16 +6,18 @@ public interface I_DiceCode extends I_SimpleDecorator<I_DiceCode, Integer>, Clon
 
 	public abstract int get();
 
-	public static I_DiceCode flat(int flat, boolean negative) { return new DiceCodeFlat(flat, negative); }
+	public abstract int max();
 
-	public static I_DiceCode flat(int flat) {
+	public static DiceCodeBase flat(int flat, boolean negative) { return new DiceCodeFlat(flat, negative); }
+
+	public static DiceCodeBase flat(int flat) {
 		return I_DiceCode.flat(flat, false);
 	}
 
-	public static I_DiceCode roll(int count, int size, boolean negative) {
+	public static DiceCodeBase roll(int count, int size, boolean negative) {
 		return new DiceCodeRoll(count, size, negative);
 	}
-	public static I_DiceCode roll(int count, int size) {
+	public static DiceCodeBase roll(int count, int size) {
 		return I_DiceCode.roll(count, size, false);
 	}
 

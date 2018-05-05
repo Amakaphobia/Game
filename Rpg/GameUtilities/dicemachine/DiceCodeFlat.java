@@ -17,4 +17,40 @@ public class DiceCodeFlat extends DiceCodeBase {
 				 this.flat;
 	}
 
+	@Override
+	public int max() {
+		return this.get();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder strb = new StringBuilder();
+
+		strb.append(this.get());
+
+		if(this.hasDecorator()) {
+			DiceCodeBase other = (DiceCodeBase) this.getDecorator();
+			strb.append(other.negative ? "-" : "+")
+				.append(other.toString());
+
+		}
+
+		return strb.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		if(obj == null) return false;
+		if(!(obj instanceof DiceCodeFlat)) return false;
+
+		DiceCodeFlat other = (DiceCodeFlat)obj;
+		return this.flat == other.flat
+			&&  super.equals(other);
+	}
+
+	@Override
+	public int hashCode() {
+		return Integer.hashCode(this.flat) + super.hashCode();
+	}
 }
