@@ -1,7 +1,9 @@
 package entity.actorBase;
 
+import static java.util.stream.Collectors.reducing;
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 import common.map.I_GameMap;
 import entity.actorBase.container.HealthPointContainer;
@@ -94,7 +96,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	public boolean isMagical() {
 		return this.Clazzes.stream()
 			.map(c -> c.isMagical())
-			.collect(Collectors.reducing(false, (a, b) -> a || b));
+			.collect(reducing(false, (a, b) -> a || b));
 	}
 	/**
 	 * Delegate Method
@@ -104,7 +106,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	public List<SpellBase<?>> getSpellsLearned() {
 		return this.Clazzes.stream()
 				.flatMap(c -> c.getSpellsLearned().stream())
-				.collect(Collectors.toList());
+				.collect(toList());
 	}
 	/**
 	 * Delegate Method
@@ -114,7 +116,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	public List<SpellBase<?>> getSpellsComplete() {
 		return this.Clazzes.stream()
 				.flatMap(c -> c.getSpellsComplete().stream())
-				.collect(Collectors.toList());
+				.collect(toList());
 	}
 	/**
 	 * Delegate Method
@@ -143,7 +145,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 		return this.Clazzes.stream()
 					.filter(ClazzBase::isMagical)
 					.flatMap(c -> c.getSpellsInMemory().stream())
-					.collect(Collectors.toList());
+					.collect(toList());
 	}
 	/**
 	 * Delegate Method
@@ -238,7 +240,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	public List<Clazzs> getClassId() {
 		return this.Clazzes.stream()
 				.map(ClazzBase::getId)
-				.collect(Collectors.toList());
+				.collect(toList());
 	}
 
 	//Leveling
