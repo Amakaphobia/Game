@@ -61,6 +61,8 @@ public abstract class RacialActorBase extends MoveableActorBase {
 	/**@param Trait the trait you want to add to this actor*/
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addTrait(TraitBase Trait) {
+		if(! Trait.testTarget(this)) return;
+
 		Trait.applyTo(this);
 		this.traits.add(Trait);
 	}
