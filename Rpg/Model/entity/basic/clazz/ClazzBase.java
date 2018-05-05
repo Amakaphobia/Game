@@ -12,6 +12,7 @@ import javafx.beans.property.StringProperty;
 import common.attack.I_Attack;
 import common.decorator.SimpleIntegerDecorator;
 import common.render.I_InfoAble;
+import dicemachine.DiceCodeBase;
 import entity.actorBase.ClassedActorBase;
 import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Skills;
@@ -86,9 +87,9 @@ public abstract class ClazzBase implements I_InfoAble, Serializable{
 	//level handling + hit die
 
 	/**the hitdie code this class gets on level up*/
-	private final String hitDieCode;
+	private final DiceCodeBase hitDieCode;
 	/**@return the hitdie Code*/
-	public String getHitDieCode() { return this.hitDieCode; }
+	public DiceCodeBase getHitDieCode() { return this.hitDieCode; }
 
 
 	/**
@@ -135,13 +136,13 @@ public abstract class ClazzBase implements I_InfoAble, Serializable{
 	 */
 	public int getBaseAttackBonus(int index) {
 		int baseAttackBonus;
-		
+
 		try {
 			baseAttackBonus = this.baseAttacks.get(index).getBaseAttackBonus();
 		}catch(IndexOutOfBoundsException  e) {
 			baseAttackBonus = 0;
 		}
-		
+
 		return baseAttackBonus;
 	}
 	/**
