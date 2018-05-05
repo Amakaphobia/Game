@@ -28,6 +28,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 
 	/**this container holds the entities Hp*/
 	protected final HealthPointContainer Hp;
+	/**@return this actors HP container*/
 	public final HealthPointContainer getHp() { return this.Hp; }
 
 	//Constructor

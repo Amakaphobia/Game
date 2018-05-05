@@ -45,7 +45,6 @@ public abstract class RacialActorBase extends MoveableActorBase {
 			RaceBase Race) {
 		super(name, bildPath, Map);
 
-
 		this.traits = new HashSet<>();
 
 		this.Race = Race;
