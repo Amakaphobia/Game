@@ -1,5 +1,9 @@
 package entity.basic.traits;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import common.render.I_InfoAble;
 import entity.basic.EntityBase;
 
 /**
@@ -8,19 +12,34 @@ import entity.basic.EntityBase;
  *
  * @param <T> the type of the trait target
  */
-public abstract class TraitBase<T extends EntityBase> implements I_Trait<T>{
+public abstract class TraitBase<T extends EntityBase> implements I_Trait<T>, I_InfoAble{
 
-	/**the trait id unique for each trait*/
-	private final int id;
-	/**the id that the next trait will get*/
-	private static int nextId = 0;
-	/**@return use this to access this traits id*/
-	public final int getId() { return this.id; }
-
-	/**Constructor*/
-	public TraitBase() {
-		this.id = nextId++;
+	/**
+	 * Constructor
+	 * @param name the name
+	 * @param description the description
+	 */
+	public TraitBase(String name, String description) {
+		this.name = new SimpleStringProperty(name);
+		this.description = new SimpleStringProperty(description);
 	}
+
+	//Properties
+
+	/**the name of the trait*/
+	private final StringProperty name;
+	/**@return the name property*/
+	public final StringProperty nameProperty() { return this.name; }
+	/**@return the name as a string*/
+	public final String getName() { return this.nameProperty().get(); }
+
+	/**the trait's description*/
+	private final StringProperty description;
+	/**@return the description Property*/
+	public final StringProperty descriptionProperty() { return this.description; }
+	/**@return the Description as a String*/
+	public final String getDescription() { return this.descriptionProperty().get(); }
+
 
 	//obj
 
@@ -32,14 +51,18 @@ public abstract class TraitBase<T extends EntityBase> implements I_Trait<T>{
 
 		@SuppressWarnings("unchecked")
 		TraitBase<? extends EntityBase> other = (TraitBase<? extends EntityBase>)obj;
-		return this.id == other.id;
+		return this.getName().equals(other.getName());
 	}
 
 	@Override
-	public String toString() { return String.valueOf(this.id); }
+	public String toString() { return this.getName(); }
 
 	@Override
 	public int hashCode() {
-		return Integer.hashCode(this.id);
+		return this.getName().hashCode();
 	}
+
+
+
+
 }
