@@ -2,44 +2,51 @@ package dicemachine;
 
 import common.decorator.I_SimpleDecorator;
 
+/**
+ * This is the base interface for Dice rolls.
+ *
+ * @see Cloneable
+ * @see I_SimpleDecorator
+ *
+ * @author Dave
+ */
 public interface I_DiceCode extends I_SimpleDecorator<I_DiceCode, Integer>, Cloneable {
 
+	/**
+	 * this method is used to get the value of this dice roll
+	 * @return the value of the roll
+	 */
 	public abstract int get();
 
+	/**
+	 * this method is used to get the maximum value of this dice roll
+	 * @return the highest possible value of the roll
+	 */
 	public abstract int max();
 
+	@SuppressWarnings("javadoc")
 	public abstract I_DiceCode clone() throws CloneNotSupportedException;
 
-	public static I_DiceCode flat(int flat, boolean negative) { return new DiceCodeFlat(flat, negative); }
+	/**
+	 * this method is used to add a modifier to this dice roll
+	 * @param flat the number you want to add
+	 * @return this for chain use or a new immutable {@link I_DiceCode}
+	 */
+	public abstract I_DiceCode addModifier(int flat);
 
-	public static I_DiceCode flat(int flat) {
-		return I_DiceCode.flat(flat, false);
-	}
+	/**
+	 *  this method is used to add another die to this dice roll
+	 * @param count the number of dice
+	 * @param size the size of dice
+	 * @return this for chain use or a new immutable {@link I_DiceCode}
+	 */
+	public abstract I_DiceCode addModifier(int count, int size);
 
-	public static I_DiceCode roll(int count, int size, boolean negative) {
-		return new DiceCodeRoll(count, size, negative);
-	}
-	public static I_DiceCode roll(int count, int size) {
-		return I_DiceCode.roll(count, size, false);
-	}
-
-	public default I_DiceCode add(int flat) {
-		this.addDecorator(I_DiceCode.flat(flat, false));
-		return this;
-	}
-
-	public default I_DiceCode add(int count, int size) {
-		this.addDecorator(I_DiceCode.roll(count, size, false));
-		return this;
-	}
-
-	public default I_DiceCode subtract(int flat) {
-		this.addDecorator(I_DiceCode.flat(flat, true));
-		return this;
-	}
-
-	public default I_DiceCode subtract(int count, int size) {
-		this.addDecorator(I_DiceCode.roll(count, size, true));
-		return this;
-	}
+	/**
+	 *  this method is used to subtract another die from this dice roll
+	 * @param count the number of dice
+	 * @param size the size of dice
+	 * @return this for chain use or a new immutable {@link I_DiceCode}
+	 */
+	public abstract I_DiceCode subtractModifier(int count, int size);
 }

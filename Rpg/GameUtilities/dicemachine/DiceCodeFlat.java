@@ -1,11 +1,24 @@
 package dicemachine;
 
+/**
+ * This Dice Code holds a flat modifier
+ * @author Dave
+ *
+ * @see DiceCodeBase
+ * @see I_DiceCode
+ *
+ */
 public class DiceCodeFlat extends DiceCodeBase {
 
+	/**holds the modifier*/
 	private int flat;
 
-	DiceCodeFlat(int flat, boolean negative) {
-		super(negative);
+	/**
+	 * Hidden Constructor
+	 * @param flat the value
+	 */
+	DiceCodeFlat(int flat) {
+		super();
 		this.flat = flat;
 	}
 
@@ -17,8 +30,7 @@ public class DiceCodeFlat extends DiceCodeBase {
 
 		if(this.hasDecorator()) {
 			DiceCodeBase other = (DiceCodeBase) this.getDecorator();
-			strb.append(other.negative ? "-" : "+")
-				.append(other.toString());
+			strb.append(other.toString());
 
 		}
 
@@ -38,7 +50,7 @@ public class DiceCodeFlat extends DiceCodeBase {
 
 	@Override
 	public int hashCode() {
-		return Integer.hashCode(this.flat) + super.hashCode();
+		return Integer.hashCode(this.flat);
 	}
 
 	@Override
@@ -48,9 +60,6 @@ public class DiceCodeFlat extends DiceCodeBase {
 
 	@Override
 	protected int getPersonal() {
-		return
-				this.negative ?
-				-this.flat :
-				 this.flat;
+		return this.flat;
 	}
 }

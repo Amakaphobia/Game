@@ -3,42 +3,58 @@ package dicemachine;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-
+/**
+ * This Class is used for dynamic dice rolls. it rolls a number of equal die and sums them up.
+ * @author Dave
+ *
+ */
 public class DiceCodeRoll extends DiceCodeBase{
 
+	/**this dice count*/
 	private int diceCount;
+	/**the dice size*/
 	private int diceSize;
+	/**true if negative*/
+	private boolean negative;
 
+	/**used to roll the dice*/
 	private static final Random RANDOM = new Random();
 
+	/**
+	 * Hidden constructor
+	 * @param diceCount the dice count
+	 * @param diceSize the dice size
+	 * @param negative true if negative
+	 */
 	DiceCodeRoll(int diceCount, int diceSize, boolean negative) {
-		super(negative);
+		super();
 		this.diceCount = diceCount;
 		this.diceSize = diceSize;
+		this.negative = negative;
 	}
 
 	@Override
 	protected int getPersonal() {
 		int erg =
-				IntStream.range(0, this.diceCount)
-					.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
-					.sum();
-			return
-				this.negative ?
-				-erg :
-				 erg;
+			IntStream.range(0, this.diceCount)
+				.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
+				.sum();
+		return
+			this.negative ?
+			-erg :
+			 erg;
 	}
 
 	@Override
 	protected int getMaxPersonal() {
 		int erg =
-				IntStream.range(0, this.diceCount)
-					.map(i -> this.diceSize)
-					.sum();
-			return
-				this.negative ?
-				-erg :
-				 erg;
+			IntStream.range(0, this.diceCount)
+				.map(i -> this.diceSize)
+				.sum();
+		return
+			this.negative ?
+			-erg :
+			 erg;
 	}
 
 	//obj
@@ -53,9 +69,7 @@ public class DiceCodeRoll extends DiceCodeBase{
 
 		if(this.hasDecorator()) {
 			DiceCodeBase other = (DiceCodeBase) this.getDecorator();
-			strb
-				.append(other.negative ? "-" : "+" )
-				.append(other.toString());
+			strb.append(other.toString());
 		}
 
 		return strb.toString();
@@ -75,12 +89,10 @@ public class DiceCodeRoll extends DiceCodeBase{
 
 	@Override
 	public int hashCode() {
-		int negativeHc = super.hashCode();
 		int diceSizeHc = Integer.hashCode(this.diceSize);
 		int diceCountHc = Integer.hashCode(this.diceCount);
 
-		return negativeHc +
-				diceSizeHc * diceSizeHc +
+		return diceSizeHc * diceSizeHc +
 				diceCountHc * diceCountHc * diceCountHc;
 	}
 }

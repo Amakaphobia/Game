@@ -2,17 +2,27 @@ package dicemachine;
 
 import common.decorator.DecoratorBase;
 
+/**
+ * This is the BaseImplementation for simple DiceCodes.
+ * @author Dave
+ *
+ * @see DecoratorBase
+ * @see I_DiceCode
+ *
+ */
 public abstract class DiceCodeBase
 		extends DecoratorBase<I_DiceCode, Integer>
 		implements I_DiceCode {
 
-	protected final boolean negative;
-
-	protected DiceCodeBase(boolean negative) {
+	/**Hidden Constructor*/
+	protected DiceCodeBase() {
 		super();
-		this.negative = negative;
 	}
 
+	/**
+	 * gets the max Value for this dice roll
+	 * @return the maximum value
+	 */
 	public int getMax() {
 		int sum = 0;
 		for(I_DiceCode e : this)
@@ -20,43 +30,54 @@ public abstract class DiceCodeBase
 		return sum;
 	}
 
+	/**@return the maximum value for this level of the dice code*/
 	protected abstract int getMaxPersonal();
+	/**@return the value for this level of the dice code*/
 	protected abstract int getPersonal();
 
-	public static I_DiceCode flat(int flat, boolean negative) {
-		return new DiceCodeFlat(flat, negative);
-	}
-
+	/**
+	 * Method used to build a flat Dice Code
+	 * @param flat the value
+	 * @return the {@link DiceCodeFlat}
+	 */
 	public static I_DiceCode flat(int flat) {
-		return DiceCodeBase.flat(flat, false);
+		return new DiceCodeFlat(flat);
 	}
+	/**
+	 * Method used to build a dynamic Dice Code
+	 * @param count the dice count
+	 * @param size the dice size
+	 * @param negative true if negative
+	 * @return the {@link DiceCodeRoll}
+	 */
 	public static I_DiceCode roll(int count, int size, boolean negative) {
 		return new DiceCodeRoll(count, size, negative);
 	}
+
+	/**
+	 * Method used to build a dynamic Dice Code
+	 * @param count the dice count
+	 * @param size the dice size
+	 * @return the {@link DiceCodeRoll}
+	 */
 	public static I_DiceCode roll(int count, int size) {
 		return DiceCodeBase.roll(count, size, false);
 	}
 
 	@Override
-	public I_DiceCode add(int flat) {
-		this.addDecorator(DiceCodeBase.flat(flat, false));
+	public I_DiceCode addModifier(int flat) {
+		this.addDecorator(DiceCodeBase.flat(flat));
 		return this;
 	}
 
 	@Override
-	public I_DiceCode add(int count, int size) {
+	public I_DiceCode addModifier(int count, int size) {
 		this.addDecorator(DiceCodeBase.roll(count, size, false));
 		return this;
 	}
 
 	@Override
-	public I_DiceCode subtract(int flat) {
-		this.addDecorator(DiceCodeBase.flat(flat, true));
-		return this;
-	}
-
-	@Override
-	public I_DiceCode subtract(int count, int size) {
+	public I_DiceCode subtractModifier(int count, int size) {
 		this.addDecorator(DiceCodeBase.roll(count, size, true));
 		return this;
 	}
@@ -99,11 +120,6 @@ public abstract class DiceCodeBase
 		if(obj == null) return false;
 		if(!(obj instanceof DiceCodeBase)) return false;
 
-		return this.negative == ((DiceCodeBase)obj).negative;
-	}
-
-	@Override
-	public int hashCode() {
-		return Boolean.hashCode(this.negative);
+		return true;
 	}
 }
