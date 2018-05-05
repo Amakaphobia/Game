@@ -5,7 +5,7 @@ import java.util.List;
 
 import javafx.scene.Parent;
 
-import dicemachine.I_DiceCode;
+import dicemachine.DiceCodeBase;
 import entity.actorBase.ClassedActorBase;
 import entity.basic.attributeSet.AttributeSet;
 import entity.basic.attributeSet.I_AttributeSet;
@@ -65,7 +65,7 @@ public class DoubleHealth extends TraitBase<ClassedActorBase> {
 			}
 		};
 
-		cab.getHp().addHitDie(I_DiceCode.flat(2));
+		cab.getHp().addHitDie(DiceCodeBase.flat(2));
 		TraitBase<ClassedActorBase> t = new DoubleHealth();
 		cab.addTrait(t);
 
