@@ -3,6 +3,7 @@ package entity.actorBase;
 import static java.util.stream.Collectors.reducing;
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import common.map.I_GameMap;
@@ -27,6 +28,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 
 	/**this container holds the entities Hp*/
 	protected final HealthPointContainer Hp;
+	public final HealthPointContainer getHp() { return this.Hp; }
 
 	//Constructor
 	/**
@@ -53,8 +55,11 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 
 		this.Hp = new HealthPointContainer(this);
 
-		this.Clazzes = null; //TODO remove mock
-		this.prefferedClass = this.Clazzes.get(0).getId(); //TODO PrefferedCLass of actor
+		this.Clazzes = new ArrayList<>(); //TODO remove mock
+		if(this.Clazzes.size() > 0)
+			this.prefferedClass = this.Clazzes.get(0).getId(); //TODO PrefferedCLass of actor
+		else
+			this.prefferedClass = Clazzs.MAGE; // TODO REMOVE mock
 	}
 
 	//ClassBase Handling

@@ -1,6 +1,7 @@
 package entity.actorBase;
 
-import javafx.scene.Parent;
+import java.util.HashSet;
+import java.util.Set;
 
 import common.OverwriteableDefault;
 import common.map.I_GameMap;
@@ -8,8 +9,14 @@ import entity.basic.EntityBase;
 import entity.basic.common.BodyInformation;
 import entity.basic.common.enums.size.Sizes;
 import entity.basic.race.RaceBase;
+import entity.basic.traits.TraitBase;
 
-@SuppressWarnings("javadoc") //TODO Docu
+/**
+ * This Class handles the interaction between the Actor and its race.
+ * @author Dave
+ * @see RaceBase
+ *
+ */
 public abstract class RacialActorBase extends MoveableActorBase {
 
 	/**
@@ -21,6 +28,7 @@ public abstract class RacialActorBase extends MoveableActorBase {
 	public RaceBase getRace() { return this.Race; }
 	/**@param race the race to set*/
 	public void setRace(RaceBase race) { this.Race = race; }
+
 
 	//Constructor
 
@@ -36,13 +44,35 @@ public abstract class RacialActorBase extends MoveableActorBase {
 			I_GameMap Map,
 			RaceBase Race) {
 		super(name, bildPath, Map);
+
+
+		this.traits = new HashSet<>();
+
 		this.Race = Race;
+		Race.getRacialTraits().forEach(t -> this.addTrait(t));
 		this.BodyInformation = new BodyInformation(new OverwriteableDefault<>(Race.getDefaultSize()));
 		this.BodyInformation.setParent(this);
+
+
 	}
 
-	protected void extractRaceEffects() {
-		//TODO extractRaceEffects
+	/**this set contains all traits an actor can have*/
+	private final Set<TraitBase<?>> traits;
+
+	/**@param Trait the trait you want to add to this actor*/
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addTrait(TraitBase Trait) {
+		Trait.applyTo(this);
+		this.traits.add(Trait);
+	}
+
+	/**@param Trait the trait you want to remove from this actor*/
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void removeTrait(TraitBase Trait) {
+		if(! this.traits.contains(Trait)) return;
+
+		Trait.removeFrom(this);
+		this.traits.remove(Trait);
 	}
 
 	//Delegates
@@ -53,16 +83,16 @@ public abstract class RacialActorBase extends MoveableActorBase {
 	protected BodyInformation BodyInformation;
 	/**
 	 * @return the current size
-	 * @see Parent.basic.common.BodyInformation#getSize()
+	 * @see BodyInformation#getSize()
 	 */
 	public Sizes getSize() { return this.BodyInformation.getSize(); }
 	/**
 	 * @param Size Size the {@link Sizes} to set
-	 * @see Parent.basic.common.BodyInformation#setSize(Parent.basic.common.enums.size.Sizes)
+	 * @see BodyInformation#setSize(Sizes)
 	 */
 	public void setSize(Sizes Size) { this.BodyInformation.setSize(Size); }
 	/**
-	 * @see Parent.basic.common.BodyInformation#clearSize()
+	 * @see BodyInformation#clearSize()
 	 */
 	public void clearSize() { this.BodyInformation.clearSize(); }
 

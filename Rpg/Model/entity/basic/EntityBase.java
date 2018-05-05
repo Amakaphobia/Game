@@ -88,6 +88,11 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	/**the Image used for information*/
 	protected Image bild = null;
 
+
+
+
+
+
 	/**
 	 * Constructor
 	 * creates a non living entity.
