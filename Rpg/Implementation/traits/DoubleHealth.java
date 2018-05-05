@@ -1,4 +1,4 @@
-package implementations.traits;
+package traits;
 
 import java.util.ArrayList;
 import java.util.List;
