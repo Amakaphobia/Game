@@ -16,7 +16,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 import boxes.Pair;
-import dicemachine.DiceCodeBase;
+import dicemachine.I_DiceCode;
 import entity.actorBase.ClassedActorBase;
 
 /**
@@ -216,7 +216,7 @@ public class HealthPointContainer implements Serializable{
 	 * This Method is used to add a new HitDie to this HealthContainer
 	 * @param diceCode the dicecode of the new hitdie
 	 */
-	public void addHitDie(DiceCodeBase diceCode) {
+	public void addHitDie(I_DiceCode diceCode) {
 		this.HpList.add(new Pair<>(diceCode.toString(), diceCode.getValue()));
 	}
 
@@ -225,8 +225,8 @@ public class HealthPointContainer implements Serializable{
 	 * This Method is used to add a new hitdie and force the maximum result
 	 * @param diceCode the dicecode of the new hitdie
 	 */
-	public void addHitDieMax(DiceCodeBase diceCode) {
-		this.HpList.add(new Pair<>(diceCode.toString(), diceCode.getMax()));
+	public void addHitDieMax(I_DiceCode diceCode) {
+		this.HpList.add(new Pair<>(diceCode.toString(), diceCode.max()));
 	}
 
 	//obj-methods

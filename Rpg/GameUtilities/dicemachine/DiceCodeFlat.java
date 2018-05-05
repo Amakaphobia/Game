@@ -18,11 +18,6 @@ public class DiceCodeFlat extends DiceCodeBase {
 	}
 
 	@Override
-	public int max() {
-		return this.get();
-	}
-
-	@Override
 	public String toString() {
 		StringBuilder strb = new StringBuilder();
 
@@ -52,5 +47,10 @@ public class DiceCodeFlat extends DiceCodeBase {
 	@Override
 	public int hashCode() {
 		return Integer.hashCode(this.flat) + super.hashCode();
+	}
+
+	@Override
+	protected int getMaxPersonal() {
+		return this.get();
 	}
 }

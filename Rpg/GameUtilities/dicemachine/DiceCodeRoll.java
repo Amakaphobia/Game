@@ -30,7 +30,7 @@ public class DiceCodeRoll extends DiceCodeBase{
 	}
 
 	@Override
-	public int max() {
+	protected int getMaxPersonal() {
 		int erg =
 				IntStream.range(0, this.diceCount)
 					.map(i -> this.diceSize)
