@@ -2,6 +2,8 @@ package entity.basic;
 
 import java.io.Serializable;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Parent;
@@ -19,19 +21,23 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 
 	// TODO ticking?
 
-
 	/**set this to true if the object is alive*/
-	protected boolean living = false;
+	private final BooleanProperty living;
 	/**
 	 * used to access {@link EntityBase#living}
 	 * @return the living value of this object. True if alive.
 	 */
-	public boolean isLiving() { return this.living; }
+	public boolean isLiving() { return this.living.get(); }
 	/**
 	 * used to set {@link EntityBase#living}
 	 * @param value true if alive
 	 */
-	public void setLiving(boolean value) { this.living = value; }
+	public void setLiving(boolean value) { this.living.set(value); }
+	/**
+	 * used to access the living Property
+	 * @return the living Property
+	 */
+	public BooleanProperty livingProperty() { return this.living; }
 
 	/**this StringProperty holds the unique ID of a Parent*/
 	protected final StringProperty id;
@@ -84,6 +90,10 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 
 	/**
 	 * Constructor
+	 * creates a non living entity.
+	 *
+	 * @see #setLiving(boolean)
+	 *
 	 * @param name the name you want the Entity to have
 	 * @param bildPath the path to the info image
 	 * @param description the description of this Parent
@@ -94,6 +104,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 		this.name = new SimpleStringProperty(name);
 		this.description = new SimpleStringProperty(description);
 		this.bildPath = bildPath;
+		this.living = new SimpleBooleanProperty(false);
 	}
 
 	/**
