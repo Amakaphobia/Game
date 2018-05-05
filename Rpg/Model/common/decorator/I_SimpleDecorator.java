@@ -22,5 +22,7 @@ public interface I_SimpleDecorator <S extends I_SimpleDecorator<S, R>, R> extend
 	 */
 	public abstract R getValue();
 
-
+	public default boolean hasDecorator() {
+		return this.getDecorator() != null;
+	}
 }
