@@ -63,13 +63,20 @@ public class DiceCodeRoll extends DiceCodeBase{
 	public String toString() {
 		StringBuilder strb = new StringBuilder();
 
+		if(this.negative)
+			strb.append("-");
+
 		strb.append(this.diceCount)
 			.append("d")
 			.append(this.diceSize);
 
 		if(this.hasDecorator()) {
-			DiceCodeBase other = (DiceCodeBase) this.getDecorator();
-			strb.append(other.toString());
+			String next = this.getDecorator().toString();
+			if(next.startsWith("-"))
+				strb.append(next.replaceFirst("-", " - "));
+			else
+				strb.append(" + ")
+					.append(next);
 		}
 
 		return strb.toString();
