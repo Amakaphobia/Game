@@ -22,12 +22,12 @@ public class DoubleHealth extends TraitBase<ClassedActorBase> {
 
 	@Override
 	public void applyTo(ClassedActorBase traitTarget) {
-		traitTarget.getHp().maxHealthProperty().set(traitTarget.getHp().getMaxHealth() * 2);
+		traitTarget.getHp().maxHealthPrivProperty().set(traitTarget.getHp().getMaxHealthPriv() * 2);
 	}
 
 	@Override
 	public void removeFrom(ClassedActorBase traitTarget) {
-		traitTarget.getHp().maxHealthProperty().set(traitTarget.getHp().getMaxHealth() / 2);
+		traitTarget.getHp().maxHealthPrivProperty().set(traitTarget.getHp().getMaxHealthPriv() / 2);
 	}
 
 	@Override
@@ -69,10 +69,10 @@ public class DoubleHealth extends TraitBase<ClassedActorBase> {
 		TraitBase<ClassedActorBase> t = new DoubleHealth();
 		cab.addTrait(t);
 
-		System.out.println(cab.getHp().getMaxHealth());
+		System.out.println(cab.getHp().getMaxHealthPriv());
 
 		cab.removeTrait(t);
 
-		System.out.println(cab.getHp().getMaxHealth());
+		System.out.println(cab.getHp().getMaxHealthPriv());
 	}
 }
