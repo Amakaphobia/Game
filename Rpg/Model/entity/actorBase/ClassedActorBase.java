@@ -13,6 +13,7 @@ import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.clazz.ClazzBase;
+import entity.basic.common.enums.DamageType;
 import entity.basic.common.enums.alignment.Alignment;
 import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Attributes;
@@ -33,9 +34,26 @@ import entity.magic.SpellBase;
 public abstract class ClassedActorBase extends SkilledActorBase implements I_HasHp{
 
 	/**this container holds the entities Hp*/
-	protected final HealthPointContainer Hp;
+	private final HealthPointContainer Hp;
 	/**@return this actors HP container*/
 	public final HealthPointContainer getHp() { return this.Hp; }
+
+	private List<DamageType> resistance;
+	public List<DamageType> getResistance() { return this.resistance; }
+	public boolean isResistantTo(DamageType type) {
+		return this.resistance.stream()
+					.filter(dt -> type.equals(dt))
+					.findFirst()
+					.isPresent();
+	}
+	private List<DamageType> immunity;
+	public List<DamageType> getImmunity() { return this.immunity; }
+	public boolean isImmunTo(DamageType type) {
+		return this.immunity.stream()
+					.filter(dt -> type.equals(dt))
+					.findFirst()
+					.isPresent();
+	}
 
 	//Constructor
 	/**
