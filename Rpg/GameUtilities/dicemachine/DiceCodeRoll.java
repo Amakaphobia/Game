@@ -12,8 +12,10 @@ public class DiceCodeRoll extends DiceCodeBase{
 
 	/**this dice count*/
 	private int diceCount;
+	public final int getDiceCount() { return this.diceCount; }
 	/**the dice size*/
 	private int diceSize;
+	public final int getDiceSize() { return this.diceSize; }
 	/**true if negative*/
 	private boolean negative;
 

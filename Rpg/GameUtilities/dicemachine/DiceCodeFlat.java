@@ -13,6 +13,8 @@ public class DiceCodeFlat extends DiceCodeBase {
 	/**holds the modifier*/
 	private int flat;
 
+	public final int getFlat() { return this.flat; }
+
 	/**
 	 * Hidden Constructor
 	 * @param flat the value
