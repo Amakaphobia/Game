@@ -5,7 +5,9 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import common.damage.Damage;
 import common.map.I_GameMap;
 import dicemachine.DiceCodeBase;
 import dicemachine.I_DiceCode;
@@ -33,27 +35,67 @@ import entity.magic.SpellBase;
  */
 public abstract class ClassedActorBase extends SkilledActorBase implements I_HasHp{
 
+	//HP Delegate
+
 	/**this container holds the entities Hp*/
 	private final HealthPointContainer Hp;
 	/**@return this actors HP container*/
 	public final HealthPointContainer getHp() { return this.Hp; }
-
-	private List<DamageType> resistance;
-	public List<DamageType> getResistance() { return this.resistance; }
-	public boolean isResistantTo(DamageType type) {
-		return this.resistance.stream()
-					.filter(dt -> type.equals(dt))
-					.findFirst()
-					.isPresent();
-	}
-	private List<DamageType> immunity;
-	public List<DamageType> getImmunity() { return this.immunity; }
-	public boolean isImmunTo(DamageType type) {
-		return this.immunity.stream()
-					.filter(dt -> type.equals(dt))
-					.findFirst()
-					.isPresent();
-	}
+	/**
+	 * Delegate Method
+	 * @return the Resistance set
+	 */
+	public Set<DamageType> getResistance() { return this.Hp.getResistance(); }
+	/**
+	 * Delegate Method
+	 * @param type the type
+	 * @see HealthPointContainer#addResistance(DamageType)
+	 */
+	public void addResistance(DamageType type) { this.Hp.addResistance(type); }
+	/**
+	 * Delegate Method
+	 * @param type the type
+	 * @see HealthPointContainer#removeResistance(DamageType)
+	 */
+	public void removeResistance(DamageType type) { this.Hp.removeResistance(type); }
+	/**
+	 * Delegate Method
+	 * @param type the type
+	 * @return true if resistant
+	 * @see HealthPointContainer#isResistantTo(DamageType)
+	 */
+	public boolean isResistantTo(DamageType type) { return this.Hp.isResistantTo(type); }
+	/**
+	 * Delegate Method
+	 * @return the immunity set
+	 * @see HealthPointContainer#getImmunity()
+	 */
+	public Set<DamageType> getImmunity() { return this.Hp.getImmunity(); }
+	/**
+	 * Delegate Method
+	 * @param type the type
+	 * @see HealthPointContainer#addImmunity(DamageType)
+	 */
+	public void addImmunity(DamageType type) { this.Hp.addImmunity(type); }
+	/**
+	 * Delegate Method
+	 * @param type the type
+	 * @see HealthPointContainer#removeImmunity(DamageType)
+	 */
+	public void removeImmunity(DamageType type) { this.Hp.removeImmunity(type); }
+	/**
+	 * Delegate Method
+	 * @param type the type
+	 * @return true if immune
+	 * @see HealthPointContainer#isImmunTo(DamageType)
+	 */
+	public boolean isImmunTo(DamageType type) { return this.Hp.isImmunTo(type); }
+	/**
+	 * Delegate Method
+	 * @param damage the damage to take
+	 * @see HealthPointContainer#takeDamage(List)
+	 */
+	public void takeDamage(List<Damage> damage) { this.Hp.takeDamage(damage); }
 
 	//Constructor
 	/**
