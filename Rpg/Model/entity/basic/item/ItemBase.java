@@ -26,19 +26,21 @@ public abstract class ItemBase extends EntityBase {
 	 * @param bildPath the bildPath
 	 * @param description the description
 	 * @param weight the weight
+	 * @param itemValue the value of this item
 	 * @param slot the slot
 	 * @param wearable true if it can be worn
 	 * @param itemGroupId the items group id
 	 */
 	public ItemBase(
 			String name, String bildPath, String description,
-			int weight, ItemSlot slot, boolean wearable, int itemGroupId) {
+			int weight, double itemValue, ItemSlot slot, boolean wearable, int itemGroupId) {
 
 		super(name, bildPath, description);
 		this.weight = weight;
 		this.slot = slot;
 		this.wearable = wearable;
 		this.itemGroupId = itemGroupId;
+		this.itemValue = itemValue;
 	}
 
 	/**
@@ -50,12 +52,13 @@ public abstract class ItemBase extends EntityBase {
 	 * @param bildPath the bildPath
 	 * @param description the description
 	 * @param weight the weight
+	 * @param itemValue the value of this item
 	 * @param itemGroupId the items group id
 	 */
 	public ItemBase(
 			String name, String bildPath, String description,
-			int weight, int itemGroupId) {
-		this(name, bildPath, description, weight, ItemSlot.SLOTLESS, false, itemGroupId);
+			int weight, double itemValue, int itemGroupId) {
+		this(name, bildPath, description, weight, itemValue, ItemSlot.SLOTLESS, false, itemGroupId);
 	}
 
 	// Properties
@@ -79,6 +82,11 @@ public abstract class ItemBase extends EntityBase {
 	private final int itemGroupId;
 	/**@return {@link #itemGroupId}*/
 	public final int getItemGroupId() { return this.itemGroupId; }
+
+	/**the value of this item*/
+	private final double itemValue;
+	/**@return {@link #itemValue}*/
+	public final double getItemValue() { return this.itemValue; }
 
 	// Object
 

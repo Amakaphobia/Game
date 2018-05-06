@@ -9,8 +9,9 @@ public abstract class WeaponBase extends ItemBase {
 
 	public WeaponBase(
 			String name, String bildPath, String description,
-			int weight, ItemSlot slot, boolean wearable, int itemGroupId) {
-		super(name, bildPath, description, weight, slot, wearable, itemGroupId);
+			int weight, int itemValue, ItemSlot slot, boolean wearable, int itemGroupId) {
+
+		super(name, bildPath, description, weight, itemValue, slot, wearable, itemGroupId);
 	}
 
 }
