@@ -24,6 +24,9 @@ public class DiceCodeRoll extends DiceCodeBase{
 	/**used to roll the dice*/
 	private static final Random RANDOM = new Random();
 
+	private int rollValue;
+	private boolean isRolled = false;
+
 	/**
 	 * Hidden constructor
 	 * @param diceCount the dice count
@@ -39,14 +42,15 @@ public class DiceCodeRoll extends DiceCodeBase{
 
 	@Override
 	protected int get() {
-		int erg =
-			IntStream.range(0, this.diceCount)
-				.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
-				.sum();
-		return
-			this.negative ?
-			-erg :
-			 erg;
+		if(!isRolled) {
+			int erg =
+					IntStream.range(0, this.diceCount)
+						.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
+						.sum();
+			this.rollValue = this.negative ? -erg : erg;
+			this.isRolled = true;
+		}
+		return this.rollValue;
 	}
 
 	@Override

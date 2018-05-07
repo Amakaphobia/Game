@@ -19,17 +19,6 @@ public abstract class DiceCodeBase
 		super();
 	}
 
-	/**
-	 * gets the max Value for this dice roll
-	 * @return the maximum value
-	 */
-	public int getMax() {
-		int sum = 0;
-		for(I_DiceCode e : this)
-			sum += e.maxValue();
-		return sum;
-	}
-
 	/**@return the value for this level of the dice code*/
 	protected abstract int get();
 	/**@return the max value for this level of the dice code*/
@@ -83,6 +72,14 @@ public abstract class DiceCodeBase
 	}
 
 	@Override
+	public Integer getValue() {
+		int sum = 0;
+		for(I_DiceCode e : this)
+			sum += ((DiceCodeBase)e).get();
+		return sum;
+	}
+
+	@Override
 	public int maxValue() {
 		int sum = 0;
 		for(I_DiceCode e : this)
@@ -94,14 +91,6 @@ public abstract class DiceCodeBase
 	public I_DiceCode clone() throws CloneNotSupportedException {
 		DiceCodeBase clone = (DiceCodeBase)super.clone();
 		return clone;
-	}
-
-	@Override
-	public Integer getValue() {
-		int sum = 0;
-		for(I_DiceCode e : this)
-			sum += ((DiceCodeBase)e).get();
-		return sum;
 	}
 
 	@Override
