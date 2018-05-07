@@ -1,5 +1,7 @@
 package common;
 
+import utils.XStringBuilder;
+
 /**
  * This generic class is used to hold a overwrite-able default value. It is used for everything that normally is not
  * changed but can be changed by magic(for example) for a finite amount of time. In that case the method
@@ -11,7 +13,6 @@ package common;
  * @param <T> the type of your value
  */
 public class OverwriteableDefault<T> {
-	//TODO TEST
 
 	/**the default value*/
 	private T Default;
@@ -35,6 +36,11 @@ public class OverwriteableDefault<T> {
 
 	/**this method is used to unset the overwrite value*/
 	public void clearOverwrite() { this.Overwrite = null; }
+	/**
+	 * This Method checks if this default value is currently overwritten
+	 * @return true if overwritten
+	 */
+	public boolean isOverwritten() { return this.Overwrite != null; }
 
 	/**
 	 * Constructor
@@ -55,6 +61,10 @@ public class OverwriteableDefault<T> {
 
 		OverwriteableDefault<?> other = (OverwriteableDefault<?>) obj;
 
+		if(this.isOverwritten() != other.isOverwritten()) return false;
+
+		if(!this.isOverwritten()) return this.Default.equals(other.Default);
+
 		return
 			this.Default.equals(other.Default) &&
 			this.Overwrite.equals(other.Overwrite);
@@ -62,12 +72,22 @@ public class OverwriteableDefault<T> {
 
 	@Override
 	public int hashCode() {
-		return Default.hashCode() + Overwrite.hashCode() * Overwrite.hashCode();
+		int hash = Default.hashCode();
+		if(this.isOverwritten())
+			hash += Overwrite.hashCode() * Overwrite.hashCode();
+		return  hash;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Current: %s\nDefault: %s", this.Default.toString(), this.Overwrite.toString());
+		XStringBuilder strb = new XStringBuilder();
+		strb.append("Default: ")
+			.append(this.Default.toString())
+			.linesep()
+			.append("Current: ")
+			.append(this.isOverwritten() ? this.Overwrite.toString() : "Default");
+
+		return strb.toString();
 	}
 
 }
