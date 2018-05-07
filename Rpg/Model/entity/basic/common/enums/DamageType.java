@@ -1,5 +1,6 @@
 package entity.basic.common.enums;
 
+@SuppressWarnings("javadoc") //TODO Docu
 public enum DamageType
 {
 	PHSICAL_BLUDGEONING(),
@@ -8,4 +9,5 @@ public enum DamageType
 	FIRE(),
 	ACID(),
 	;
+	//TODO add every Damage Type
 }

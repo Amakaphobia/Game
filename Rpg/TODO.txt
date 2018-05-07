@@ -8,6 +8,7 @@ Functional
 	eventtarget interface
 Moving Candidates
 	Overwrite able Default -> Tools maybe
+	Decorator Stuff -> Tools
 Dice
 	Critable die for damage
 		extends DiceCodeRoll

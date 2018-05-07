@@ -72,7 +72,7 @@ class HealthPointContainerTest {
 
 		assertEquals(testHp, Hpc.getCurrentHealth());
 
-		Damage odmg = new Damage(DiceCodeBase.flat(6), DamageType.PHSICAL_BLUDGEONING, false);
+		Damage odmg = new Damage(DiceCodeBase.flat(6), DamageType.PHSICAL_BLUDGEONING);
 		testHp -= odmg.getDamage();
 		Hpc.takeDamage(Arrays.asList(odmg)); //TODO test
 		assertEquals(testHp, Hpc.getCurrentHealth());
@@ -86,7 +86,7 @@ class HealthPointContainerTest {
 	void testTakeDamage() {
 		HealthPointContainer Hpc = this.buildOne();
 		int maxHp = Hpc.getMaxHealth();
-		Damage odmg = new Damage(DiceCodeBase.flat(maxHp), DamageType.PHSICAL_BLUDGEONING, false);
+		Damage odmg = new Damage(DiceCodeBase.flat(maxHp), DamageType.PHSICAL_BLUDGEONING);
 
 		Hpc.takeDamage(Arrays.asList(odmg));
 		assertEquals(0, Hpc.getCurrentHealth());
@@ -94,7 +94,7 @@ class HealthPointContainerTest {
 		Hpc.takeHeal(maxHp);
 		assertEquals(maxHp, Hpc.getCurrentHealth());
 
-		odmg = new Damage(DiceCodeBase.flat(maxHp * 2), DamageType.PHSICAL_BLUDGEONING, false);
+		odmg = new Damage(DiceCodeBase.flat(maxHp * 2), DamageType.PHSICAL_BLUDGEONING);
 		Hpc.takeDamage(Arrays.asList(odmg));
 		assertEquals(0, Hpc.getCurrentHealth());
 	}
@@ -104,7 +104,7 @@ class HealthPointContainerTest {
 		HealthPointContainer Hpc = this.buildOne();
 		int maxHp = Hpc.getMaxHealth();
 
-		Damage odmg = new Damage(DiceCodeBase.flat(maxHp), DamageType.PHSICAL_BLUDGEONING, false);
+		Damage odmg = new Damage(DiceCodeBase.flat(maxHp), DamageType.PHSICAL_BLUDGEONING);
 
 		Hpc.takeDamage(odmg);
 		assertEquals(0, Hpc.getCurrentHealth());
@@ -112,7 +112,7 @@ class HealthPointContainerTest {
 		Hpc.takeHeal(maxHp * 2);
 		assertEquals(maxHp, Hpc.getCurrentHealth());
 
-		odmg = new Damage(DiceCodeBase.flat(maxHp * 2), DamageType.PHSICAL_BLUDGEONING, false);
+		odmg = new Damage(DiceCodeBase.flat(maxHp * 2), DamageType.PHSICAL_BLUDGEONING);
 		Hpc.takeDamage(odmg);
 		assertEquals(0, Hpc.getCurrentHealth());
 
@@ -155,7 +155,7 @@ class HealthPointContainerTest {
 
 		assertEquals(100d, Hpc.getCurrentHealthPercent());
 
-		Damage odmg = new Damage(DiceCodeBase.flat(6), DamageType.PHSICAL_BLUDGEONING, false);
+		Damage odmg = new Damage(DiceCodeBase.flat(6), DamageType.PHSICAL_BLUDGEONING);
 		Hpc.takeDamage(odmg);
 		assertEquals(50d, Hpc.getCurrentHealthPercent());
 

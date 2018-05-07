@@ -3,35 +3,41 @@ package common.damage;
 import dicemachine.I_DiceCode;
 import entity.basic.common.enums.DamageType;
 
-@SuppressWarnings("javadoc") // TODO docu
+/**
+ * This Class represents a damage object. It has a Die and a type.
+ *
+ * @author Dave
+ *
+ * @see DamageType
+ * @see I_DiceCode
+ */
 public class Damage  {
 
-	private boolean rolled = false;
-
+	/**the damage type*/
 	private final DamageType type;
+	/**@return {@link #type}*/
 	public final DamageType getType() { return this.type; }
+	/**the die used to calculate the damage*/
 	private final I_DiceCode die;
-	private int rollValue;
-	private boolean crit;
+	/**@return {@link #die}*/
+	public final I_DiceCode getDie() { return this.die; }
 
-	public Damage(I_DiceCode die, DamageType type, boolean crit) {
+	/**
+	 * Constructor
+	 * @param die the damage die
+	 * @param type the type of damage
+	 */
+	public Damage(I_DiceCode die, DamageType type) {
 		super();
 		this.type = type;
 		this.die = die;
-		this.crit = crit;
 	}
 
+	/**
+	 * this method is used to get the damage value of this object
+	 * @return a int containing damage points
+	 */
 	public int getDamage() {
-		if(!rolled) {
-			this.rollValue = die.get();
-			this.rolled = true;
-			/*
-			double multiplier =
-					target.isImmunTo(type) ? 0d :
-					target.isResistantTo(type) ? .5 :
-					1d;
-			this.actualValue = (int) Math.floor(multiplier * rollValue);*/
-		}
-		return this.rollValue;
+		return this.die.getValue();
 	}
 }
