@@ -12,9 +12,11 @@ public class DiceCodeRoll extends DiceCodeBase{
 
 	/**this dice count*/
 	private int diceCount;
+	/**@return the number of dice*/
 	public final int getDiceCount() { return this.diceCount; }
 	/**the dice size*/
 	private int diceSize;
+	/**@return the size of the dice*/
 	public final int getDiceSize() { return this.diceSize; }
 	/**true if negative*/
 	private boolean negative;
@@ -36,7 +38,7 @@ public class DiceCodeRoll extends DiceCodeBase{
 	}
 
 	@Override
-	protected int getPersonal() {
+	protected int get() {
 		int erg =
 			IntStream.range(0, this.diceCount)
 				.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
@@ -48,7 +50,7 @@ public class DiceCodeRoll extends DiceCodeBase{
 	}
 
 	@Override
-	protected int getMaxPersonal() {
+	protected int max() {
 		int erg =
 			IntStream.range(0, this.diceCount)
 				.map(i -> this.diceSize)

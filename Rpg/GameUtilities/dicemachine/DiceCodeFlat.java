@@ -13,8 +13,6 @@ public class DiceCodeFlat extends DiceCodeBase {
 	/**holds the modifier*/
 	private int flat;
 
-	public final int getFlat() { return this.flat; }
-
 	/**
 	 * Hidden Constructor
 	 * @param flat the value
@@ -28,7 +26,7 @@ public class DiceCodeFlat extends DiceCodeBase {
 	public String toString() {
 		StringBuilder strb = new StringBuilder();
 
-		strb.append(this.getPersonal());
+		strb.append(this.get());
 
 		if(this.hasDecorator()) {
 			DiceCodeBase other = (DiceCodeBase) this.getDecorator();
@@ -56,12 +54,12 @@ public class DiceCodeFlat extends DiceCodeBase {
 	}
 
 	@Override
-	protected int getMaxPersonal() {
-		return this.getPersonal();
+	protected int max() {
+		return this.flat;
 	}
 
 	@Override
-	protected int getPersonal() {
+	protected int get() {
 		return this.flat;
 	}
 }

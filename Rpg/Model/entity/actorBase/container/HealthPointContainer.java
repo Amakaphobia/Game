@@ -22,7 +22,6 @@ import javafx.collections.ObservableList;
 import boxes.Pair;
 import common.damage.Damage;
 import dicemachine.DiceCodeBase;
-import dicemachine.DiceCodeFlat;
 import dicemachine.DiceCodeRoll;
 import dicemachine.I_DiceCode;
 import entity.actorBase.ClassedActorBase;
@@ -288,13 +287,13 @@ public class HealthPointContainer implements Serializable{
 	}
 
 	/**
-	 * This Method is used to add Temporary hp from a {@link I_DiceCode} implementation. It uses the {@link DiceCodeBase#get()}
+	 * This Method is used to add Temporary hp from a {@link I_DiceCode} implementation. It uses the {@link DiceCodeBase#getValue()}
 	 * as input.
 	 * @see HealthPointContainer#addTemporaryHp(int)
 	 * @param Dice the hitdie you want to add.
 	 */
 	public void addTemporaryHp(I_DiceCode Dice) {
-		this.addTemporaryHp(Dice.get());
+		this.addTemporaryHp(Dice.getValue());
 	}
 
 	/**
@@ -409,9 +408,6 @@ public class HealthPointContainer implements Serializable{
 						for(I_DiceCode e : entry.getValue())
 							countedDice += ((DiceCodeRoll)e).getDiceCount();
 						counted = (DiceCodeBase) DiceCodeBase.roll(countedDice, currentRoll.getDiceSize());
-					}else if(current instanceof DiceCodeFlat) {
-						DiceCodeFlat currentFlat = (DiceCodeFlat)current;
-						counted = (DiceCodeBase) DiceCodeBase.flat(currentFlat.getFlat() * entry.getValue().size());
 					}
 
 					counted.addDecorator(current.getDecorator());
@@ -435,7 +431,7 @@ public class HealthPointContainer implements Serializable{
 	 * @param diceCode the dicecode of the new hitdie
 	 */
 	public void addHitDieMax(I_DiceCode diceCode) {
-		this.HpList.add(new Pair<>(diceCode, diceCode.max()));
+		this.HpList.add(new Pair<>(diceCode, diceCode.maxValue()));
 	}
 
 	//obj-methods

@@ -26,14 +26,14 @@ public abstract class DiceCodeBase
 	public int getMax() {
 		int sum = 0;
 		for(I_DiceCode e : this)
-			sum += e.max();
+			sum += e.maxValue();
 		return sum;
 	}
 
-	/**@return the maximum value for this level of the dice code*/
-	protected abstract int getMaxPersonal();
 	/**@return the value for this level of the dice code*/
-	protected abstract int getPersonal();
+	protected abstract int get();
+	/**@return the max value for this level of the dice code*/
+	protected abstract int max();
 
 	/**
 	 * Method used to build a flat Dice Code
@@ -83,18 +83,10 @@ public abstract class DiceCodeBase
 	}
 
 	@Override
-	public int max() {
+	public int maxValue() {
 		int sum = 0;
 		for(I_DiceCode e : this)
-			sum += ((DiceCodeBase)e).getMaxPersonal();
-		return sum;
-	}
-
-	@Override
-	public int get() {
-		int sum = 0;
-		for(I_DiceCode e : this)
-			sum += ((DiceCodeBase)e).getPersonal();
+			sum += ((DiceCodeBase)e).max();
 		return sum;
 	}
 
@@ -108,7 +100,7 @@ public abstract class DiceCodeBase
 	public Integer getValue() {
 		int sum = 0;
 		for(I_DiceCode e : this)
-			sum += ((DiceCodeBase)e).getPersonal();
+			sum += ((DiceCodeBase)e).get();
 		return sum;
 	}
 

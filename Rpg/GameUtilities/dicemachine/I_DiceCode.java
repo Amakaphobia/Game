@@ -16,13 +16,14 @@ public interface I_DiceCode extends I_SimpleDecorator<I_DiceCode, Integer>, Clon
 	 * this method is used to get the value of this dice roll
 	 * @return the value of the roll
 	 */
-	public abstract int get();
+	@Override
+	public abstract Integer getValue();
 
 	/**
 	 * this method is used to get the maximum value of this dice roll
 	 * @return the highest possible value of the roll
 	 */
-	public abstract int max();
+	public abstract int maxValue();
 
 	@SuppressWarnings("javadoc")
 	public abstract I_DiceCode clone() throws CloneNotSupportedException;

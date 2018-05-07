@@ -18,7 +18,7 @@ class DiceMachineTest {
 		IntStream.rangeClosed(1, 100).forEach(x ->
 			IntStream.rangeClosed(1, 100).forEach(y -> {
 				I_DiceCode die = DiceCodeBase.roll(x, y);
-				int erg = die.get();
+				int erg = die.getValue();
 				boolean toTest = erg >= x && erg <= x*y;
 
 				assertTrue(toTest);
@@ -31,7 +31,7 @@ class DiceMachineTest {
 		IntStream.rangeClosed(1, 1000).forEach(x ->
 			IntStream.rangeClosed(1, 1000).forEach(y -> {
 				I_DiceCode die = DiceCodeBase.roll(x, y);
-				int erg = die.max();
+				int erg = die.maxValue();
 				boolean toTest = erg == x*y;
 
 				assertTrue(toTest);
@@ -50,7 +50,7 @@ class DiceMachineTest {
 
 					die.addDecorator(other);
 
-					int erg = die.get();
+					int erg = die.getValue();
 
 					boolean toTest = erg >= x+z && erg <= x*y+z;
 
@@ -70,7 +70,7 @@ class DiceMachineTest {
 
 				die.addDecorator(other);
 
-				int erg = die.get();
+				int erg = die.getValue();
 
 				boolean toTest = erg >= 2 * (x) && erg <= (x*y) * 2;
 
@@ -127,8 +127,8 @@ class DiceMachineTest {
 					String exp = String.valueOf(x).concat("d").concat(String.valueOf(y));
 					exp = exp + " + " + exp;
 					exp = exp +
-							String.valueOf(mod.get() < 0 ? " - " : " + " ) +
-							String.valueOf(mod.get() < 0 ? mod.get() * -1 : mod.get());
+							String.valueOf(mod.getValue() < 0 ? " - " : " + " ) +
+							String.valueOf(mod.getValue() < 0 ? mod.getValue() * -1 : mod.getValue());
 					assertEquals(exp, die.toString());
 		})));
 	}
