@@ -24,7 +24,9 @@ public class DiceCodeRoll extends DiceCodeBase{
 	/**used to roll the dice*/
 	private static final Random RANDOM = new Random();
 
+	/**caches the rolled value of this die so it doesn't re-roll when asked twice*/
 	private int rollValue;
+	/**flag thats true when the value of this die is cached*/
 	private boolean isRolled = false;
 
 	/**
