@@ -34,7 +34,6 @@ import entity.basic.common.enums.DamageType;
  * @author Dave
  *
  */
-@SuppressWarnings("javadoc") // TODO docu
 public class HealthPointContainer implements Serializable{
 
 	//TODO test with temp hp
@@ -55,12 +54,11 @@ public class HealthPointContainer implements Serializable{
 	 * @return integer containing the total maximum Health
 	 */
 	public final int getTotalMaximumHealth() { return this.maximumHealth.get(); }
+	/**bind currentHealthPercent to current health / max health * 100*/
 	private final ChangeListener<Number> MaximumPercentChangeListener =
-			(ov, newVal, oldVal) -> {
-				// bind currentHealthPercent to current health / max health * 100
+		(ov, newVal, oldVal) -> this.currentHealthPercent.set(this.getCurrentHealth() / newVal.doubleValue() * 100d);
 
-				this.currentHealthPercent.set(this.getCurrentHealth() / newVal.doubleValue() * 100d);
-			};
+
 	//total Current Health
 	/**This property holds the total current health a character currently has*/
 	private final IntegerProperty totalCurrentHealth = new SimpleIntegerProperty(0);
@@ -74,18 +72,19 @@ public class HealthPointContainer implements Serializable{
 	 * @return integer containing the total currentHealth of the parent
 	 */
 	public int getTotalCurrentHealth() { return this.currentHealth.get(); }
+	/**bind currentHealthPercent to current health / max health * 100*/
 	private final ChangeListener<Number> CurrentPercentChangeListener =
-			(ov, newVal, oldVal) -> {
-				// bind currentHealthPercent to current health / max health * 100
-				double val = newVal.doubleValue()/this.getMaxHealth() * 100d;
-				this.currentHealthPercent.set(val);
-			};
+		(ov, newVal, oldVal) -> this.currentHealthPercent.set(newVal.doubleValue()/this.getMaxHealth() * 100d);
+
 
 	//Temporary Hp
+	/**holds temporary hp*/
 	private final IntegerProperty temporaryHp = new SimpleIntegerProperty(0);
+	/**@return temporary hp as integer*/
 	public final int getTemporaryHp() { return this.temporaryHp.get(); }
+	/**@return {@link #temporaryHp}*/
 	public final IntegerProperty temporaryHpProperty() { return this.temporaryHp; }
-	public final void setTemporaryHp(int value) { this.temporaryHp.set(value > 0 ? value : 0); }
+	/**this listener updates total health values when temp hp is changed*/
 	private final ChangeListener<Number> TemporaryHpChangeListener =
 			(ov, newVal, oldVal) -> {
 				if(newVal.intValue() < 0) {
@@ -145,6 +144,7 @@ public class HealthPointContainer implements Serializable{
 	 * @return integer containing the maximum Health
 	 */
 	public int getMaxHealth() { return this.maximumHealth.get(); }
+	/**this listener updates total max health on max health change*/
 	private final ChangeListener<Number> MaximumHealthChangeListener =
 		(ov, newVal, oldVal) -> {
 			if(newVal.intValue() < 0) {
@@ -167,6 +167,7 @@ public class HealthPointContainer implements Serializable{
 	 * @return integer containing the currentHealth of the parent
 	 */
 	public int getCurrentHealth() { return this.currentHealth.get(); }
+	/**this listener caps current health on 0 updates the parent on change and percentile change*/
 	private final ChangeListener<Number> CurrentHealthChangeListener =
 			(ov, oldVal, newVal) -> {
 				//negative cap current health at 0
@@ -178,7 +179,7 @@ public class HealthPointContainer implements Serializable{
 
 				int totalCH = newVal.intValue() + this.getTemporaryHp();
 				this.totalCurrentHealth.set(totalCH);
-				this.currentHealthPercent.set(newVal.doubleValue()/this.getMaxHealth() * 100d);
+				this.currentHealthPercent.set((double)totalCH /this.getMaxHealth() * 100d);
 
 				if(newVal.intValue() == 0)
 					this.Parent.onHealthZero();
@@ -252,8 +253,9 @@ public class HealthPointContainer implements Serializable{
 
 	//DamageHandling
 	/**
-	 * This method is used to take damage.
-	 * @param damage a list of damage objects that this actor endures
+	 * This Method is used to apply damage to this object.
+	 * @see Damage
+	 * @param Damages a list of damage objects that this actor endures
 	 */
 	public void takeDamage(List<Damage> Damages) {
 		this.takeDamage(
@@ -266,18 +268,45 @@ public class HealthPointContainer implements Serializable{
 				.sum());
 	}
 
+	/**
+	 * This Method is used to apply damage to this object.
+	 * @see Damage
+	 * @param Damage the damage to take
+	 */
 	public void takeDamage(Damage Damage) {
 		this.takeDamage(Arrays.asList(Damage));
 	}
 
+	/**
+	 * This Method is used to add temporary hp from a {@link HealthPointContainer}. It uses the {@link #getTotalCurrentHealth()}
+	 * as input.
+	 * @see #addTemporaryHp(int)
+	 * @param TempHp the container to add
+	 */
 	public void addTemporaryHp(HealthPointContainer TempHp) {
-		int currentval = this.getTemporaryHp();
-		this.temporaryHp.set(currentval + TempHp.getTotalCurrentHealth());
+		this.addTemporaryHp(TempHp.getTotalCurrentHealth());
 	}
 
+	/**
+	 * This Method is used to add Temporary hp from a {@link I_DiceCode} implementation. It uses the {@link DiceCodeBase#get()}
+	 * as input.
+	 * @see HealthPointContainer#addTemporaryHp(int)
+	 * @param Dice the hitdie you want to add.
+	 */
 	public void addTemporaryHp(I_DiceCode Dice) {
+		this.addTemporaryHp(Dice.get());
+	}
+
+	/**
+	 * This method is used to add a flat integer value to the sum of temporary hitpoints. If the given value is less
+	 * than or equal to zero it does nothing. If you want to subtract hp from the temporary hitpoints use {@link #takeDamage(Damage)}
+	 * @param value the value you want to add
+	 */
+	public void addTemporaryHp(int value) {
+		if(value <= 0) return;
+
 		int currentval = this.getTemporaryHp();
-		this.temporaryHp.set(currentval + Dice.get());
+		this.temporaryHp.set(currentval + value);
 	}
 
 	/**
@@ -304,7 +333,7 @@ public class HealthPointContainer implements Serializable{
 	/**
 	 * this method is used after heal computation to add the computed heal to the current health
 	 * @param heal the total amount of heal received
-	 * @param canOverHeal set this to true if currentHealth can get bigger than maxhealth
+	 * @param canOverHeal set this to true if currentHealth can get bigger than max health
 	 */
 	public void takeHeal(int heal, boolean canOverHeal) {
 		int newHealth;
@@ -336,7 +365,7 @@ public class HealthPointContainer implements Serializable{
 
 		this.Parent = Parent;
 
-		this.HpList.addListener(HpListChangeListener);
+		this.HpList.addListener(this.HpListChangeListener);
 
 		this.maximumHealth.addListener(this.MaximumHealthChangeListener);
 		this.currentHealth.addListener(this.CurrentHealthChangeListener);
