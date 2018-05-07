@@ -1,7 +1,7 @@
 package common.attack;
 
 /**
- * Simple Implementation of the {@link I_Attack} interface. Bareley more than an int.
+ * Simple Implementation of the {@link I_Attack} interface. Barely more than an int.
  * @author Dave
  *
  */
