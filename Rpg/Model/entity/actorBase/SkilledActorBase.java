@@ -2,9 +2,9 @@ package entity.actorBase;
 
 import java.util.Optional;
 
-import common.check.AttributeCheck;
-import common.check.I_CheckResult;
-import common.check.SkillCheck;
+import common.check.checks.AttributeCheck;
+import common.check.checks.SkillCheck;
+import common.check.results.I_CheckResult;
 import common.map.I_GameMap;
 import entity.actorBase.container.SkillAttDele;
 import entity.basic.EntityBase;

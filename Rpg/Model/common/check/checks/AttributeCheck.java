@@ -1,4 +1,4 @@
-package common.check;
+package common.check.checks;
 
 import entity.actorBase.SkilledActorBase;
 import entity.basic.common.enums.skillsattributes.Attributes;

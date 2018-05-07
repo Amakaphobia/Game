@@ -1,4 +1,6 @@
-package common.check;
+package common.check.checks;
+
+import common.check.results.I_CheckResult;
 
 /**
  * This interface is implemented by check classes. its only method is one that does a check and returns

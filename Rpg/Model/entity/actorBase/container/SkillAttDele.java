@@ -3,10 +3,10 @@ package entity.actorBase.container;
 import java.io.Serializable;
 import java.util.Optional;
 
-import common.check.AttributeCheck;
-import common.check.I_Check;
-import common.check.I_CheckResult;
-import common.check.SkillCheck;
+import common.check.checks.AttributeCheck;
+import common.check.checks.I_Check;
+import common.check.checks.SkillCheck;
+import common.check.results.I_CheckResult;
 import entity.actorBase.SkilledActorBase;
 import entity.basic.attributeSet.Attribute;
 import entity.basic.attributeSet.AttributeSet;

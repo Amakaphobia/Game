@@ -1,5 +1,9 @@
-package common.check;
+package common.check.checks;
 
+import common.check.results.CheckResult;
+import common.check.results.CritResult;
+import common.check.results.FumbleResult;
+import common.check.results.I_CheckResult;
 import dicemachine.DiceCodeBase;
 import dicemachine.I_DiceCode;
 import entity.actorBase.SkilledActorBase;
@@ -31,7 +35,14 @@ public abstract class CheckBase implements I_Check{
 	public void setDie(I_DiceCode die) {
 		this.die = die;
 	}
-
+	/**
+	 * Constructor without situational bonus
+	 * @param Actor the actor that performs the check
+	 * @param threshold the threshold that is given
+	 */
+	public CheckBase(SkilledActorBase Actor, int threshold) {
+		this(Actor, threshold, 0);
+	}
 	/**
 	 * Constructor
 	 * @param Actor the actor that performs the check
@@ -59,9 +70,12 @@ public abstract class CheckBase implements I_Check{
 			.addModifier(this.computeBonus())
 			.addModifier(this.situationalBonus);
 
-		int erg = this.die.getValue() - this.threshold;
-
-		return new CheckResult(erg);
+		if(this.die.isCrit())
+			return new CritResult();
+		else if(this.die.isFumble())
+			return new FumbleResult();
+		else
+			return new CheckResult(this.die.getValue() - threshold);
 	}
 
 }

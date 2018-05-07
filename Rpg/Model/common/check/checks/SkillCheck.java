@@ -1,5 +1,7 @@
-package common.check;
+package common.check.checks;
 
+import common.check.results.CheckResult;
+import common.check.results.I_CheckResult;
 import entity.actorBase.SkilledActorBase;
 import entity.basic.common.enums.skillsattributes.Skills;
 
