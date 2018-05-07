@@ -48,6 +48,10 @@ public abstract class ClazzBase implements I_InfoAble, Serializable{
 	public ClazzBase(Clazzs id, ClassedActorBase Parent) {
 		this(id);
 		this.Parent = Parent;
+
+		// last steps - lets keep it that way
+		this.level = 0;
+		this.levelUp();
 	}
 
 	/**
@@ -69,10 +73,6 @@ public abstract class ClazzBase implements I_InfoAble, Serializable{
 		this.baseAttacks = new ArrayList<>();
 
 		this.SpellStrategy = this.injectSpellStrategy();
-
-		// last steps - lets keep it that way
-		this.level = 0;
-		this.levelUp();
 	}
 
 	// Parent Handling
@@ -146,7 +146,7 @@ public abstract class ClazzBase implements I_InfoAble, Serializable{
 		return baseAttackBonus;
 	}
 	/**
-	 * This method gives a count of possible attacks er combat round.
+	 * This method gives a count of possible attacks per combat round.
 	 * @return count of attacks
 	 */
 	public int getBaseAttackCount() {

@@ -107,7 +107,7 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 	 * @param SkillSet the {@link I_SkillSet}
 	 * @param AttributeSet the {@link I_AttributeSet}
 	 * @param Alignment the {@link Alignment}
-	 * @param clazz the {@link ClazzBase}
+	 * @param prefferedClazz the prefferedClazz of this actor
 	 *
 	 * @see SkilledActorBase#SkilledActorBase(String, String, I_GameMap, RaceBase, I_SkillSet, I_AttributeSet, Alignment)
 	 */
@@ -117,16 +117,38 @@ public abstract class ClassedActorBase extends SkilledActorBase implements I_Has
 			RaceBase Race,
 			I_SkillSet SkillSet, I_AttributeSet AttributeSet,
 			Alignment Alignment,
-			Clazzs clazz) {
+			Clazzs prefferedClazz) {
+		this(name, bildPath, Map, Race, SkillSet, AttributeSet, Alignment, prefferedClazz, new ArrayList<>());
+	}
+
+	/**
+	 * Constructor
+	 * @param name the name
+	 * @param bildPath the bild path
+	 * @param Map the map
+	 * @param Race the {@link RaceBase}
+	 * @param SkillSet the {@link I_SkillSet}
+	 * @param AttributeSet the {@link I_AttributeSet}
+	 * @param Alignment the {@link Alignment}
+	 * @param prefferedClazz the prefferedClazz of this actor
+	 * @param clazzes the classes of this actor
+	 *
+	 * @see SkilledActorBase#SkilledActorBase(String, String, I_GameMap, RaceBase, I_SkillSet, I_AttributeSet, Alignment)
+	 */
+	public ClassedActorBase(
+			String name, String bildPath,
+			I_GameMap Map,
+			RaceBase Race,
+			I_SkillSet SkillSet, I_AttributeSet AttributeSet,
+			Alignment Alignment,
+			Clazzs prefferedClazz, List<ClazzBase> clazzes) {
 		super(name, bildPath, Map, Race, SkillSet, AttributeSet, Alignment);
 
 		this.Hp = new HealthPointContainer(this);
 
-		this.Clazzes = new ArrayList<>(); //TODO remove mock
-		if(this.Clazzes.size() > 0)
-			this.prefferedClass = this.Clazzes.get(0).getId(); //TODO PrefferedCLass of actor
-		else
-			this.prefferedClass = Clazzs.MAGE; // TODO REMOVE mock
+		this.Clazzes = clazzes;
+
+		this.prefferedClass = prefferedClazz;
 	}
 
 	//ClassBase Handling

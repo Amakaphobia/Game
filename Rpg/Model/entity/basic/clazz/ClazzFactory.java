@@ -20,6 +20,10 @@ public class ClazzFactory {
 		return new WarriorMock(Parent);
 	}
 
+	public static final ClazzBase get(Clazzs Clazz) {
+		return null; //TODO remove mock of get(CLazzs) method
+	}
+
 	//TODO remove mock
 	private static class WarriorMock extends ClazzBase{
 
