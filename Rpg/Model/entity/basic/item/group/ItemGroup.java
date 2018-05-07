@@ -6,7 +6,13 @@ import common.decorator.DecoratorBase;
  * ItemGroup Class can be decorated.
  * <br><br>
  * <blockquote>
- * To Create GroupGroups Create the outer group first and the inner second to decorate them with the outer
+ * To Create GroupGroups Create the outer group first and the inner second to decorate them with the outer. <br>
+ * create group ammunition <br>
+ * create arrow <br>
+ * create stone <br>
+ *  <br>
+ * arrow.addDecorator(ammunition) <br>
+ * stone.addDecorator(Ammunition)
  * </blockquote>
  *
  * @author Dave
