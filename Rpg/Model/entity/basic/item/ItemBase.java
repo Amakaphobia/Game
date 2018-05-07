@@ -1,6 +1,7 @@
 package entity.basic.item;
 
 import entity.basic.EntityBase;
+import entity.basic.item.group.ItemGroup;
 
 /**
  * This is the base Implementation Class for all items.
@@ -32,7 +33,7 @@ public abstract class ItemBase extends EntityBase {
 	 */
 	public ItemBase(
 			String name, String bildPath, String description,
-			int weight, double itemValue, ItemSlot slot, boolean wearable, int itemGroupId) {
+			int weight, double itemValue, ItemSlot slot, boolean wearable, ItemGroup itemGroupId) {
 
 		super(name, bildPath, description);
 		this.weight = weight;
@@ -56,7 +57,7 @@ public abstract class ItemBase extends EntityBase {
 	 */
 	public ItemBase(
 			String name, String bildPath, String description,
-			int weight, double itemValue, int itemGroupId) {
+			int weight, double itemValue, ItemGroup itemGroupId) {
 		this(name, bildPath, description, weight, itemValue, ItemSlot.SLOTLESS, false, itemGroupId);
 	}
 
@@ -78,9 +79,9 @@ public abstract class ItemBase extends EntityBase {
 	public final boolean isWearable() { return this.wearable; }
 
 	/**this items group identifier*/
-	private final int itemGroupId;
+	private final ItemGroup itemGroupId;
 	/**@return {@link #itemGroupId}*/
-	public final int getItemGroupId() { return this.itemGroupId; }
+	public final ItemGroup getItemGroupId() { return this.itemGroupId; }
 
 	/**the value of this item*/
 	private final double itemValue;

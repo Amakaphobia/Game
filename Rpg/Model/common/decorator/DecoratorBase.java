@@ -59,7 +59,7 @@ public abstract class DecoratorBase<S extends I_SimpleDecorator<S, R>, R> implem
 
 	@Override
 	public Iterator<S> iterator() {
-		return new I_SimpleDecoratorIterator();
+		return new SimpleDecoratorIterator();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public abstract class DecoratorBase<S extends I_SimpleDecorator<S, R>, R> implem
 	 * @author Dave
 	 *
 	 */
-	protected class I_SimpleDecoratorIterator implements Iterator<S>{
+	protected class SimpleDecoratorIterator implements Iterator<S>{
 		/**the current Decorator*/
 		private I_SimpleDecorator<S, R> current = DecoratorBase.this;
 		/**flag to remember if the first element was send down*/
@@ -95,7 +95,5 @@ public abstract class DecoratorBase<S extends I_SimpleDecorator<S, R>, R> implem
 
 			return ret;
 		}
-
 	}
-
 }
