@@ -8,6 +8,9 @@ Functional
 	eventtarget interface
 Moving Candidates
 	Overwrite able Default -> Tools maybe
+Dice
+	Critable die for damage
+		extends DiceCodeRoll
 Base
 	SpellStuff
 		wirkungsbereich
@@ -23,7 +26,7 @@ Base
     	Maybe halfhalf base?
     Skill
     	how to handle multiple performs or profession skills?
-    Traits?
+    Traits
     General Entity
      	introduce containerclass for that container + health + spellbook .....
      HPContainer
@@ -35,7 +38,6 @@ Base
     Logger
     	personal history logger (?)
     	datafile logger?
-    DiceMachine
     IG TimeHandler
     Dialog Handler
     incomingevent
