@@ -23,7 +23,7 @@ public abstract class CheckBase implements I_Check{
 	/**the bonus or malus added to the check by circumstances*/
 	protected int situationalBonus;
 	/**holds the die identifier default is set to 1d20*/
-	protected I_DiceCode die = DiceCodeBase.roll(1, 20);
+	private I_DiceCode die = DiceCodeBase.roll(1, 20);
 	/**
 	 * this Method is used to change the dice used for this check
 	 * @param die the die you want to use
