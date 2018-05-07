@@ -25,7 +25,7 @@ public class DiceCodeRoll extends DiceCodeBase{
 	private static final Random RANDOM = new Random();
 
 	/**caches the rolled value of this die so it doesn't re-roll when asked twice*/
-	private int rollValue;
+	protected int rollValue;
 	/**flag thats true when the value of this die is cached*/
 	private boolean isRolled = false;
 	/**true if its a crit*/
@@ -47,7 +47,7 @@ public class DiceCodeRoll extends DiceCodeBase{
 	}
 
 	/**this internal method is used to roll the die, check if a crit or fumble is rolled and cache the results*/
-	private void roll() {
+	protected void roll() {
 		int erg =
 				IntStream.range(0, this.diceCount)
 					.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
