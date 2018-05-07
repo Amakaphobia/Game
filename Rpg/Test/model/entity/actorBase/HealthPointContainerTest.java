@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import boxes.Pair;
 import common.damage.Damage;
+import common.damage.DamageType;
 import dicemachine.DiceCodeBase;
 import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
-import entity.basic.common.enums.DamageType;
 
 @SuppressWarnings({"javadoc"})
 class HealthPointContainerTest {

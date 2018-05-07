@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import common.damage.Damage;
+import common.damage.DamageType;
 import common.map.I_GameMap;
 import dicemachine.DiceCodeBase;
 import dicemachine.I_DiceCode;
@@ -15,7 +16,6 @@ import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
 import entity.basic.attributeSet.I_AttributeSet;
 import entity.basic.clazz.ClazzBase;
-import entity.basic.common.enums.DamageType;
 import entity.basic.common.enums.alignment.Alignment;
 import entity.basic.common.enums.clazz.Clazzs;
 import entity.basic.common.enums.skillsattributes.Attributes;

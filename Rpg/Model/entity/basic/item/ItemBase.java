@@ -1,7 +1,6 @@
 package entity.basic.item;
 
 import entity.basic.EntityBase;
-import entity.basic.common.enums.item.ItemSlot;
 
 /**
  * This is the base Implementation Class for all items.

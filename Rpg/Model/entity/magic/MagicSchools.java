@@ -1,4 +1,4 @@
-package entity.basic.common.enums;
+package entity.magic;
 
 //TODO docu
 @SuppressWarnings("javadoc")

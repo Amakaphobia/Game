@@ -1,7 +1,6 @@
 package common.damage;
 
 import dicemachine.I_DiceCode;
-import entity.basic.common.enums.DamageType;
 
 /**
  * This Class represents a damage object. It has a Die and a type.

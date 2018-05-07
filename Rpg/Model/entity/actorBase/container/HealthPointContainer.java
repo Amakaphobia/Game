@@ -21,11 +21,11 @@ import javafx.collections.ObservableList;
 
 import boxes.Pair;
 import common.damage.Damage;
+import common.damage.DamageType;
 import dicemachine.DiceCodeBase;
 import dicemachine.DiceCodeRoll;
 import dicemachine.I_DiceCode;
 import entity.actorBase.ClassedActorBase;
-import entity.basic.common.enums.DamageType;
 
 /**
  * This Class holds the logic and value of an Actors healthPoints.

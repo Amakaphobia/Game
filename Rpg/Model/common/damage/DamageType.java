@@ -1,4 +1,4 @@
-package entity.basic.common.enums;
+package common.damage;
 
 @SuppressWarnings("javadoc") //TODO Docu
 public enum DamageType

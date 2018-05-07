@@ -1,7 +1,5 @@
 package entity.basic.item;
 
-import entity.basic.common.enums.item.ItemSlot;
-
 @SuppressWarnings("javadoc")
 public abstract class WeaponBase extends ItemBase {
 

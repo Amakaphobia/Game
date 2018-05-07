@@ -9,9 +9,6 @@ Functional
 Moving Candidates
 	Overwrite able Default -> Tools maybe
 	Decorator Stuff -> Tools
-Dice
-	Critable die for damage
-		extends DiceCodeRoll
 Base
 	SpellStuff
 		wirkungsbereich
@@ -23,17 +20,10 @@ Base
     	remember class skills on new class  
     Races
     	I dont even know :D
-    	Maybe Decorator?
-    	Maybe halfhalf base?
+    	Decorating once and concating lists on return if != null
     Skill
     	how to handle multiple performs or profession skills?
     Traits
-    General Entity
-     	introduce containerclass for that container + health + spellbook .....
-     HPContainer
-     	equals
-     	hc
-     	Docu
     Savingthrow
         predicat (Difference Skill-/Att-check and saving throw?)
     Logger
