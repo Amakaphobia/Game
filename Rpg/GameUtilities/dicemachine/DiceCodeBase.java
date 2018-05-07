@@ -86,8 +86,7 @@ public abstract class DiceCodeBase
 	public int max() {
 		int sum = 0;
 		for(I_DiceCode e : this)
-			if(e instanceof DiceCodeBase)
-				sum += ((DiceCodeBase)e).getMaxPersonal();
+			sum += ((DiceCodeBase)e).getMaxPersonal();
 		return sum;
 	}
 
@@ -95,8 +94,7 @@ public abstract class DiceCodeBase
 	public int get() {
 		int sum = 0;
 		for(I_DiceCode e : this)
-			if(e instanceof DiceCodeBase)
-				sum += ((DiceCodeBase)e).getPersonal();
+			sum += ((DiceCodeBase)e).getPersonal();
 		return sum;
 	}
 
@@ -110,7 +108,7 @@ public abstract class DiceCodeBase
 	public Integer getValue() {
 		int sum = 0;
 		for(I_DiceCode e : this)
-			sum += e.get();
+			sum += ((DiceCodeBase)e).getPersonal();
 		return sum;
 	}
 
