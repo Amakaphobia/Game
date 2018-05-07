@@ -50,4 +50,20 @@ public interface I_DiceCode extends I_SimpleDecorator<I_DiceCode, Integer>, Clon
 	 * @return this for chain use or a new immutable {@link I_DiceCode}
 	 */
 	public abstract I_DiceCode subtractModifier(int count, int size);
+
+	/**
+	 * This default method is used to check if you rolled the highest possible number on a die
+	 * @return true if crit false if not
+	 */
+	public default boolean isCrit() {
+		return this.getValue() == this.maxValue();
+	}
+
+	/**
+	 * This Method is used to check if you rolled a 1
+	 * @return true if 1
+	 */
+	public default boolean isFumble() {
+		return this.getValue() == 1;
+	}
 }
