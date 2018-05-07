@@ -55,15 +55,10 @@ public interface I_DiceCode extends I_SimpleDecorator<I_DiceCode, Integer>, Clon
 	 * This default method is used to check if you rolled the highest possible number on a die
 	 * @return true if crit false if not
 	 */
-	public default boolean isCrit() {
-		return this.getValue() == this.maxValue();
-	}
-
+	public abstract boolean isCrit();
 	/**
 	 * This Method is used to check if you rolled a 1
 	 * @return true if 1
 	 */
-	public default boolean isFumble() {
-		return this.getValue() == 1;
-	}
+	public abstract boolean isFumble();
 }

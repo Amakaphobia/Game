@@ -28,6 +28,10 @@ public class DiceCodeRoll extends DiceCodeBase{
 	private int rollValue;
 	/**flag thats true when the value of this die is cached*/
 	private boolean isRolled = false;
+	/**true if its a crit*/
+	private boolean crit;
+	/**true if its a fumble*/
+	private boolean fumble;
 
 	/**
 	 * Hidden constructor
@@ -42,14 +46,26 @@ public class DiceCodeRoll extends DiceCodeBase{
 		this.negative = negative;
 	}
 
+	/**this internal method is used to roll the die, check if a crit or fumble is rolled and cache the results*/
+	private void roll() {
+		int erg =
+				IntStream.range(0, this.diceCount)
+					.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
+					.sum();
+
+		this.rollValue = this.negative ? -erg : erg;
+
+		//if max rolled and dice size bigger than 1 its a crit
+		this.crit = this.rollValue == this.max() && this.diceSize > 1;
+
+		// if its a die with more than 1 side and a one is rolled its a fumble
+		this.fumble = this.rollValue == 1 && this.diceSize > 1;
+	}
+
 	@Override
 	protected int get() {
 		if(!isRolled) {
-			int erg =
-					IntStream.range(0, this.diceCount)
-						.map(i -> DiceCodeRoll.RANDOM.nextInt(this.diceSize) + 1)
-						.sum();
-			this.rollValue = this.negative ? -erg : erg;
+			this.roll();
 			this.isRolled = true;
 		}
 		return this.rollValue;
@@ -66,6 +82,12 @@ public class DiceCodeRoll extends DiceCodeBase{
 			-erg :
 			 erg;
 	}
+
+	@Override
+	public boolean isCrit() { return this.crit; }
+
+	@Override
+	public boolean isFumble() { return this.fumble; }
 
 	//obj
 

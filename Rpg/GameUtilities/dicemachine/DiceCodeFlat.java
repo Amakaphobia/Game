@@ -62,4 +62,10 @@ public class DiceCodeFlat extends DiceCodeBase {
 	protected int get() {
 		return this.flat;
 	}
+
+	@Override
+	public boolean isCrit() { return false; } //flat rolls cant crit
+
+	@Override
+	public boolean isFumble() { return false; } //flat rolls cant fumble
 }
