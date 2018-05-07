@@ -4,17 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+
 import javafx.collections.ObservableList;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import boxes.Pair;
+import common.damage.Damage;
 import dicemachine.DiceCodeBase;
 import entity.actorBase.container.HealthPointContainer;
 import entity.actorBase.container.I_HasHp;
+import entity.basic.common.enums.DamageType;
 
-@SuppressWarnings({"deprecation", "javadoc"})
+@SuppressWarnings({"javadoc"})
 class HealthPointContainerTest {
 
 	public HealthPointContainer buildOne() {
@@ -32,7 +35,6 @@ class HealthPointContainerTest {
 	}
 
 	@Test
-	@Disabled
 	void testGetHpList() {
 		ObservableList<?> ll = this.buildOne().getHpList();
 		assertEquals(2, ll.size());
@@ -55,62 +57,63 @@ class HealthPointContainerTest {
 	}
 
 	@Test
-	@Disabled
 	void testGetMaxHealthPriv() {
 		HealthPointContainer Hpc = this.buildOne();
-		assertEquals(12, Hpc.getMaxHealthPriv());
+		assertEquals(12, Hpc.getMaxHealth());
 		Hpc.addHitDie(DiceCodeBase.roll(1, 6));
-		assertTrue(Hpc.getMaxHealthPriv() <= 18 && Hpc.getMaxHealthPriv() > 12);
+		assertTrue(Hpc.getMaxHealth() <= 18 && Hpc.getMaxHealth() > 12);
 	}
 
 	@Test
-	@Disabled
 	void testGetCurrentHealthPriv() {
 		HealthPointContainer Hpc = this.buildOne();
 
-		int testHp = Hpc.getMaxHealthPriv();
+		int testHp = Hpc.getMaxHealth();
 
 		assertEquals(testHp, Hpc.getCurrentHealth());
 
-		int dmg = 6;
-		testHp -= dmg;
-		Hpc.takeDamage(dmg); //TODO test
+		Damage odmg = new Damage(DiceCodeBase.flat(6), DamageType.PHSICAL_BLUDGEONING, false);
+		testHp -= odmg.getDamage();
+		Hpc.takeDamage(Arrays.asList(odmg)); //TODO test
 		assertEquals(testHp, Hpc.getCurrentHealth());
 
-		testHp += dmg;
-		Hpc.takeHeal(dmg);
+		testHp += odmg.getDamage();
+		Hpc.takeHeal(odmg.getDamage());
 		assertEquals(testHp, Hpc.getCurrentHealth());
 	}
 
 	@Test
-	@Disabled
 	void testTakeDamage() {
 		HealthPointContainer Hpc = this.buildOne();
-		int maxHp = Hpc.getMaxHealthPriv();
+		int maxHp = Hpc.getMaxHealth();
+		Damage odmg = new Damage(DiceCodeBase.flat(maxHp), DamageType.PHSICAL_BLUDGEONING, false);
 
-		Hpc.takeDamage(maxHp);
+		Hpc.takeDamage(Arrays.asList(odmg));
 		assertEquals(0, Hpc.getCurrentHealth());
 
 		Hpc.takeHeal(maxHp);
 		assertEquals(maxHp, Hpc.getCurrentHealth());
 
-		Hpc.takeDamage(maxHp * 2);
+		odmg = new Damage(DiceCodeBase.flat(maxHp * 2), DamageType.PHSICAL_BLUDGEONING, false);
+		Hpc.takeDamage(Arrays.asList(odmg));
 		assertEquals(0, Hpc.getCurrentHealth());
 	}
 
 	@Test
-	@Disabled
 	void testTakeHeal() {
 		HealthPointContainer Hpc = this.buildOne();
-		int maxHp = Hpc.getMaxHealthPriv();
+		int maxHp = Hpc.getMaxHealth();
 
-		Hpc.takeDamage(maxHp);
+		Damage odmg = new Damage(DiceCodeBase.flat(maxHp), DamageType.PHSICAL_BLUDGEONING, false);
+
+		Hpc.takeDamage(odmg);
 		assertEquals(0, Hpc.getCurrentHealth());
 
 		Hpc.takeHeal(maxHp * 2);
 		assertEquals(maxHp, Hpc.getCurrentHealth());
 
-		Hpc.takeDamage(maxHp * 2);
+		odmg = new Damage(DiceCodeBase.flat(maxHp * 2), DamageType.PHSICAL_BLUDGEONING, false);
+		Hpc.takeDamage(odmg);
 		assertEquals(0, Hpc.getCurrentHealth());
 
 		Hpc.takeHeal(maxHp * 2, true);
@@ -118,44 +121,49 @@ class HealthPointContainerTest {
 	}
 
 	@Test
-	@Disabled
 	void testAddHitDie() {
 		HealthPointContainer Hpc = this.buildOne();
 		Hpc.addHitDie(DiceCodeBase.roll(1, 6));
 		assertEquals("3d6", Hpc.getAllCodes().get(0).toString());
 
-		assertTrue(Hpc.getMaxHealthPriv() <= 18 && Hpc.getMaxHealthPriv() > 12);
+		assertTrue(Hpc.getMaxHealth() <= 18 && Hpc.getMaxHealth() > 12);
 	}
 
 	@Test
-	@Disabled
 	void testAddHitDieMax() {
 		HealthPointContainer Hpc = this.buildOne();
 		Hpc.addHitDieMax(DiceCodeBase.roll(1, 6));
 		assertEquals("3d6", Hpc.getAllCodes().get(0).toString());
 
-		assertTrue(Hpc.getMaxHealthPriv() == 18);
+		assertTrue(Hpc.getMaxHealth() == 18);
 		Hpc.addHitDieMax(DiceCodeBase.roll(1, 10));
-		assertTrue(Hpc.getMaxHealthPriv() == 28);
+		assertTrue(Hpc.getMaxHealth() == 28);
 	}
 
-
 	@Test
-	@Disabled
 	void testGetCurrentHealthPercent() {
-		HealthPointContainer Hpc = this.buildOne();
+
+		I_HasHp Parent = new I_HasHp() {
+			@Override public void onHealthZero() {}
+			@Override public void onHealthNoLongerZero() {}
+		};
+
+		HealthPointContainer Hpc = new HealthPointContainer(Parent);
+
+		Hpc.addHitDie(DiceCodeBase.flat(6));
+		Hpc.addHitDie(DiceCodeBase.flat(6));
 
 		assertEquals(100d, Hpc.getCurrentHealthPercent());
 
-		Hpc.takeDamage(6);
+		Damage odmg = new Damage(DiceCodeBase.flat(6), DamageType.PHSICAL_BLUDGEONING, false);
+		Hpc.takeDamage(odmg);
 		assertEquals(50d, Hpc.getCurrentHealthPercent());
 
-		Hpc.takeDamage(6);
+		Hpc.takeDamage(odmg);
 		assertEquals(0d, Hpc.getCurrentHealthPercent());
 	}
 
 	@Test
-	@Disabled
 	void testEquals() {
 		HealthPointContainer Hpc1 = this.buildOne();
 		HealthPointContainer Hpc2 = this.buildOne();
@@ -167,7 +175,6 @@ class HealthPointContainerTest {
 	}
 
 	@Test
-	@Disabled
 	void testHashCode() {
 		HealthPointContainer Hpc1 = this.buildOne();
 		HealthPointContainer Hpc2 = this.buildOne();
@@ -179,7 +186,6 @@ class HealthPointContainerTest {
 	}
 
 	@Test
-	@Disabled
 	void testToString() {
 		HealthPointContainer Hpc = this.buildOne();
 		assertEquals("2d6", Hpc.toString());

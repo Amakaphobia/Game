@@ -5,16 +5,15 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -35,25 +34,69 @@ import entity.basic.common.enums.DamageType;
  * @author Dave
  *
  */
+@SuppressWarnings("javadoc") // TODO docu
 public class HealthPointContainer implements Serializable{
 
 	//TODO test with temp hp
-	//TODO remove out fuckery
-	//TODO rename privs
-	//TODO move tmp hp to intproperty
 
 	/**The {@link I_HasHp} that is the Parent of this container*/
 	private I_HasHp Parent;
 
-	/**holds temporary hp*/
-	private final ObjectProperty<HealthPointContainer> tempHp;
-	/**@return the temp hp*/
-	public HealthPointContainer getTempHp() { return this.tempHp.get(); }
-	/**@return the temp hp property*/
-	public ObjectProperty<HealthPointContainer> tempHpProperty() { return this.tempHp; }
-	/**@param TempHp the temp hp to set*/
-	public void setTempHp(HealthPointContainer TempHp) { this.tempHp.set(TempHp); }
+	//total Maximum Health
+	/**This Property holds the total maximum Health value of this level*/
+	private final IntegerProperty totalMaximumHealth = new SimpleIntegerProperty(1);
+	/**
+	 * This Method exposes the {@link #totalMaximumHealth} property
+	 * @return the totalMaximumHealth IntProperty
+	 */
+	public final IntegerProperty totalMaximumHealthProperty() { return this.totalMaximumHealth; }
+	/**
+	 * This method is used to access the value of the {@link #totalMaximumHealth} property
+	 * @return integer containing the total maximum Health
+	 */
+	public final int getTotalMaximumHealth() { return this.maximumHealth.get(); }
+	private final ChangeListener<Number> MaximumPercentChangeListener =
+			(ov, newVal, oldVal) -> {
+				// bind currentHealthPercent to current health / max health * 100
 
+				this.currentHealthPercent.set(this.getCurrentHealth() / newVal.doubleValue() * 100d);
+			};
+	//total Current Health
+	/**This property holds the total current health a character currently has*/
+	private final IntegerProperty totalCurrentHealth = new SimpleIntegerProperty(0);
+	/**
+	 * This Method is used to expose the totalCurrentHealth property
+	 * @return IntegerProperty total currentHealth
+	 */
+	public IntegerProperty totalCurrentHealthProperty() { return this.totalCurrentHealth; }
+	/**
+	 * this Method is used to access the value of the total currentHealth property
+	 * @return integer containing the total currentHealth of the parent
+	 */
+	public int getTotalCurrentHealth() { return this.currentHealth.get(); }
+	private final ChangeListener<Number> CurrentPercentChangeListener =
+			(ov, newVal, oldVal) -> {
+				// bind currentHealthPercent to current health / max health * 100
+				double val = newVal.doubleValue()/this.getMaxHealth() * 100d;
+				this.currentHealthPercent.set(val);
+			};
+
+	//Temporary Hp
+	private final IntegerProperty temporaryHp = new SimpleIntegerProperty(0);
+	public final int getTemporaryHp() { return this.temporaryHp.get(); }
+	public final IntegerProperty temporaryHpProperty() { return this.temporaryHp; }
+	public final void setTemporaryHp(int value) { this.temporaryHp.set(value > 0 ? value : 0); }
+	private final ChangeListener<Number> TemporaryHpChangeListener =
+			(ov, newVal, oldVal) -> {
+				if(newVal.intValue() < 0) {
+					this.temporaryHp.set(0);
+					return;
+				}
+				this.totalMaximumHealth.set(this.getMaxHealth() + newVal.intValue());
+				this.totalCurrentHealth.set(this.getCurrentHealth() + newVal.intValue());
+			};
+
+	//HPList
 	/**this list holds all used hitdie and the result of the throw*/
 	private final ObservableList<Pair<I_DiceCode, Integer>> HpList = FXCollections.observableArrayList();
 	/**
@@ -61,63 +104,93 @@ public class HealthPointContainer implements Serializable{
 	 * @return the {@link #HpList} of this object
 	 */
 	public ObservableList<Pair<I_DiceCode, Integer>> getHpList() { return this.HpList; }
+	/**this Listener is used by the hitdie list*/
+	private final ListChangeListener<Pair<I_DiceCode, Integer>> HpListChangeListener =
+		c -> {
+			while(c.next()) {
+				if(c.wasPermutated() || c.wasUpdated()) continue;
+
+				final int firstOne = this.HpList.size() == 1 ? 1 : 0;
+
+				final int hpChange =
+					c.getAddedSubList().stream()
+						.mapToInt(p -> p.getValue())
+						.sum()
+					-
+					c.getRemoved().stream()
+						.mapToInt(p -> p.getValue())
+						.sum();
+
+				final int max = this.getMaxHealth() + hpChange - firstOne;
+				this.maximumHealth.set(max);
+
+				final int cur = this.getCurrentHealth() + hpChange;
+				this.currentHealth.set(cur);
+
+				final double per = (double)this.getTotalCurrentHealth() / (double) this.getMaxHealth() * 100d;
+				this.currentHealthPercent.set(per);
+			}
+		};
 
 	//Maximum Health
-
-	/**This property holds the total maximum health value*/
-	private final IntegerProperty maximumHealthOut = new SimpleIntegerProperty();
 	/**This Property holds the maximum Health value of this level*/
-	private final IntegerProperty maximumHealth = new SimpleIntegerProperty(1);;
+	private final IntegerProperty maximumHealth = new SimpleIntegerProperty(1);
 	/**
 	 * This Method exposes the {@link #maximumHealth} property
 	 * @return the maximumHealth IntProperty
 	 */
-	public IntegerProperty maxHealthPrivProperty() { return this.maximumHealth; }
-	/**
-	 * This Method exposes the {@link #maximumHealthOut} property
-	 * @return the maximumHealthOut IntProperty
-	 */
-	public IntegerProperty maxHealthOutProperty() { return this.maximumHealthOut; }
+	public IntegerProperty maxHealthProperty() { return this.maximumHealth; }
 	/**
 	 * This method is used to access the value of the {@link #maximumHealth} property
 	 * @return integer containing the maximum Health
 	 */
-	public int getMaxHealthPriv() { return this.maximumHealth.get(); }
-	/**
-	 * This method is used to access the value of the {@link #maximumHealthOut} property
-	 * @return integer containing the maximum Health out
-	 */
-	public int getMaxHealthOut() { return this.maximumHealthOut.get(); }
+	public int getMaxHealth() { return this.maximumHealth.get(); }
+	private final ChangeListener<Number> MaximumHealthChangeListener =
+		(ov, newVal, oldVal) -> {
+			if(newVal.intValue() < 0) {
+				this.maximumHealth.set(0);
+				return;
+			}
+			this.totalMaximumHealth.set(newVal.intValue() + this.getTemporaryHp());
+		};
 
 	//Current Health
-
-	/**this property holds the total current health*/
-	private final IntegerProperty currentHealthOut = new SimpleIntegerProperty();
 	/**This property holds the current health a character currently has*/
 	private final IntegerProperty currentHealth = new SimpleIntegerProperty(0);
 	/**
 	 * This Method is used to expose the currentHealth property
 	 * @return IntegerProperty currentHealth
 	 */
-	public IntegerProperty currentHealthPrivProperty() { return this.currentHealth; }
-	/**
-	 * This Method is used to expose the currentHealthOut property
-	 * @return IntegerProperty currentHealthOut
-	 */
-	public IntegerProperty currentHealthOutProperty() { return this.currentHealthOut; }
+	public IntegerProperty currentHealthProperty() { return this.currentHealth; }
 	/**
 	 * this Method is used to access the value of the currentHealth property
 	 * @return integer containing the currentHealth of the parent
 	 */
-	public int getCurrentHealthPriv() { return this.currentHealth.get(); }
-	/**
-	 * this Method is used to access the value of the currentHealthout property
-	 * @return integer containing the currentHealthout of the parent
-	 */
-	public int getCurrentHealthOut() { return this.currentHealthOut.get(); }
+	public int getCurrentHealth() { return this.currentHealth.get(); }
+	private final ChangeListener<Number> CurrentHealthChangeListener =
+			(ov, oldVal, newVal) -> {
+				//negative cap current health at 0
+				if(newVal.intValue() < 0) {
+					this.currentHealth.set(0);
+					return;
+				}
+
+
+				int totalCH = newVal.intValue() + this.getTemporaryHp();
+				this.totalCurrentHealth.set(totalCH);
+				this.currentHealthPercent.set(newVal.doubleValue()/this.getMaxHealth() * 100d);
+
+				if(newVal.intValue() == 0)
+					this.Parent.onHealthZero();
+				else if(oldVal.intValue() == 0 && newVal.intValue() > 0)
+					this.Parent.onHealthNoLongerZero();
+				else if(newVal.intValue() == this.getMaxHealth())
+					this.Parent.onHealthFull();
+
+				this.Parent.onHealthGeneralChange();
+			};
 
 	//Current Health Percent
-
 	/**
 	 * This Property holds the current Health in relation to the max health<br>
 	 * <code>
@@ -125,31 +198,18 @@ public class HealthPointContainer implements Serializable{
 	 * </code>
 	 */
 	private final DoubleProperty currentHealthPercent = new SimpleDoubleProperty();
-	/**this property holds the total current health percent*/
-	private final DoubleProperty currentHealthPercentOut = new SimpleDoubleProperty();
 	/**
 	 * this Method is used to expose the currentHealthPercent Property.
 	 * @return the DoubleProperty currentHealth
 	 */
-	public DoubleProperty currentHealthPercentPrivProperty() { return this.currentHealthPercent; }
-	/**
-	 * this Method is used to expose the currentHealthPercentOut Property.
-	 * @return the DoubleProperty currentHealthOut
-	 */
-	public DoubleProperty currentHealthPercentOutProperty() { return this.currentHealthPercentOut; }
+	public DoubleProperty currentHealthPercentProperty() { return this.currentHealthPercent; }
 	/**
 	 * this Method is used to access the value of the currentHealthPercent property
 	 * @return double between 0 and 100
 	 */
-	public double getCurrentHealthPercentPriv() { return this.currentHealthPercent.get(); }
-	/**
-	 * this Method is used to access the value of the currentHealthPercentout property
-	 * @return double between 0 and 100
-	 */
-	public double getCurrentHealthPercentOut() { return this.currentHealthPercentOut.get(); }
+	public double getCurrentHealthPercent() { return this.currentHealthPercent.get(); }
 
 	//Resistance
-
 	/**holds all resistances. resistances against damage types half the damage taken*/
 	private final Set<DamageType> resistance;
 	/**@return the resistance set*/
@@ -190,55 +250,55 @@ public class HealthPointContainer implements Serializable{
 					.isPresent();
 	}
 
+	//DamageHandling
 	/**
 	 * This method is used to take damage.
 	 * @param damage a list of damage objects that this actor endures
 	 */
-	public void takeDamage(List<Damage> damage) {
-		final int damageTaken = damage.stream()
-			.filter(d -> !this.isImmunTo(d.getType()))
-			.mapToInt(d ->
-				this.isResistantTo(d.getType()) ?
-						(int)Math.floor(d.getDamage() * .5) :
-						d.getDamage())
-			.sum();
-
-		if(this.getTempHp() != null) {
-			int dmgOverflow = damageTaken - this.getTempHp().getCurrentHealthPriv();
-			if(dmgOverflow >= 0) {
-				this.tempHp.set(null);
-				this.takeDamage(dmgOverflow);
-			} else
-				this.getTempHp().takeDamage(damageTaken);
-		}
+	public void takeDamage(List<Damage> Damages) {
+		this.takeDamage(
+			Damages.stream()
+				.filter(d -> !this.isImmunTo(d.getType()))
+				.mapToInt(d ->
+					this.isResistantTo(d.getType()) ?
+							(int)Math.floor(d.getDamage() * .5) :
+							d.getDamage())
+				.sum());
 	}
 
+	public void takeDamage(Damage Damage) {
+		this.takeDamage(Arrays.asList(Damage));
+	}
 
-	/**
-	 * This
-	 * @param TempHp
-	 */
 	public void addTemporaryHp(HealthPointContainer TempHp) {
-		if(this.getTempHp() == null)
-			this.tempHp.set(TempHp);
-		else {
-			int currentTempHp = this.getTempHp().getCurrentHealthOut();
-			TempHp.addHitDie(DiceCodeBase.flat(currentTempHp));
-			this.tempHp.set(TempHp);
-		}
+		int currentval = this.getTemporaryHp();
+		this.temporaryHp.set(currentval + TempHp.getTotalCurrentHealth());
+	}
 
-
-
+	public void addTemporaryHp(I_DiceCode Dice) {
+		int currentval = this.getTemporaryHp();
+		this.temporaryHp.set(currentval + Dice.get());
 	}
 
 	/**
 	 * this method is used to after damage computation to subtract the computed damage from the current health
 	 * @param damage the total amount of damage taken
 	 */
-	@Deprecated //TODO morph private remove tag
-	public void takeDamage(int damage) {
-		int newHealth = this.getCurrentHealthPriv() - damage;
-		this.currentHealth.set(newHealth);
+	private void takeDamage(final int damage) {
+		final int tmpHp = this.getTemporaryHp();
+		if(tmpHp > 0) {
+			if(tmpHp > damage)
+				this.temporaryHp.set(tmpHp - damage);
+			else {
+				this.temporaryHp.set(0);
+				this.takeDamage(damage - tmpHp);
+			}
+
+			return;
+		}
+
+		final int curHp = this.getCurrentHealth();
+		this.currentHealth.set(curHp - damage);
 	}
 
 	/**
@@ -247,13 +307,12 @@ public class HealthPointContainer implements Serializable{
 	 * @param canOverHeal set this to true if currentHealth can get bigger than maxhealth
 	 */
 	public void takeHeal(int heal, boolean canOverHeal) {
-
 		int newHealth;
 		if(canOverHeal)
-			newHealth = this.getCurrentHealthPriv() + heal;
+			newHealth = this.getCurrentHealth() + heal;
 		else {
-			int test = this.getCurrentHealthPriv() + heal;
-			newHealth = test > this.getMaxHealthPriv() ? this.getMaxHealthPriv() : test;
+			int test = this.getCurrentHealth() + heal;
+			newHealth = test > this.getMaxHealth() ? this.getMaxHealth() : test;
 		}
 
 		this.currentHealth.set(newHealth);
@@ -268,51 +327,6 @@ public class HealthPointContainer implements Serializable{
 		this.takeHeal(heal, false);
 	}
 
-	/**this Listener is used by the hitdie list*/
-	private ListChangeListener<Pair<I_DiceCode, Integer>> HpListChangeListener=
-		c -> {
-			while(c.next()) {
-				if(c.wasPermutated() || c.wasUpdated()) continue;
-
-				final int firstOne = this.HpList.size() == 1 ? 1 : 0;
-
-				final int hpChange =
-					c.getAddedSubList().stream()
-						.mapToInt(p -> p.getValue())
-						.sum()
-					-
-					c.getRemoved().stream()
-						.mapToInt(p -> p.getValue())
-						.sum();
-
-				this.maximumHealth.set(this.getMaxHealthPriv() + hpChange - firstOne);
-
-				this.currentHealth.set(this.getCurrentHealthPriv() + hpChange);
-			}
-		};
-
-	//TODO replace temp hp with simple int :(
-
-	/**this listener is used by the temphp property*/
-	private ChangeListener<HealthPointContainer> tempHpChange =
-		(ov, oldval, newval) -> {
-			this.currentHealthOut.unbind();
-			this.currentHealthPercentOut.unbind();
-			this.maximumHealthOut.unbind();
-
-			if(newval == null) {
-				this.currentHealthOut.bind(this.currentHealth);
-				this.maximumHealthOut.bind(this.maximumHealth);
-				this.currentHealthPercentOut.bind(this.currentHealthPercent);
-			}else {
-				this.currentHealthOut.bind(this.currentHealth.add(this.getTempHp().currentHealthOut));
-				this.maximumHealthOut.bind(this.maximumHealth.add(this.getTempHp().maximumHealthOut));
-				this.currentHealthPercentOut.bind(
-					(this.currentHealthPercent
-						.add(this.getTempHp().currentHealthPercentOut))
-						.divide(2));
-			}
-		};
 
 	/** Constructor
 	 * @param Parent the Actor that is the owner of this HealthContainer
@@ -322,41 +336,13 @@ public class HealthPointContainer implements Serializable{
 
 		this.Parent = Parent;
 
-		// CurrentHealthChangeListener which will update the parent of this container according to the changes
-		this.currentHealth.addListener((ov, oldVal, newVal) -> {
-			//negative cap current health at 0
-			if(newVal.intValue() < 0) {
-				this.currentHealth.set(0);
-				return;
-			}
-
-			final int correctedNewVal = newVal.intValue() < 0 ? 0 : newVal.intValue();
-
-			if(correctedNewVal == 0)
-				this.Parent.onHealthZero();
-			else if(oldVal.intValue() == 0 && correctedNewVal > 0)
-				this.Parent.onHealthNoLongerZero();
-			else if(correctedNewVal == this.getMaxHealthPriv())
-				this.Parent.onHealthFull();
-
-			this.Parent.onHealthGeneralChange();
-		});
-
-
-		// bind currentHealthPercent to currenthealth / max health * 100
-		this.currentHealth.addListener((ov, oldVal, newVal) -> {
-			this.currentHealthPercent.set(newVal.doubleValue()/this.getMaxHealthPriv() * 100d);
-		});
-
-		//implementing listener to hitdielist to update max and current hit die on a new hitdie
-
-
 		this.HpList.addListener(HpListChangeListener);
 
-		//Temp HP
-
-		this.tempHp = new SimpleObjectProperty<>();
-		this.tempHp.addListener(tempHpChange);
+		this.maximumHealth.addListener(this.MaximumHealthChangeListener);
+		this.currentHealth.addListener(this.CurrentHealthChangeListener);
+		this.totalCurrentHealth.addListener(this.CurrentPercentChangeListener);
+		this.totalMaximumHealth.addListener(this.MaximumPercentChangeListener);
+		this.temporaryHp.addListener(this.TemporaryHpChangeListener);
 
 		this.resistance = new HashSet<>();
 		this.immunity = new HashSet<>();
@@ -364,8 +350,8 @@ public class HealthPointContainer implements Serializable{
 
 	/**
 	 * This method is used to generate a compressed list of all diceCodes in this Objects {@link #HpList}
-	 * @return List Containing strings like: <br>
-	 * "xdy(+1)" grouped by the part after x<br>
+	 * @return List Containing I_DiceCodes like: <br>
+	 * "xdy(+z)" grouped by the part after x<br>
 	 * all x with the same key get added up so that a HpList containing the dice code 1d6 twice gets turned into a
 	 * list with one Element (2d6)
 	 */
@@ -406,16 +392,14 @@ public class HealthPointContainer implements Serializable{
 				.collect(toList());
 	}
 
-	//TODO addTempHp(hitdie)
-
 	/**
 	 * This Method is used to add a new HitDie to this HealthContainer
 	 * @param diceCode the dicecode of the new hitdie
 	 */
 	public void addHitDie(I_DiceCode diceCode) {
-		this.HpList.add(new Pair<>(diceCode, diceCode.getValue()));
+		Pair<I_DiceCode, Integer> p =new Pair<>(diceCode, diceCode.getValue());
+		this.HpList.add(p);
 	}
-
 
 	/**
 	 * This Method is used to add a new hitdie and force the maximum result
