@@ -83,7 +83,7 @@ public abstract class EntityBase implements Serializable, I_InfoAble{
 	 */
 	public void setDescription(String text) { this.description.set(text); }
 
-	/**holds the path to the image*/
+	/**holds the path to the image*/ //TODO Replace w/ IMAGE
 	protected String bildPath;
 	/**the Image used for information*/
 	protected Image bild = null;

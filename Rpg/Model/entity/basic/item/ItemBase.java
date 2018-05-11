@@ -25,15 +25,15 @@ public abstract class ItemBase extends EntityBase {
 	 * @param name the name
 	 * @param bildPath the bildPath
 	 * @param description the description
+	 * @param itemGroupId the items group id
 	 * @param weight the weight
 	 * @param itemValue the value of this item
 	 * @param slot the slot
 	 * @param wearable true if it can be worn
-	 * @param itemGroupId the items group id
 	 */
 	public ItemBase(
 			String name, String bildPath, String description,
-			int weight, double itemValue, ItemSlot slot, boolean wearable, ItemGroup itemGroupId) {
+			ItemGroup itemGroupId, int weight, double itemValue, ItemSlot slot, boolean wearable) {
 
 		super(name, bildPath, description);
 		this.weight = weight;
@@ -58,7 +58,7 @@ public abstract class ItemBase extends EntityBase {
 	public ItemBase(
 			String name, String bildPath, String description,
 			int weight, double itemValue, ItemGroup itemGroupId) {
-		this(name, bildPath, description, weight, itemValue, ItemSlot.SLOTLESS, false, itemGroupId);
+		this(name, bildPath, description, itemGroupId, weight, itemValue, ItemSlot.SLOTLESS, false);
 	}
 
 	// Properties
